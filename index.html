@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agentic Security Partners | Rapid Web & API Assessments</title>
+  <meta name="description" content="AI-powered discovery, human-validated findings. Web and API security assessments with OWASP Top 10 coverage. Fast turnaround, evidence-first reporting." />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:1100px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0 18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;cursor:pointer}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .brand-text{display:none}
+    .links{display:flex;gap:18px;color:var(--muted);font-size:14px}
+    .links a{cursor:pointer;transition:color 0.2s}
+    .links a:hover,.links a.active{color:var(--text)}
+    .cta{padding:10px 14px;border-radius:12px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.18);font-weight:700;cursor:pointer;transition:background 0.2s}
+    .cta:hover{background:rgba(124,92,255,.25)}
+    @media (max-width:900px){.links{display:none}}
+
+    .page{display:none;animation:fadeIn 0.3s ease-in}
+    .page.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    .heroL{padding:30px}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02)}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.12);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+    h1{margin:14px 0 10px;font-size:42px;line-height:1.05;letter-spacing:-.6px}
+    @media (max-width:520px){h1{font-size:34px}}
+    .sub{margin:0;color:var(--muted);max-width:62ch}
+    .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02);font-weight:800;font-size:14px;cursor:pointer;transition:border-color 0.2s}
+    .btnP{border-color:rgba(124,92,255,.35);background:rgba(124,92,255,.18)}
+    .btn:hover{border-color:rgba(169,180,199,.35)}
+
+    .heroR{padding:18px;display:flex;align-items:center;justify-content:center}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%}
+    .stat{padding:16px;text-align:center;border-radius:12px;border:1px solid var(--line);background:rgba(10,14,22,.5)}
+    .statNum{
+      font-size:32px;
+      font-weight:800;
+      margin:0 0 4px;
+      color:#10b981;
+    }
+    .statLabel{font-size:12px;color:var(--muted);margin:0}
+
+    .sec{padding:26px 0}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    @media (max-width:1100px){.grid5{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:900px){.grid3,.grid4{grid-template-columns:1fr}.grid5{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:520px){.grid5{grid-template-columns:1fr}}
+    .feat{padding:16px}
+    .feat h3{margin:6px 0 8px;font-size:16px}
+    .feat p{margin:0;color:var(--muted);font-size:14px}
+
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:900px){.two{grid-template-columns:1fr}}
+    .box{padding:16px}
+    ul{margin:0;padding-left:18px;color:var(--muted)}
+    li{margin:8px 0}
+
+    .pricing{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    @media (max-width:1100px){.pricing{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:900px){.pricing{grid-template-columns:1fr}}
+    .price{padding:16px;padding-top:42px;position:relative}
+    .badge{position:absolute;top:12px;left:16px;font-size:11px;font-weight:900;padding:5px 10px;border-radius:999px;border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.12);color:#c8f7d7;white-space:nowrap}
+    .badgeNew{border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.12);color:#fde68a}
+    .range{font-size:24px;letter-spacing:-.4px;margin:8px 0 6px}
+    .turnaround{font-size:12px;color:var(--ok);margin-bottom:8px}
+    .small{color:var(--muted);font-size:12px}
+
+    .compare-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
+    .compare-table th,.compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+    .compare-table th{color:var(--muted);font-weight:600}
+    .compare-table td:first-child{font-weight:600}
+    .check{color:var(--ok)}
+    .x{color:#ef4444}
+
+    .human-ai{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:12px;border-radius:8px;overflow:hidden}
+    .human-ai div{padding:10px;background:rgba(0,0,0,.2);text-align:center;font-size:13px}
+    .human-ai .header{background:rgba(124,92,255,.15);font-weight:700;color:var(--text)}
+    .human-ai .ai{color:var(--accent)}
+    .human-ai .human{color:var(--ok)}
+    @media (max-width:600px){.human-ai{grid-template-columns:1fr}.human-ai div{text-align:left}}
+
+    .owasp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+    @media (max-width:600px){.owasp-grid{grid-template-columns:1fr}}
+    .owasp-item{display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 10px;background:rgba(0,0,0,.2);border-radius:6px}
+    .owasp-item .num{font-weight:800;color:var(--accent);min-width:45px}
+
+    .video-placeholder{background:rgba(0,0,0,.3);border:2px dashed var(--line);border-radius:12px;padding:40px;text-align:center;margin-top:24px}
+    .video-placeholder h3{margin:0 0 8px}
+    .video-placeholder p{margin:0;color:var(--muted);font-size:14px}
+
+    .foot{border-top:1px solid var(--line);padding:22px 0 34px;color:var(--muted);font-size:12.5px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand" onclick="showPage('home')"><img src="logo.png" alt="Agentic Security Partners" class="logo"><div class="brand-text">Agentic Security Partners</div></div>
+      <nav class="links">
+        <a href="#" onclick="showPage('home'); return false" class="nav-link" data-page="home">Home</a>
+        <a href="#" onclick="showPage('how'); return false" class="nav-link" data-page="how">How it works</a>
+        <a href="#" onclick="showPage('deliverables'); return false" class="nav-link" data-page="deliverables">Deliverables</a>
+        <a href="#" onclick="showPage('pricing'); return false" class="nav-link" data-page="pricing">Pricing</a>
+        <a href="#" onclick="showPage('contact'); return false" class="nav-link" data-page="contact">Get Started</a>
+      </nav>
+      <a class="cta" href="#" onclick="showPage('contact'); return false">Get a quote</a>
+    </header>
+
+    <!-- Home Page -->
+    <div id="page-home" class="page active">
+      <section class="hero">
+        <div class="card heroL">
+          <div class="eyebrow"><span class="dot"></span> AI-powered discovery • Human-validated findings</div>
+          <h1>Security assessments focused on what actually matters—delivered fast.</h1>
+          <p class="sub">We combine automated reconnaissance with expert human validation. Every critical finding is verified by a security professional before it reaches your report. Comprehensive OWASP Top 10 testing in days, not weeks.</p>
+          <div class="btns">
+            <a class="btn btnP" href="#" onclick="showPage('contact'); return false">Get a quote</a>
+            <a class="btn" href="#" onclick="showPage('how'); return false">See how it works</a>
+            <a class="btn" href="#" onclick="showPage('pricing'); return false">Pricing</a>
+          </div>
+          <p class="small" style="margin-top:14px">✓ Every high-severity finding manually verified &nbsp;•&nbsp; ✓ Clear confidence labels &nbsp;•&nbsp; ✓ Reproduction steps included &nbsp;•&nbsp; ✓ Signed attestation letter</p>
+        </div>
+        <div class="card heroR">
+          <div class="stats">
+            <div class="stat">
+              <div class="statNum">24hr</div>
+              <div class="statLabel">Fastest Turnaround</div>
+            </div>
+            <div class="stat">
+              <div class="statNum">Full</div>
+              <div class="statLabel">Web + API Coverage</div>
+            </div>
+            <div class="stat">
+              <div class="statNum">Every</div>
+              <div class="statLabel">Critical Finding Validated</div>
+            </div>
+            <div class="stat">
+              <div class="statNum">OWASP</div>
+              <div class="statLabel">Top 10 2025 Coverage</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <h2 style="margin:0 0 12px;letter-spacing:-.3px">Why choose us</h2>
+        <div class="grid4">
+          <div class="card feat">
+            <h3>⚡ Speed Without Sacrifice</h3>
+            <p>Traditional pentests take 2-4 weeks. Typical delivery in 24 hours to 5 days, depending on scope. Automation handles discovery; humans validate what matters.</p>
+          </div>
+          <div class="card feat">
+            <h3>🎯 High-Impact Focus</h3>
+            <p>No noise, no compliance checkboxes. Only validated vulnerabilities—RCE, SQLi, SSRF, auth bypass, and business logic flaws that actually impact your business.</p>
+          </div>
+          <div class="card feat">
+            <h3>👤 Human Where It Counts</h3>
+            <p>AI finds candidates. Humans verify exploitability, assess business impact, write remediation steps, and walk you through findings on a call.</p>
+          </div>
+          <div class="card feat">
+            <h3>🔐 Enterprise-Grade Security</h3>
+            <p>AES-256 encrypted credential vault. Per-client data isolation. Complete audit trails. Signed attestation letters. Certified data destruction.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI vs Human Transparency -->
+      <section class="sec">
+        <h2 style="margin:0 0 12px;letter-spacing:-.3px">AI + Human: Where each excels</h2>
+        <p class="sub" style="margin-bottom:16px">We're transparent about what's automated and what's human-driven.</p>
+        <div class="card box">
+          <div class="human-ai">
+            <div class="header">Phase</div>
+            <div class="header">AI-Powered</div>
+            <div class="header">Human Expert</div>
+            
+            <div>Reconnaissance & Discovery</div>
+            <div class="ai">✓ Automated</div>
+            <div>—</div>
+            
+            <div>Vulnerability Scanning</div>
+            <div class="ai">✓ Comprehensive automated scanning</div>
+            <div>—</div>
+            
+            <div>Finding Triage & Prioritization</div>
+            <div class="ai">✓ AI-assisted scoring</div>
+            <div class="human">✓ Expert review</div>
+            
+            <div>Critical Finding Validation</div>
+            <div>—</div>
+            <div class="human">✓ 100% manually verified</div>
+            
+            <div>Report Writing</div>
+            <div class="ai">✓ Draft generation</div>
+            <div class="human">✓ Expert editing & polish</div>
+            
+            <div>Attestation & Sign-Off</div>
+            <div>—</div>
+            <div class="human">✓ Named engineer signs</div>
+            
+            <div>Findings Walkthrough Call</div>
+            <div>—</div>
+            <div class="human">✓ 100% human</div>
+            
+            <div>Remediation Guidance</div>
+            <div>—</div>
+            <div class="human">✓ 100% human</div>
+            
+            <div>Credential & Data Security</div>
+            <div class="ai">✓ AES-256 encrypted vault</div>
+            <div class="human">✓ Audit oversight</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- vs Traditional Pentest -->
+      <section class="sec">
+        <h2 style="margin:0 0 12px;letter-spacing:-.3px">How we compare</h2>
+        <div class="card box">
+          <table class="compare-table">
+            <tr>
+              <th></th>
+              <th>Traditional Pentest</th>
+              <th>DIY (Burp + Freelancer)</th>
+              <th>Agentic Security</th>
+            </tr>
+            <tr>
+              <td>Turnaround</td>
+              <td>2-4 weeks</td>
+              <td>1-2 weeks</td>
+              <td><span class="check">24hrs - 5 days</span></td>
+            </tr>
+            <tr>
+              <td>Cost</td>
+              <td>$15k - $50k+</td>
+              <td>$5k - $15k</td>
+              <td><span class="check">~$500 - $25k (scope-dependent)</span></td>
+            </tr>
+            <tr>
+              <td>Coverage Consistency</td>
+              <td>Varies by tester</td>
+              <td>Varies by tester</td>
+              <td><span class="check">40+ checks, every time</span></td>
+            </tr>
+            <tr>
+              <td>Human Validation</td>
+              <td><span class="check">Yes</span></td>
+              <td><span class="check">Yes</span></td>
+              <td><span class="check">Yes (all critical)</span></td>
+            </tr>
+            <tr>
+              <td>Findings Call</td>
+              <td>Sometimes</td>
+              <td>Extra cost</td>
+              <td><span class="check">Included</span></td>
+            </tr>
+            <tr>
+              <td>OWASP Top 10 Coverage</td>
+              <td>Partial</td>
+              <td>Partial</td>
+              <td><span class="check">Complete 2025</span></td>
+            </tr>
+            <tr>
+              <td>Signed Attestation</td>
+              <td>Sometimes</td>
+              <td><span class="x">Rarely</span></td>
+              <td><span class="check">Every report</span></td>
+            </tr>
+            <tr>
+              <td>Audit Trail</td>
+              <td><span class="x">No</span></td>
+              <td><span class="x">No</span></td>
+              <td><span class="check">Complete access logging</span></td>
+            </tr>
+            <tr>
+              <td>Secure Data Deletion</td>
+              <td>Varies</td>
+              <td><span class="x">Unknown</span></td>
+              <td><span class="check">Certified destruction</span></td>
+            </tr>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- How It Works Page -->
+    <div id="page-how" class="page">
+      <section class="sec">
+        <h1 style="margin:0 0 12px;letter-spacing:-.3px">How it works</h1>
+        <p class="sub" style="margin-bottom:24px">AI-powered discovery with human-validated findings. We identify vulnerabilities—we don't exploit your production systems.</p>
+        
+        <div class="grid4" style="margin-bottom:24px">
+          <div class="card feat">
+            <h3>1) Automated Discovery</h3>
+            <p>AI-powered reconnaissance maps your attack surface: endpoints, APIs, JavaScript files, configurations. We discover what's exposed before testing.</p>
+          </div>
+          <div class="card feat">
+            <h3>2) Targeted Testing</h3>
+            <p>Comprehensive automated scanning across all OWASP Top 10 categories. Safe, rate-limited testing that identifies vulnerabilities without exploiting production data.</p>
+          </div>
+          <div class="card feat">
+            <h3>3) Human Validation</h3>
+            <p>Security expert reviews every critical finding. We verify exploitability, assess real-world impact, and write specific remediation steps.</p>
+          </div>
+          <div class="card feat">
+            <h3>4) Secure Delivery</h3>
+            <p>Reports delivered with SHA256 integrity verification. Optional password protection. Signed attestation letter. Data deleted per your retention requirements.</p>
+          </div>
+        </div>
+
+        <!-- What We Test vs Don't -->
+        <div class="card box" style="margin-bottom:24px">
+          <h3 style="margin:0 0 10px">What we do (and don't do)</h3>
+          <div class="two">
+            <div>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 8px">✓ We identify & validate:</p>
+              <ul>
+                <li>Proof of Concept demonstrating exploitability</li>
+                <li>Evidence: request/response, screenshots, reproduction steps</li>
+                <li>Business impact assessment for each finding</li>
+                <li>Specific remediation recommendations</li>
+              </ul>
+            </div>
+            <div>
+              <p style="color:#ef4444;font-weight:700;margin:0 0 8px">✗ We never:</p>
+              <ul>
+                <li>Exfiltrate or access real customer data</li>
+                <li>Perform denial-of-service attacks</li>
+                <li>Modify production databases</li>
+                <li>Leave persistent backdoors or test artifacts</li>
+                <li>Attempt to bypass safeguards outside agreed scope</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- OWASP Top 10 2025 -->
+        <div class="card box" style="margin-bottom:24px">
+          <h3 style="margin:0 0 10px">Comprehensive Testing Aligned to OWASP Top 10 (2025)</h3>
+          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Every assessment includes comprehensive testing aligned to the latest OWASP Top 10 risk categories.</p>
+          <div class="owasp-grid">
+            <div class="owasp-item"><span class="num">A01</span> Broken Access Control (IDOR, privilege escalation)</div>
+            <div class="owasp-item"><span class="num">A02</span> Security Misconfiguration (headers, secrets, CORS)</div>
+            <div class="owasp-item"><span class="num">A03</span> Software Supply Chain (CVEs, outdated components)</div>
+            <div class="owasp-item"><span class="num">A04</span> Cryptographic Failures (weak crypto, exposed keys)</div>
+            <div class="owasp-item"><span class="num">A05</span> Injection (SQL, XSS, Command, SSRF, XXE)</div>
+            <div class="owasp-item"><span class="num">A06</span> Insecure Design (business logic, race conditions)</div>
+            <div class="owasp-item"><span class="num">A07</span> Authentication Failures (JWT, OAuth, session)</div>
+            <div class="owasp-item"><span class="num">A08</span> Data Integrity Failures (deserialization, uploads)</div>
+            <div class="owasp-item"><span class="num">A09</span> Logging & Monitoring Failures</div>
+            <div class="owasp-item"><span class="num">A10</span> Exception Handling (ReDoS, error disclosure)</div>
+          </div>
+        </div>
+
+        <!-- Credential Handling -->
+        <div class="card box">
+          <h3 style="margin:0 0 10px">🔐 Enterprise-Grade Data Security</h3>
+          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Your credentials and findings are protected with the same rigor we'd expect for our own systems:</p>
+          <div class="two">
+            <div>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 8px">Credential Protection</p>
+              <ul>
+                <li><strong>AES-256 encrypted vault:</strong> Credentials encrypted at rest with per-client isolation</li>
+                <li><strong>Secure transfer:</strong> 1Password, Vault, or encrypted channel</li>
+                <li><strong>Time-limited access:</strong> Only during the assessment window</li>
+                <li><strong>Multi-pass secure deletion:</strong> Cryptographically destroyed after engagement</li>
+                <li><strong>Access logging:</strong> Every credential access logged with checksums</li>
+              </ul>
+            </div>
+            <div>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 8px">Data Lifecycle Management</p>
+              <ul>
+                <li><strong>Per-client isolation:</strong> Your data never mixes with other clients</li>
+                <li><strong>Complete audit trail:</strong> Tamper-evident logging for compliance</li>
+                <li><strong>Configurable retention:</strong> Data deleted per your requirements (default: 30 days)</li>
+                <li><strong>Deletion certificates:</strong> Signed proof of secure data destruction</li>
+                <li><strong>Emergency stop:</strong> Instant kill switch if you need to halt testing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Placeholder -->
+        <div class="video-placeholder">
+          <h3>🎬 See it in action</h3>
+          <p>Video walkthrough coming soon—see how an assessment runs from start to report delivery.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Deliverables Page -->
+    <div id="page-deliverables" class="page">
+      <section class="sec">
+        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Deliverables</h1>
+        <p class="sub" style="margin-bottom:24px">Executive-ready summaries and developer-ready evidence. Every finding includes reproduction steps.</p>
+        
+        <div class="grid3" style="margin-bottom:24px">
+          <div class="card box">
+            <h3 style="margin:0 0 10px">Executive Summary (PDF)</h3>
+            <ul>
+              <li>High-level risk overview and business impact</li>
+              <li>Critical findings summary with prioritization</li>
+              <li>OWASP Top 10 coverage scorecard</li>
+              <li>Remediation roadmap and timeline</li>
+              <li>Risk scoring and compliance alignment</li>
+            </ul>
+          </div>
+          <div class="card box">
+            <h3 style="margin:0 0 10px">Technical Report (PDF)</h3>
+            <ul>
+              <li>Detailed vulnerability descriptions</li>
+              <li>Proof of Concept for each finding</li>
+              <li>Curl commands for reproduction</li>
+              <li>Specific remediation code examples</li>
+              <li>CVSS scoring and CWE references</li>
+            </ul>
+          </div>
+          <div class="card box">
+            <h3 style="margin:0 0 10px">Attestation Letter (PDF)</h3>
+            <ul>
+              <li>Named security engineer sign-off</li>
+              <li>Human validation certification</li>
+              <li>Methodology statement</li>
+              <li>Evidence availability confirmation</li>
+              <li>Audit-ready documentation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card box">
+          <h3 style="margin:0 0 10px">Developer-Ready Evidence</h3>
+          <ul>
+            <li><strong>Reproduction steps:</strong> Curl commands and raw HTTP requests—test fixes immediately</li>
+            <li><strong>Raw findings (JSON):</strong> Machine-readable for Jira, GitHub Issues, or your security tools</li>
+            <li><strong>Artifact bundle:</strong> Redacted screenshots, request/response pairs, validation outputs</li>
+            <li><strong>Confidence labels:</strong> High/medium/low so your team knows what to prioritize</li>
+          </ul>
+        </div>
+
+        <div class="two" style="margin-top:24px">
+          <div class="card box">
+            <h3 style="margin:0 0 10px">🔒 Secure Report Delivery</h3>
+            <ul>
+              <li><strong>Integrity verified:</strong> SHA256 manifest for all deliverables</li>
+              <li><strong>Password protected:</strong> Optional AES encryption on delivery package</li>
+              <li><strong>One-time download:</strong> Secure tokens with configurable expiry</li>
+              <li><strong>Audit logged:</strong> Complete delivery trail for compliance</li>
+            </ul>
+          </div>
+          <div class="card box">
+            <h3 style="margin:0 0 10px">📝 Attestation & Compliance</h3>
+            <ul>
+              <li><strong>Signed attestation letter:</strong> Named security engineer signs off</li>
+              <li><strong>Compliance mapping:</strong> SOC 2, ISO 27001, PCI-DSS alignment</li>
+              <li><strong>Attack path visualization:</strong> Visual diagrams for executives</li>
+              <li><strong>Audit-ready documentation:</strong> Stands up to auditor scrutiny</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card box" style="margin-top:24px">
+          <h3 style="margin:0 0 10px">Findings Review Call (Included)</h3>
+          <p style="margin:0;color:var(--muted)">Every assessment includes a walkthrough call with a security expert. We discuss critical findings, answer technical questions, and help prioritize your remediation roadmap. <strong>100% human, no AI.</strong></p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Pricing Page -->
+    <div id="page-pricing" class="page">
+      <section class="sec">
+        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Pricing</h1>
+        <p class="sub" style="margin-bottom:24px">Transparent, scope-based pricing. Start small, scale up. First-time client discounts available.</p>
+        
+        <div class="pricing">
+          <div class="card price">
+            <div class="badge badgeNew">Entry point</div>
+            <h3 style="margin:0 0 4px">Attack Surface Intel</h3>
+            <div class="range">$500 <span class="small">USD</span></div>
+            <div class="turnaround">⚡ Same-day delivery</div>
+            <ul style="font-size:13px">
+              <li>External reconnaissance</li>
+              <li>Subdomain & asset discovery</li>
+              <li>Exposed credentials check</li>
+              <li>Technology fingerprinting</li>
+              <li>Risk summary report</li>
+            </ul>
+            <p class="small" style="margin-top:10px"><strong>Human:</strong> Report review</p>
+          </div>
+          
+          <div class="card price">
+            <div class="badge badgeNew">Fast</div>
+            <h3 style="margin:0 0 4px">Rapid Assessment</h3>
+            <div class="range">$2,500 <span class="small">USD</span></div>
+            <div class="turnaround">⚡ 24-48 hour turnaround</div>
+            <ul style="font-size:13px">
+              <li>Single app or API</li>
+              <li>OWASP Top 10 checks</li>
+              <li>Critical findings only</li>
+              <li>Markdown report</li>
+              <li>Same-day findings call</li>
+            </ul>
+            <p class="small" style="margin-top:10px"><strong>Human:</strong> Validation + call</p>
+          </div>
+
+          <div class="card price">
+            <h3 style="margin:0 0 4px">Standard</h3>
+            <div class="range">$5k–$10k <span class="small">USD</span></div>
+            <div class="turnaround">3–5 day turnaround</div>
+            <ul style="font-size:13px">
+              <li>Web app + primary API</li>
+              <li>Full OWASP Top 10</li>
+              <li>PDF + JSON reports</li>
+              <li>1-hour findings call</li>
+              <li>Remediation guidance</li>
+            </ul>
+            <p class="small" style="margin-top:10px"><strong>Human:</strong> Full validation + call + guidance</p>
+          </div>
+          
+          <div class="card price">
+            <div class="badge">Popular</div>
+            <h3 style="margin:0 0 4px">Platform</h3>
+            <div class="range">$15k–$25k <span class="small">USD</span></div>
+            <div class="turnaround">5–7 day turnaround</div>
+            <ul style="font-size:13px">
+              <li>Multiple apps (up to 10)</li>
+              <li>Authenticated testing</li>
+              <li>Multi-role access control</li>
+              <li>API schema fuzzing</li>
+              <li>2-hour findings call</li>
+            </ul>
+            <p class="small" style="margin-top:10px"><strong>Human:</strong> Dedicated analyst + consultation</p>
+          </div>
+          
+          <div class="card price">
+            <h3 style="margin:0 0 4px">Enterprise</h3>
+            <div class="range">$30k+ <span class="small">USD</span></div>
+            <div class="turnaround">Custom timeline</div>
+            <ul style="font-size:13px">
+              <li>Broad scope + retest</li>
+              <li>Complex SSO/API flows</li>
+              <li>Remediation verification</li>
+              <li>Custom compliance reports</li>
+              <li>Ongoing support</li>
+            </ul>
+            <p class="small" style="margin-top:10px"><strong>Human:</strong> Dedicated team + extended support</p>
+          </div>
+        </div>
+        
+        <div class="card box" style="margin-top:24px">
+          <h3 style="margin:0 0 10px">Add-On Services (Human-Delivered)</h3>
+          <div class="two">
+            <ul>
+              <li><strong>Remediation support:</strong> Pair with your devs to fix issues ($200/hr)</li>
+              <li><strong>Retest verification:</strong> Confirm fixes work ($1,500 per retest)</li>
+              <li><strong>Extended scope:</strong> +$2k per 5 additional targets</li>
+              <li><strong>Regression insurance:</strong> Catch re-introduced vulns before production ($1k/mo)</li>
+            </ul>
+            <ul>
+              <li><strong>Ongoing monitoring:</strong> Monthly scans + quarterly deep-dive ($2.5k–$5k/mo)</li>
+              <li><strong>Compliance mapping:</strong> SOC 2, ISO 27001, PCI-DSS alignment ($2k add-on)</li>
+              <li><strong>Executive briefing:</strong> Board-ready presentation ($1,500)</li>
+              <li><strong>Attack path visualization:</strong> Visual diagrams for stakeholders (included in Standard+)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card box" style="margin-top:24px;border-color:rgba(124,92,255,.3)">
+          <h3 style="margin:0 0 8px">🎁 First-Time Client Discount</h3>
+          <p style="margin:0;color:var(--muted)">New clients get <strong>20% off</strong> their first assessment. We want to prove our value before you commit to larger engagements.</p>
+        </div>
+        
+        <p class="small" style="margin-top:14px">Pricing varies by scope size, authentication complexity, and compliance requirements. <a href="#" onclick="showPage('contact'); return false" style="color:var(--accent)">Contact us</a> for a custom quote.</p>
+      </section>
+    </div>
+
+    <!-- Contact/Get Started Page -->
+    <div id="page-contact" class="page">
+      <section class="sec">
+        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Get started</h1>
+        <p class="sub" style="margin-bottom:24px">Ready to see what we can find? Tell us about your scope and we'll provide a quote within 24 hours.</p>
+        
+        <div class="card box">
+          <h3 style="margin:0 0 10px">What we need to get started</h3>
+          <ul>
+            <li><strong>Target URLs:</strong> Primary application and API endpoints (1 URL for Rapid, up to 10 for Platform)</li>
+            <li><strong>Timeline:</strong> When do you need results? (Same-day to 1 week options)</li>
+            <li><strong>Authentication:</strong> Do you need authenticated testing? (We'll discuss credential handling)</li>
+            <li><strong>Rate limits:</strong> Any restrictions on request frequency?</li>
+            <li><strong>Contact:</strong> Technical point of contact for questions during testing</li>
+          </ul>
+        </div>
+
+        <div class="card box" style="margin-top:24px">
+          <h3 style="margin:0 0 8px">Get a quote</h3>
+          <p class="small" style="margin:0 0 12px">We respond within 24 hours with a custom quote based on your scope.</p>
+          <a class="btn btnP" href="#" onclick="alert('Wire this button to your intake system (Calendly / email / CRM).'); return false;">Request quote</a>
+          <span style="margin:0 12px;color:var(--muted)">or</span>
+          <a class="btn" href="#" onclick="alert('Wire to Calendly or scheduling link'); return false;">Book a call</a>
+        </div>
+
+        <div class="two" style="margin-top:24px">
+          <div class="card box">
+            <h3 style="margin:0 0 10px">Quick start options</h3>
+            <ul>
+              <li><strong>$500 Attack Surface Intel:</strong> Same-day external reconnaissance</li>
+              <li><strong>$2,500 Rapid Assessment:</strong> 24-48 hour OWASP Top 10 check</li>
+              <li><strong>$5k+ Standard:</strong> Full assessment with PDF reports</li>
+            </ul>
+          </div>
+          <div class="card box">
+            <h3 style="margin:0 0 10px">What happens next</h3>
+            <ul>
+              <li>1. You share scope details</li>
+              <li>2. We provide quote within 24 hours</li>
+              <li>3. Sign authorization letter</li>
+              <li>4. Secure credential handoff (if needed)</li>
+              <li>5. Assessment begins with live dashboard</li>
+              <li>6. Findings call + secure report delivery</li>
+              <li>7. Data securely destroyed per retention policy</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="foot">
+      <div><b>Agentic Security Partners LLC</b> — AI-powered discovery, human-validated findings.</div>
+      <div style="margin-top:6px">© <span id="y"></span> • High-impact security assessments for modern SaaS teams.</div>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+      
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-page') === pageId) {
+          link.classList.add('active');
+        }
+      });
+      
+      window.scrollTo(0, 0);
+    }
+    
+    window.addEventListener('load', function() {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        showPage(hash);
+      }
+    });
+  </script>
+</body>
+</html>
+
