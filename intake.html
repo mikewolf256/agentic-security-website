@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scope Intake | Agentic Security Partners</title>
+  <meta name="description" content="Complete your security assessment scope intake form." />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--error:#ef4444;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:800px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:30px}
+    
+    .logo{height:40px;margin-bottom:20px}
+    h1{margin:0 0 8px;font-size:28px;letter-spacing:-.3px}
+    .sub{margin:0 0 24px;color:var(--muted)}
+    
+    .tier-badge{display:inline-block;padding:6px 12px;border-radius:6px;font-size:13px;font-weight:700;background:rgba(124,92,255,.15);border:1px solid rgba(124,92,255,.3);color:var(--accent);margin-bottom:16px}
+    
+    .form-group{margin-bottom:20px}
+    label{display:block;margin-bottom:6px;font-weight:600;font-size:14px}
+    .required::after{content:" *";color:var(--error)}
+    input,textarea,select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.3);color:var(--text);font-size:15px;font-family:inherit}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+    input::placeholder,textarea::placeholder{color:var(--muted)}
+    textarea{min-height:100px;resize:vertical}
+    select{cursor:pointer}
+    
+    .checkbox-group{display:flex;align-items:center;gap:10px}
+    .checkbox-group input{width:auto}
+    
+    .help-text{font-size:12px;color:var(--muted);margin-top:4px}
+    
+    .targets-container{display:flex;flex-direction:column;gap:8px}
+    .target-row{display:flex;gap:8px}
+    .target-row input{flex:1}
+    .target-row button{padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer;font-size:14px}
+    .target-row button:hover{background:rgba(255,255,255,.1);color:var(--text)}
+    .add-target{padding:10px;border:1px dashed var(--line);border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;font-size:14px;width:100%}
+    .add-target:hover{border-color:var(--accent);color:var(--accent)}
+    
+    .btn{padding:14px 24px;border-radius:12px;border:none;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.2s}
+    .btnP{background:var(--accent);color:white}
+    .btnP:hover{background:#6b4be0}
+    .btnP:disabled{background:var(--muted);cursor:not-allowed}
+    
+    .error-box{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:16px;margin-bottom:20px;color:#fca5a5}
+    .success-box{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:20px;text-align:center}
+    .success-box h2{color:var(--ok);margin:0 0 12px}
+    .success-box p{margin:8px 0;color:var(--muted)}
+    .success-box .client-id{font-family:monospace;background:rgba(0,0,0,.3);padding:8px 12px;border-radius:6px;display:inline-block;margin:12px 0}
+    
+    .loading{display:flex;align-items:center;justify-content:center;gap:12px;padding:40px}
+    .spinner{width:24px;height:24px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    
+    .hidden{display:none}
+    
+    .foot{text-align:center;padding:20px 0;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="/">
+      <img src="logo.png" alt="Agentic Security Partners" class="logo">
+    </a>
+    
+    <!-- Loading State -->
+    <div id="loading-state" class="card">
+      <div class="loading">
+        <div class="spinner"></div>
+        <span>Validating your access...</span>
+      </div>
+    </div>
+    
+    <!-- Error State -->
+    <div id="error-state" class="card hidden">
+      <h1>Access Denied</h1>
+      <div class="error-box" id="error-message">
+        Your access token is invalid or has expired.
+      </div>
+      <p>If you've already purchased an assessment, please check your email for the correct link.</p>
+      <p>Need to purchase? <a href="/#pricing">View our pricing</a></p>
+    </div>
+    
+    <!-- Form State -->
+    <div id="form-state" class="card hidden">
+      <div class="tier-badge" id="tier-badge">Loading...</div>
+      <h1>Complete Your Scope Intake</h1>
+      <p class="sub">Provide the details below to begin your security assessment. All information is encrypted and handled securely.</p>
+      
+      <form id="intake-form" onsubmit="submitIntake(event)">
+        <input type="hidden" id="token" name="token">
+        
+        <div class="form-group">
+          <label class="required" for="company_name">Company Name</label>
+          <input type="text" id="company_name" name="company_name" required placeholder="Acme Corporation">
+        </div>
+        
+        <div class="form-group">
+          <label class="required" for="contact_name">Your Name</label>
+          <input type="text" id="contact_name" name="contact_name" required placeholder="Jane Smith">
+        </div>
+        
+        <div class="form-group">
+          <label class="required" for="contact_email">Email Address</label>
+          <input type="email" id="contact_email" name="contact_email" required placeholder="jane@acme.com">
+        </div>
+        
+        <div class="form-group">
+          <label class="required">Target URLs</label>
+          <p class="help-text">Enter the URLs you want us to assess. One URL per line.</p>
+          <div class="targets-container" id="targets-container">
+            <div class="target-row">
+              <input type="url" name="target_url" required placeholder="https://app.example.com">
+              <button type="button" onclick="removeTarget(this)" title="Remove">✕</button>
+            </div>
+          </div>
+          <button type="button" class="add-target" onclick="addTarget()">+ Add another target</button>
+        </div>
+        
+        <div class="form-group">
+          <label for="desired_start_date">Preferred Start Date</label>
+          <input type="date" id="desired_start_date" name="desired_start_date">
+          <p class="help-text">Leave blank for ASAP</p>
+        </div>
+        
+        <div class="form-group">
+          <label for="timeline">Timeline Preference</label>
+          <select id="timeline" name="timeline">
+            <option value="">Select...</option>
+            <option value="asap">ASAP</option>
+            <option value="1_week">Within 1 week</option>
+            <option value="2_weeks">Within 2 weeks</option>
+            <option value="flexible">Flexible</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="auth_required" name="auth_required">
+            <label for="auth_required" style="margin:0">Authentication required for testing</label>
+          </div>
+          <p class="help-text">Check if we need login credentials to test authenticated areas. We'll contact you for secure credential handoff.</p>
+        </div>
+        
+        <div class="form-group">
+          <label for="rate_limit">Rate Limit Restrictions</label>
+          <input type="text" id="rate_limit" name="rate_limit" placeholder="e.g., 10 requests/second">
+          <p class="help-text">Leave blank for default (10 req/sec)</p>
+        </div>
+        
+        <div class="form-group">
+          <label for="notes">Additional Notes</label>
+          <textarea id="notes" name="notes" placeholder="Any special instructions, areas of concern, or context we should know about..."></textarea>
+        </div>
+        
+        <div id="form-error" class="error-box hidden"></div>
+        
+        <button type="submit" class="btn btnP" id="submit-btn" style="width:100%">Submit Intake</button>
+      </form>
+    </div>
+    
+    <!-- Success State -->
+    <div id="success-state" class="card hidden">
+      <div class="success-box">
+        <h2>✓ Intake Submitted Successfully</h2>
+        <p>Your scope has been received and your engagement is being prepared.</p>
+        <div class="client-id" id="client-id-display">CLIENT_ID</div>
+        <p style="margin-top:20px"><strong>What happens next?</strong></p>
+        <p id="next-steps">We'll review your scope and begin the assessment. You'll receive an email when testing begins.</p>
+      </div>
+    </div>
+    
+    <footer class="foot">
+      <div>Agentic Security Partners LLC • <a href="/">Back to home</a></div>
+    </footer>
+  </div>
+  
+  <script>
+    // ============================================
+    // Configuration
+    // ============================================
+    const API_BASE_URL = 'https://api.agenticsecurity.com';  // Update for production
+    // const API_BASE_URL = 'http://localhost:8200';  // For local development
+    
+    // ============================================
+    // State Management
+    // ============================================
+    function showState(stateId) {
+      ['loading-state', 'error-state', 'form-state', 'success-state'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+      document.getElementById(stateId).classList.remove('hidden');
+    }
+    
+    // ============================================
+    // Token Validation
+    // ============================================
+    async function validateToken() {
+      // Get token from URL
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token') || params.get('session_id');
+      
+      if (!token) {
+        document.getElementById('error-message').textContent = 'No access token provided. Please use the link from your payment confirmation email.';
+        showState('error-state');
+        return;
+      }
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/validate-token/${token}`);
+        const data = await response.json();
+        
+        if (!data.valid) {
+          document.getElementById('error-message').textContent = data.error || 'Your access token is invalid or has expired.';
+          showState('error-state');
+          return;
+        }
+        
+        // Token is valid - show form
+        document.getElementById('token').value = token;
+        document.getElementById('tier-badge').textContent = data.tier_name || data.tier;
+        document.getElementById('contact_email').value = data.email || '';
+        
+        showState('form-state');
+        
+      } catch (error) {
+        console.error('Validation error:', error);
+        document.getElementById('error-message').textContent = 'Unable to validate your access. Please try again or contact support.';
+        showState('error-state');
+      }
+    }
+    
+    // ============================================
+    // Target URL Management
+    // ============================================
+    function addTarget() {
+      const container = document.getElementById('targets-container');
+      const row = document.createElement('div');
+      row.className = 'target-row';
+      row.innerHTML = `
+        <input type="url" name="target_url" required placeholder="https://api.example.com">
+        <button type="button" onclick="removeTarget(this)" title="Remove">✕</button>
+      `;
+      container.appendChild(row);
+    }
+    
+    function removeTarget(button) {
+      const container = document.getElementById('targets-container');
+      if (container.children.length > 1) {
+        button.parentElement.remove();
+      }
+    }
+    
+    // ============================================
+    // Form Submission
+    // ============================================
+    async function submitIntake(event) {
+      event.preventDefault();
+      
+      const form = document.getElementById('intake-form');
+      const submitBtn = document.getElementById('submit-btn');
+      const errorBox = document.getElementById('form-error');
+      
+      // Collect target URLs
+      const targetInputs = document.querySelectorAll('input[name="target_url"]');
+      const targetUrls = Array.from(targetInputs).map(input => input.value.trim()).filter(url => url);
+      
+      if (targetUrls.length === 0) {
+        errorBox.textContent = 'Please enter at least one target URL.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+      
+      // Build submission data
+      const data = {
+        token: document.getElementById('token').value,
+        company_name: document.getElementById('company_name').value.trim(),
+        contact_name: document.getElementById('contact_name').value.trim(),
+        contact_email: document.getElementById('contact_email').value.trim(),
+        target_urls: targetUrls,
+        desired_start_date: document.getElementById('desired_start_date').value || null,
+        timeline: document.getElementById('timeline').value || null,
+        auth_required: document.getElementById('auth_required').checked,
+        rate_limit: document.getElementById('rate_limit').value.trim() || null,
+        notes: document.getElementById('notes').value.trim() || null,
+      };
+      
+      // Disable submit
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      errorBox.classList.add('hidden');
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/intake`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(result.detail?.error || result.error || 'Submission failed');
+        }
+        
+        // Success!
+        document.getElementById('client-id-display').textContent = result.client_id;
+        document.getElementById('next-steps').innerHTML = result.next_steps.map(step => `<p>• ${step}</p>`).join('');
+        showState('success-state');
+        
+      } catch (error) {
+        console.error('Submission error:', error);
+        errorBox.textContent = error.message;
+        errorBox.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Intake';
+      }
+    }
+    
+    // ============================================
+    // Initialize
+    // ============================================
+    document.addEventListener('DOMContentLoaded', validateToken);
+  </script>
+</body>
+</html>
+

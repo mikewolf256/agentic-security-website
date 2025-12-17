@@ -1,7 +1,18 @@
 [build]
   publish = "."
 
-# SPA routing - redirect all routes to index.html
+# Serve intake.html directly (before catch-all)
+[[redirects]]
+  from = "/intake"
+  to = "/intake.html"
+  status = 200
+
+[[redirects]]
+  from = "/intake.html"
+  to = "/intake.html"
+  status = 200
+
+# SPA routing - redirect all other routes to index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -9,4 +20,12 @@
 
 [build.environment]
   NODE_VERSION = "18"
+
+# Headers for security and CORS
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
 

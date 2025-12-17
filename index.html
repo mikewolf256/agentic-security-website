@@ -535,6 +535,7 @@
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
             <p class="small" style="margin-top:10px"><strong>Human:</strong> Report review</p>
+            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="startCheckout('attack_surface_intel')">Buy Now - $500</button>
           </div>
           
           <div class="card price">
@@ -551,6 +552,7 @@
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
             <p class="small" style="margin-top:10px"><strong>Human:</strong> Validation + call</p>
+            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="startCheckout('rapid_assessment')">Buy Now - $2,500</button>
           </div>
 
           <div class="card price">
@@ -566,6 +568,7 @@
               <li>Remediation guidance</li>
             </ul>
             <p class="small" style="margin-top:10px"><strong>Human:</strong> Full validation + call + guidance</p>
+            <button class="btn" style="width:100%;margin-top:12px" onclick="showPage('contact')">Request Quote</button>
           </div>
           
           <div class="card price">
@@ -582,6 +585,7 @@
               <li>2-hour findings call</li>
             </ul>
             <p class="small" style="margin-top:10px"><strong>Human:</strong> Dedicated analyst + consultation</p>
+            <button class="btn" style="width:100%;margin-top:12px" onclick="showPage('contact')">Request Quote</button>
           </div>
           
           <div class="card price">
@@ -597,6 +601,7 @@
               <li><strong>Signed attestation letter</strong></li>
             </ul>
             <p class="small" style="margin-top:10px"><strong>Human:</strong> Dedicated team + extended support</p>
+            <button class="btn" style="width:100%;margin-top:12px" onclick="showPage('contact')">Request Quote</button>
           </div>
         </div>
         
@@ -686,6 +691,15 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
     
+    // ============================================
+    // Configuration
+    // ============================================
+    const API_BASE_URL = 'https://api.agenticsecurity.com';  // Update for production
+    // const API_BASE_URL = 'http://localhost:8200';  // For local development
+    
+    // ============================================
+    // Page Navigation
+    // ============================================
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
@@ -720,6 +734,50 @@
         showPage(hash);
       }
     });
+    
+    // ============================================
+    // Stripe Checkout
+    // ============================================
+    async function startCheckout(tier) {
+      // Prompt for email
+      const email = prompt('Enter your email address to continue:');
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      
+      // Show loading state
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(btn => btn.disabled = true);
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/checkout`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            tier: tier,
+            email: email,
+          }),
+        });
+        
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.detail || 'Failed to create checkout session');
+        }
+        
+        const data = await response.json();
+        
+        // Redirect to Stripe Checkout
+        window.location.href = data.checkout_url;
+        
+      } catch (error) {
+        console.error('Checkout error:', error);
+        alert('Error: ' + error.message + '\n\nPlease try again or contact us directly.');
+        buttons.forEach(btn => btn.disabled = false);
+      }
+    }
   </script>
 </body>
 </html>
