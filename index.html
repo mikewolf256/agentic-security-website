@@ -193,19 +193,19 @@
         <h2 style="margin:0 0 12px;letter-spacing:-.3px">Why choose us</h2>
         <div class="grid4">
           <div class="card feat">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt"></use></svg>Speed Without Sacrifice</h3>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Speed Without Sacrifice</h3>
             <p>Traditional pentests take 2-4 weeks. Typical delivery in 24 hours to 5 days, depending on scope. Automation handles discovery; humans validate what matters.</p>
           </div>
           <div class="card feat">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-target"></use></svg>High-Impact Focus</h3>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-target" xlink:href="#ico-target"></use></svg>High-Impact Focus</h3>
             <p>No noise, no compliance checkboxes. Only validated vulnerabilities like RCE, SQLi, SSRF, auth bypass, and business logic flaws that actually impact your business.</p>
           </div>
           <div class="card feat">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-user-check"></use></svg>Human Where It Counts</h3>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-user-check" xlink:href="#ico-user-check"></use></svg>Human Where It Counts</h3>
             <p>AI finds candidates. Humans verify exploitability, assess business impact, write remediation steps, and walk you through findings on a call.</p>
           </div>
           <div class="card feat">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-lock"></use></svg>Enterprise-Grade Security</h3>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-lock" xlink:href="#ico-lock"></use></svg>Enterprise-Grade Security</h3>
             <p>AES-256 encrypted credential vault. Per-client data isolation. Complete audit trails. Signed attestation letters (Standard+ included; add-on available). Certified data destruction.</p>
           </div>
         </div>
@@ -401,7 +401,7 @@
 
         <!-- Credential Handling -->
         <div class="card box">
-          <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-lock"></use></svg>Enterprise-Grade Data Security</h3>
+          <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-lock" xlink:href="#ico-lock"></use></svg>Enterprise-Grade Data Security</h3>
           <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Your credentials and findings are protected with the same rigor we'd expect for our own systems:</p>
           <div class="two">
             <div>
@@ -429,7 +429,7 @@
 
         <!-- Video Placeholder -->
         <div class="video-placeholder">
-          <h3><svg class="ico" aria-hidden="true"><use href="#ico-play"></use></svg>See it in action</h3>
+          <h3><svg class="ico" aria-hidden="true"><use href="#ico-play" xlink:href="#ico-play"></use></svg>See it in action</h3>
           <p>Video walkthrough coming soon. See how an assessment runs from start to report delivery.</p>
         </div>
       </section>
@@ -487,7 +487,7 @@
 
         <div class="two" style="margin-top:24px">
           <div class="card box">
-            <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-shield"></use></svg>Secure Report Delivery</h3>
+            <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>Secure Report Delivery</h3>
             <ul>
               <li><strong>Integrity verified:</strong> SHA256 manifest for all deliverables</li>
               <li><strong>Password protected:</strong> Optional AES encryption on delivery package</li>
@@ -496,7 +496,7 @@
             </ul>
           </div>
           <div class="card box">
-            <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-file-text"></use></svg>Attestation & Compliance</h3>
+            <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-file-text" xlink:href="#ico-file-text"></use></svg>Attestation & Compliance</h3>
             <ul>
               <li><strong>Signed attestation letter:</strong> Included in Standard+ (add-on for Intel/Rapid)</li>
               <li><strong>Compliance mapping:</strong> SOC 2, ISO 27001, PCI-DSS alignment</li>
@@ -620,7 +620,7 @@
         </div>
 
         <div class="card box" style="margin-top:24px;border-color:rgba(124,92,255,.3)">
-          <h3 style="margin:0 0 8px"><svg class="ico" aria-hidden="true"><use href="#ico-gift"></use></svg>First-Time Client Discount</h3>
+          <h3 style="margin:0 0 8px"><svg class="ico" aria-hidden="true"><use href="#ico-gift" xlink:href="#ico-gift"></use></svg>First-Time Client Discount</h3>
           <p style="margin:0;color:var(--muted)">New clients get <strong>20% off</strong> their first assessment. We want to prove our value before you commit to larger engagements.</p>
         </div>
         
@@ -680,7 +680,7 @@
 
     <footer class="foot">
       <div><b>Agentic Security Partners LLC</b> • AI-powered discovery, human-validated findings.</div>
-      <div style="margin-top:6px">© <span id="y"></span> • High-impact security assessments for modern SaaS teams.</div>
+      <div style="margin-top:6px">© <span id="y">2025</span> • High-impact security assessments for modern SaaS teams.</div>
     </footer>
   </div>
   <script>
@@ -702,6 +702,14 @@
           link.classList.add('active');
         }
       });
+
+      // Preserve deep-linking + back/forward behavior without a jarring jump.
+      try {
+        history.replaceState(null, '', '#' + pageId);
+      } catch (e) {
+        // Fallback for older browsers
+        window.location.hash = pageId;
+      }
       
       window.scrollTo(0, 0);
     }
