@@ -8,46 +8,64 @@
       <stop offset="0" stop-color="#7c5cff"/>
       <stop offset="1" stop-color="#22c55e"/>
     </linearGradient>
+    <style>
+      .title { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; font-weight: 850; }
+      .sans  { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+      .muted { fill: #a9b4c7; }
+      .text  { fill: #e9eef7; }
+      .mono  { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    </style>
   </defs>
 
   <rect width="1200" height="675" fill="url(#bg)"/>
 
-  <text x="70" y="110" fill="#e9eef7" font-size="54" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="800">
-    From 4 “Critical” to 0 Confirmed
+  <text x="70" y="110" class="title text" font-size="54">
+    From 4 "Critical" to 0 Confirmed
   </text>
-  <text x="70" y="155" fill="#a9b4c7" font-size="22" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+  <text x="70" y="155" class="sans muted" font-size="22">
     Why validation matters: reduce false positives and ship developer-trustworthy results.
   </text>
 
-  <g transform="translate(70,220)">
-    <rect x="0" y="0" width="1060" height="110" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(124,92,255,0.35)"/>
-    <text x="24" y="42" fill="#e9eef7" font-size="24" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="700">1) Scanner flags candidates</text>
-    <text x="24" y="78" fill="#a9b4c7" font-size="18" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
-      Example: “auth bypass” based on response-shape heuristics (status/content markers).
+  <g transform="translate(70,210)">
+    <rect x="0" y="0" width="1060" height="160" rx="18" fill="#ffffff" fill-opacity="0.03" stroke="#7c5cff" stroke-opacity="0.35"/>
+    <text x="24" y="42" class="sans text" font-size="24" font-weight="750">1) Scanner flags candidates</text>
+    <text x="24" y="76" class="sans muted" font-size="18">
+      Example: "auth bypass" based on response-shape heuristics (status/content markers).
     </text>
-    <text x="960" y="70" fill="#fde68a" font-size="40" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="900" text-anchor="end">
-      4
+
+    <!-- What the scanner flagged -->
+    <text x="24" y="110" class="sans muted" font-size="16">
+      • NoSQL injection auth bypass — Scanner: Critical (CVSS 9.1)
     </text>
+    <text x="24" y="136" class="sans muted" font-size="16">
+      • LDAP injection auth bypass (3 variants) — Scanner: Critical (CVSS 9.1)
+    </text>
+
+    <!-- Right-side count + outcome badge -->
+    <text x="1016" y="74" fill="#fde68a" font-size="40" class="sans" font-weight="900" text-anchor="end">4</text>
+    <text x="1016" y="98" class="sans muted" font-size="13" text-anchor="end">candidates</text>
+
+    <rect x="820" y="112" width="216" height="34" rx="10" fill="#22c55e" fill-opacity="0.14" stroke="#22c55e" stroke-opacity="0.35"/>
+    <text x="928" y="134" class="sans text" font-size="14" font-weight="800" text-anchor="middle">Validated: false positive</text>
   </g>
 
-  <g transform="translate(70,360)">
-    <rect x="0" y="0" width="1060" height="130" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(34,197,94,0.35)"/>
-    <text x="24" y="42" fill="#e9eef7" font-size="24" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="700">2) Validation confirms exploitability</text>
-    <text x="24" y="78" fill="#a9b4c7" font-size="18" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+  <g transform="translate(70,390)">
+    <rect x="0" y="0" width="1060" height="130" rx="18" fill="#ffffff" fill-opacity="0.03" stroke="#22c55e" stroke-opacity="0.35"/>
+    <text x="24" y="42" class="sans text" font-size="24" font-weight="750">2) Validation confirms exploitability</text>
+    <text x="24" y="78" class="sans muted" font-size="18">
       Control requests + payload variants + response diffs + endpoint behavior checks.
     </text>
-    <text x="24" y="108" fill="#a9b4c7" font-size="18" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+    <text x="24" y="108" class="sans muted" font-size="18">
       Output: confirmed / unconfirmed / false positive + evidence and rationale.
     </text>
-    <text x="960" y="88" fill="#22c55e" font-size="40" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="900" text-anchor="end">
-      0
-    </text>
+    <text x="1016" y="88" fill="#22c55e" font-size="40" class="sans" font-weight="900" text-anchor="end">0</text>
+    <text x="1016" y="112" class="sans muted" font-size="13" text-anchor="end">confirmed</text>
   </g>
 
-  <g transform="translate(70,520)">
-    <rect x="0" y="0" width="1060" height="110" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(31,42,61,1)"/>
-    <text x="24" y="42" fill="#e9eef7" font-size="24" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="700">3) Deliver high-signal reporting</text>
-    <text x="24" y="78" fill="#a9b4c7" font-size="18" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+  <g transform="translate(70,535)">
+    <rect x="0" y="0" width="1060" height="110" rx="18" fill="#ffffff" fill-opacity="0.03" stroke="#1f2a3d" stroke-opacity="1"/>
+    <text x="24" y="42" class="sans text" font-size="24" font-weight="750">3) Deliver high-signal reporting</text>
+    <text x="24" y="78" class="sans muted" font-size="18">
       Less noise. Faster remediation. Higher trust with engineering and leadership.
     </text>
   </g>
