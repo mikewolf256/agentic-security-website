@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sample: Validation Report | Agentic Security Partners</title>
+  <meta name="description" content="A sample validation report showing evidence-first structure and confidence labeling." />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:980px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.65;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+    h1{margin:8px 0 8px;letter-spacing:-.3px;line-height:1.2}
+    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    p,li{color:var(--muted)}
+    ul{margin:8px 0 0;padding-left:18px}
+    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    @media (max-width:900px){.meta{grid-template-columns:1fr 1fr}}
+    @media (max-width:520px){.meta{grid-template-columns:1fr}}
+    .chip{border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.22);padding:12px}
+    .chip .k{font-size:12px;color:var(--muted);margin:0}
+    .chip .v{font-size:14px;color:var(--text);font-weight:700;margin:2px 0 0}
+    pre{white-space:pre-wrap;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
+    .good{color:var(--ok);font-weight:800}
+    .bad{color:#ef4444;font-weight:800}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+          <div>
+            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div class="pill">Sample report</div>
+          </div>
+        </div>
+        <a class="pill" href="/#proof">← Back to Proof</a>
+      </div>
+
+      <h1>Sample validation report (structure)</h1>
+      <p>This is a simplified example of what “validated” looks like. The goal is clarity: reproduce quickly, understand impact, and know the confidence level.</p>
+
+      <div class="meta">
+        <div class="chip"><p class="k">Title</p><p class="v">Potential auth bypass (candidate)</p></div>
+        <div class="chip"><p class="k">Status</p><p class="v"><span class="bad">Not confirmed</span> (false positive)</p></div>
+        <div class="chip"><p class="k">Confidence</p><p class="v"><span class="good">High</span></p></div>
+        <div class="chip"><p class="k">Severity</p><p class="v">N/A (candidate disproven)</p></div>
+      </div>
+
+      <h2>Summary</h2>
+      <p>Scanner flagged an authentication bypass based on a 200 response and “homepage-looking” content. Validation shows the endpoint returns the same homepage response for payload and control requests; no authentication logic is exercised.</p>
+
+      <h2>Reproduction (example)</h2>
+      <ol style="color:var(--muted);padding-left:18px;margin:8px 0 0">
+        <li>Send a baseline request (control).</li>
+        <li>Send the candidate payload request.</li>
+        <li>Compare response markers (status, size, keywords).</li>
+      </ol>
+
+      <h2>Evidence (example excerpts)</h2>
+      <pre>CONTROL
+POST /login
+...
+
+HTTP/1.1 200 OK
+Content-Length: 412833
+...
+&lt;title&gt;Home&lt;/title&gt;
+
+PAYLOAD
+POST /login
+...
+
+HTTP/1.1 200 OK
+Content-Length: 412833
+...
+&lt;title&gt;Home&lt;/title&gt;
+
+Conclusion: response-shape is identical; candidate is not exploitable.</pre>
+
+      <h2>What “validated” means on our reports</h2>
+      <ul>
+        <li><strong>Confirmed findings</strong> include reproduction steps + evidence + remediation guidance.</li>
+        <li><strong>Unconfirmed candidates</strong> are clearly labeled with confidence and what’s missing to confirm.</li>
+        <li><strong>False positives</strong> are closed with a short explanation and proof.</li>
+      </ul>
+
+      <div class="foot">
+        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

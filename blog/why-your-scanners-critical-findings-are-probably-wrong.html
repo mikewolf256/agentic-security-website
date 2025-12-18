@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Why Your Scanner’s “Critical” Findings Are Probably Wrong | Agentic Security Partners</title>
+  <meta name="description" content="Why many scanner critical findings are false positives, and a practical validation loop to get to truth fast." />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.75;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+    h1{margin:8px 0 8px;letter-spacing:-.4px;line-height:1.2}
+    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    p,li{color:var(--muted)}
+    ul{margin:8px 0 0;padding-left:18px}
+    .callout{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08);color:var(--muted)}
+    pre{white-space:pre-wrap;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+          <div>
+            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div class="pill">Blog</div>
+          </div>
+        </div>
+        <a class="pill" href="/#proof">← Back to Proof</a>
+      </div>
+
+      <h1>Why your scanner’s “Critical” findings are probably wrong</h1>
+      <p>Most scanners are forced to infer vulnerabilities from response patterns: status codes, content markers, timing differences, or error strings. Those heuristics are useful for discovery — but they can also create high-confidence-looking false positives.</p>
+
+      <div class="callout">
+        <strong style="color:#fde68a">Rule of thumb:</strong>
+        <span>scanner output is a candidate; exploitability is a conclusion you earn with validation.</span>
+      </div>
+
+      <h2>Common reasons “critical” is wrong</h2>
+      <ul>
+        <li><strong>Response-shape traps:</strong> endpoints that always return “home” content for any request.</li>
+        <li><strong>Error handling quirks:</strong> “200 OK” with a generic error page can look like auth bypass.</li>
+        <li><strong>WAF/CDN normalization:</strong> injected payloads are stripped or normalized, producing misleading similarities.</li>
+        <li><strong>Out-of-scope routes:</strong> 404/redirect behavior gets misclassified as “bypass.”</li>
+      </ul>
+
+      <h2>A lightweight validation loop (safe for production)</h2>
+      <p>You don’t need full exploitation to validate. A quick loop catches most false positives:</p>
+      <ul>
+        <li><strong>Baseline control:</strong> normal request and a neutral/empty request.</li>
+        <li><strong>Payload variants:</strong> multiple payloads to avoid one-off matches.</li>
+        <li><strong>Compare:</strong> status, response size, and stable markers (title, key JSON fields).</li>
+        <li><strong>Behavior check:</strong> does the endpoint actually execute the vulnerable code path?</li>
+      </ul>
+
+      <pre>Example (simplified):
+CONTROL -> 200, 400KB, title=Home
+PAYLOAD -> 200, 400KB, title=Home
+EMPTY   -> 200, 400KB, title=Home
+
+Conclusion: endpoint returns “Home” regardless of input; candidate is not exploitable.</pre>
+
+      <h2>What “validated” looks like</h2>
+      <p>Validated reports include:</p>
+      <ul>
+        <li>Clear status: confirmed / unconfirmed / false positive</li>
+        <li>Evidence: request/response excerpts (redacted if needed)</li>
+        <li>Confidence labels so teams know what to prioritize</li>
+      </ul>
+
+      <p>Want to see a concrete example? Start with the <a href="/case-studies/validation-in-action.html">Validation in Action case study</a> and the <a href="/samples/validation-report-example.html">sample validation report</a>.</p>
+
+      <div class="foot">
+        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

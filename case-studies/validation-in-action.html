@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Case Study: Validation in Action | Agentic Security Partners</title>
+  <meta name="description" content="A short case study showing how validation turns scanner critical findings into verified signal." />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.65;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+    h1{margin:8px 0 8px;letter-spacing:-.3px;line-height:1.2}
+    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    p,li{color:var(--muted)}
+    ul{margin:8px 0 0;padding-left:18px}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    @media (max-width:720px){.kpis{grid-template-columns:1fr}}
+    .kpi{border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.22);padding:14px}
+    .kpi .num{font-size:32px;font-weight:900;color:var(--ok);margin:0}
+    .kpi .lbl{margin:2px 0 0;font-size:13px}
+    .note{margin-top:14px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08)}
+    code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    pre{white-space:pre-wrap;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+          <div>
+            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div class="pill">Case study</div>
+          </div>
+        </div>
+        <a class="pill" href="/#proof">← Back to Proof</a>
+      </div>
+
+      <h1>Validation in action: when “Critical” isn’t real</h1>
+      <p>This example shows how a common scanner heuristic can produce “critical auth bypass” findings — and how a lightweight validation loop can prove exploitability (or quickly close it out).</p>
+
+      <div class="kpis">
+        <div class="kpi">
+          <p class="num">4</p>
+          <p class="lbl">Scanner “critical” candidates</p>
+        </div>
+        <div class="kpi">
+          <p class="num">0</p>
+          <p class="lbl">Confirmed vulnerabilities after validation</p>
+        </div>
+        <div class="kpi">
+          <p class="num">High</p>
+          <p class="lbl">Confidence in the conclusion (evidence-backed)</p>
+        </div>
+      </div>
+
+      <h2>What the scanner flagged</h2>
+      <ul>
+        <li><strong>NoSQL injection auth bypass</strong> — heuristic: “200 OK with homepage content instead of login form”</li>
+        <li><strong>LDAP injection auth bypass (3 variants)</strong> — heuristic: “200 OK with homepage content”</li>
+      </ul>
+
+      <h2>How we validated it</h2>
+      <ul>
+        <li><strong>Controls:</strong> baseline requests and empty/neutral payloads</li>
+        <li><strong>Payload variants:</strong> multiple payloads per class (NoSQL/LDAP) to rule out one-off behavior</li>
+        <li><strong>Response comparison:</strong> status, size, and content markers</li>
+        <li><strong>Behavior check:</strong> does this endpoint actually perform authentication logic?</li>
+      </ul>
+
+      <h2>What we found</h2>
+      <p>The root endpoint returned the same homepage response for all requests — payload and control — indicating the response-shape “signal” was an artifact, not exploitability.</p>
+
+      <pre>Example outcome (simplified):
+- Normal request   -> 200, ~400KB homepage
+- Payload request  -> 200, ~400KB homepage (same markers)
+- Empty request    -> 200, ~400KB homepage (same markers)
+Conclusion: endpoint returns homepage regardless of input; no auth logic exercised.</pre>
+
+      <div class="note">
+        <strong style="color:#fde68a">Why this matters:</strong>
+        <span style="color:var(--muted)">Without validation, teams waste days on “critical” findings that aren’t real. With validation, the deliverable is trustworthy and immediately actionable.</span>
+      </div>
+
+      <h2>What you should expect in our deliverables</h2>
+      <ul>
+        <li><strong>Status:</strong> confirmed / unconfirmed / false positive</li>
+        <li><strong>Evidence:</strong> request/response excerpts and rationale</li>
+        <li><strong>Reproduction:</strong> steps you can re-run immediately</li>
+      </ul>
+
+      <div class="foot">
+        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

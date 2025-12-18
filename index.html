@@ -186,6 +186,7 @@
         <a href="#home" onclick="showPage('home'); return false" class="nav-link" data-page="home">Home</a>
         <a href="#how" onclick="showPage('how'); return false" class="nav-link" data-page="how">How it works</a>
         <a href="#deliverables" onclick="showPage('deliverables'); return false" class="nav-link" data-page="deliverables">Deliverables</a>
+        <a href="#proof" onclick="showPage('proof'); return false" class="nav-link" data-page="proof">Proof</a>
         <a href="#pricing" onclick="showPage('pricing'); return false" class="nav-link" data-page="pricing">Pricing</a>
         <a href="#contact" onclick="showPage('contact'); return false" class="nav-link" data-page="contact">Get Started</a>
       </nav>
@@ -551,6 +552,38 @@
         <div class="card box" style="margin-top:24px">
           <h3 style="margin:0 0 10px">Findings Review Call (Included)</h3>
           <p style="margin:0;color:var(--muted)">Every assessment includes a walkthrough call with a security expert. We discuss critical findings, answer technical questions, and help prioritize your remediation roadmap. <strong>100% human, no AI.</strong></p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Proof / Resources Page -->
+    <div id="page-proof" class="page">
+      <section class="sec">
+        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Proof</h1>
+        <p class="sub" style="margin-bottom:24px">Short, concrete examples of how validation turns scanner noise into actionable signal.</p>
+
+        <div class="grid4" style="margin-bottom:24px">
+          <a class="card feat" href="/case-studies/validation-in-action.html">
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-user-check" xlink:href="#ico-user-check"></use></svg>Case study: “Validation in action”</h3>
+            <p>A real-world example: 4 scanner “critical” auth bypass findings → 0 confirmed after validation, with evidence.</p>
+          </a>
+          <a class="card feat" href="/samples/validation-report-example.html">
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-file-text" xlink:href="#ico-file-text"></use></svg>Sample validation report</h3>
+            <p>What a validated finding looks like: reproduction steps, request/response evidence, and confidence labels.</p>
+          </a>
+          <a class="card feat" href="/marketing/validation/from-4-critical-to-0-confirmed.svg">
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>Infographic</h3>
+            <p>“From 4 Critical to 0 Confirmed” — the high-level pipeline and why it matters.</p>
+          </a>
+          <a class="card feat" href="/blog/why-your-scanners-critical-findings-are-probably-wrong.html">
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Blog post</h3>
+            <p>Why many “critical” scanner findings are false positives, and how to validate fast without breaking prod.</p>
+          </a>
+        </div>
+
+        <div class="card box">
+          <h3 style="margin:0 0 8px">Where this fits in the engagement</h3>
+          <p style="margin:0;color:var(--muted);font-size:14px">These assets support the “Human Validation” step. We use the same approach for every critical/high-severity candidate before it enters your report.</p>
         </div>
       </section>
     </div>
