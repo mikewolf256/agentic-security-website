@@ -32,6 +32,11 @@
     .kpi .num{font-size:32px;font-weight:900;color:var(--ok);margin:0}
     .kpi .lbl{margin:2px 0 0;font-size:13px}
     .danger{color:#ef4444;font-weight:800}
+    .flag{margin:10px 0}
+    .flag .t{color:var(--text);font-weight:800}
+    .flag .m{margin-top:4px;font-size:13px}
+    .flag .h{margin-top:6px;font-size:13px;color:var(--muted)}
+    .flag code{font-size:12.5px}
     .note{margin-top:14px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08)}
     code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
     pre{white-space:pre-wrap;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
@@ -72,8 +77,16 @@
 
       <h2>What the scanner flagged</h2>
       <ul>
-        <li><strong>NoSQL injection auth bypass</strong> — Scanner: <span class="danger">Critical</span> (<span class="danger">CVSS 9.1</span>) — heuristic: “200 OK with homepage content instead of login form”</li>
-        <li><strong>LDAP injection auth bypass (3 variants)</strong> — Scanner: <span class="danger">Critical</span> (<span class="danger">CVSS 9.1</span>) — heuristic: “200 OK with homepage content”</li>
+        <li class="flag">
+          <div class="t">NoSQL injection auth bypass</div>
+          <div class="m">Scanner: <span class="danger">Critical</span> (<span class="danger">CVSS 9.1</span>)</div>
+          <div class="h">Heuristic: <code>200 OK</code> with homepage content instead of login form</div>
+        </li>
+        <li class="flag">
+          <div class="t">LDAP injection auth bypass (3 variants)</div>
+          <div class="m">Scanner: <span class="danger">Critical</span> (<span class="danger">CVSS 9.1</span>)</div>
+          <div class="h">Heuristic: <code>200 OK</code> with homepage content</div>
+        </li>
       </ul>
 
       <h2>How we validated it</h2>
