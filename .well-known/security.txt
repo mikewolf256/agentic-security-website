@@ -1,6 +1,8 @@
-Contact: mailto:hello@agenticsecurity.com
+Contact: mailto:hello@agenticsec.team
 Preferred-Languages: en
-Policy: https://frolicking-douhua-45393e.netlify.app/#home
-Hiring: https://frolicking-douhua-45393e.netlify.app/#home
+Canonical: https://agenticsec.team/.well-known/security.txt
+Policy: https://agenticsec.team/#home
+Hiring: https://agenticsec.team/#home
+Expires: 2026-12-31T23:59:59Z
 
 

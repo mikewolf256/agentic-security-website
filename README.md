@@ -35,7 +35,7 @@ npx serve .
 ### Custom Domain
 
 1. In Netlify: Site settings > Domain management
-2. Add your custom domain (e.g., `agenticsecurity.com`)
+2. Add your custom domain (e.g., `agenticsec.team`)
 3. Follow DNS instructions (add CNAME record)
 4. Netlify provides free SSL automatically
 
