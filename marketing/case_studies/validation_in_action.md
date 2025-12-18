@@ -10,8 +10,8 @@ Scanner output is not a vulnerability. This case study shows how a “critical�
 
 The automated scan initially flagged:
 
-- **NoSQL Injection Auth Bypass** — Critical (heuristic: “200 OK with homepage content instead of login form”)
-- **LDAP Injection Auth Bypass (3 variants)** — Critical (heuristic: “200 OK with homepage content”)
+- **NoSQL Injection Auth Bypass** — Critical (CVSS 9.1) (heuristic: “200 OK with homepage content instead of login form”)
+- **LDAP Injection Auth Bypass (3 variants)** — Critical (CVSS 9.1) (heuristic: “200 OK with homepage content”)
 
 ## What validation did
 
