@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy | Agentic Security Partners</title>
+  <meta name="description" content="Privacy policy for Agentic Security Partners." />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    h1{margin:0 0 8px;letter-spacing:-.3px}
+    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    p,li{color:var(--muted)}
+    ul{margin:8px 0 0;padding-left:18px}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+    .pill{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="brand">
+        <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+        <div>
+          <div style="font-weight:800">Agentic Security Partners</div>
+          <div class="pill">Privacy Policy</div>
+        </div>
+      </div>
+
+      <h1>Privacy Policy</h1>
+      <p>Last updated: <span id="d"></span></p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Contact details:</strong> name, email, company (when you request a quote or purchase an engagement).</li>
+        <li><strong>Scope information:</strong> target URLs, timelines, notes, and other engagement details you provide.</li>
+        <li><strong>Operational data:</strong> basic logs needed to operate the service (e.g., request metadata for abuse prevention and reliability).</li>
+      </ul>
+
+      <h2>How we use your data</h2>
+      <ul>
+        <li>To provide quotes, coordinate engagements, and deliver reports.</li>
+        <li>To maintain security, reliability, and prevent abuse.</li>
+        <li>To comply with legal obligations.</li>
+      </ul>
+
+      <h2>Scope & credential handling</h2>
+      <p>For authenticated testing, we’ll coordinate a secure credential handoff method (e.g., a password manager vault share or encrypted channel). Access is limited to the engagement window and handled per the retention terms agreed during onboarding.</p>
+
+      <h2>Sharing</h2>
+      <p>We do not sell your personal information. We share information only with service providers necessary to deliver the service (e.g., payment processing), and only as needed for that purpose.</p>
+
+      <h2>Retention</h2>
+      <p>We retain engagement data only as long as needed for delivery and any agreed retention period. If you need deletion on a shorter timeline, email <a href="mailto:hello@agenticsecurity.com">hello@agenticsecurity.com</a>.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? Email <a href="mailto:hello@agenticsecurity.com">hello@agenticsecurity.com</a>.</p>
+
+      <div class="foot">
+        <div><a href="/">Back to home</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const now = new Date();
+    document.getElementById('y').textContent = now.getFullYear();
+    document.getElementById('d').textContent = now.toISOString().slice(0, 10);
+  </script>
+</body>
+</html>
+
+

@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Agentic Security Partners | Rapid Web & API Assessments</title>
   <meta name="description" content="AI-powered discovery, human-validated findings. Web and API security assessments with OWASP Top 10 coverage. Fast turnaround, evidence-first reporting." />
+  <meta property="og:title" content="Agentic Security Partners | Rapid Web & API Assessments" />
+  <meta property="og:description" content="AI-powered discovery, human-validated findings. Web and API security assessments with fast turnaround and evidence-first reporting." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/logo.png" />
   <style>
     :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:1100px}
     *{box-sizing:border-box} html,body{height:100%}
@@ -16,16 +22,39 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:24px}
     .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0 18px}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0 18px;position:relative}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;cursor:pointer}
     .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
-    .brand-text{display:none}
+    .brand-text{display:block}
     .links{display:flex;gap:18px;color:var(--muted);font-size:14px}
     .links a{cursor:pointer;transition:color 0.2s}
     .links a:hover,.links a.active{color:var(--text)}
     .cta{padding:10px 14px;border-radius:12px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.18);font-weight:700;cursor:pointer;transition:background 0.2s}
     .cta:hover{background:rgba(124,92,255,.25)}
-    @media (max-width:900px){.links{display:none}}
+    .menuBtn{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02);cursor:pointer}
+    .menuBtn:hover{border-color:rgba(169,180,199,.35)}
+    @media (max-width:900px){
+      .brand-text{display:none}
+      .cta{display:none}
+      .menuBtn{display:inline-flex}
+      .links{display:none}
+      .nav.open .links{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        position:absolute;
+        top:62px;
+        right:0;
+        padding:12px;
+        border-radius:16px;
+        border:1px solid var(--line);
+        background:rgba(16,24,39,.92);
+        box-shadow:var(--shadow);
+        min-width:220px;
+      }
+      .nav.open .links a{padding:8px 10px;border-radius:10px}
+      .nav.open .links a:hover{background:rgba(255,255,255,.04)}
+    }
 
     .page{display:none;animation:fadeIn 0.3s ease-in}
     .page.active{display:block}
@@ -109,6 +138,16 @@
     .foot{border-top:1px solid var(--line);padding:22px 0 34px;color:var(--muted);font-size:12.5px}
     .ico{width:16px;height:16px;display:inline-block;vertical-align:-2px;margin-right:8px;color:var(--text)}
     .ico.muted{color:var(--muted)}
+
+    /* Simple modal */
+    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
+    .modalOverlay.open{display:flex}
+    .modal{width:min(560px, 100%);padding:18px}
+    .modal h3{margin:0 0 6px}
+    .modal p{margin:0 0 12px;color:var(--muted);font-size:14px}
+    .modal input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.3);color:var(--text);font-size:15px}
+    .modal .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .modal .row .btn{flex:1}
   </style>
 </head>
 <body>
@@ -144,13 +183,16 @@
     <header class="nav">
       <div class="brand" onclick="showPage('home')"><img src="logo.png" alt="Agentic Security Partners" class="logo"><div class="brand-text">Agentic Security Partners</div></div>
       <nav class="links">
-        <a href="#" onclick="showPage('home'); return false" class="nav-link" data-page="home">Home</a>
-        <a href="#" onclick="showPage('how'); return false" class="nav-link" data-page="how">How it works</a>
-        <a href="#" onclick="showPage('deliverables'); return false" class="nav-link" data-page="deliverables">Deliverables</a>
-        <a href="#" onclick="showPage('pricing'); return false" class="nav-link" data-page="pricing">Pricing</a>
-        <a href="#" onclick="showPage('contact'); return false" class="nav-link" data-page="contact">Get Started</a>
+        <a href="#home" onclick="showPage('home'); return false" class="nav-link" data-page="home">Home</a>
+        <a href="#how" onclick="showPage('how'); return false" class="nav-link" data-page="how">How it works</a>
+        <a href="#deliverables" onclick="showPage('deliverables'); return false" class="nav-link" data-page="deliverables">Deliverables</a>
+        <a href="#pricing" onclick="showPage('pricing'); return false" class="nav-link" data-page="pricing">Pricing</a>
+        <a href="#contact" onclick="showPage('contact'); return false" class="nav-link" data-page="contact">Get Started</a>
       </nav>
-      <a class="cta" href="#" onclick="showPage('contact'); return false">Get a quote</a>
+      <button class="menuBtn" type="button" aria-label="Open menu" onclick="toggleMenu()">
+        <svg class="ico muted" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M4 7h16v2H4V7zm0 8h16v2H4v-2zm0-4h16v2H4v-2z"/></svg>
+      </button>
+      <a class="cta" href="#contact" onclick="showPage('contact'); return false">Get a quote</a>
     </header>
 
     <!-- Home Page -->
@@ -183,7 +225,7 @@
             </div>
             <div class="stat">
               <div class="statNum">OWASP</div>
-              <div class="statLabel">Top 10 2025 Coverage</div>
+              <div class="statLabel">Top 10 aligned coverage</div>
             </div>
           </div>
         </div>
@@ -381,21 +423,21 @@
           </div>
         </div>
 
-        <!-- OWASP Top 10 2025 -->
+        <!-- OWASP Top 10 -->
         <div class="card box" style="margin-bottom:24px">
-          <h3 style="margin:0 0 10px">Comprehensive Testing Aligned to OWASP Top 10 (2025)</h3>
-          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Every assessment includes comprehensive testing aligned to the latest OWASP Top 10 risk categories.</p>
+          <h3 style="margin:0 0 10px">Comprehensive testing aligned to OWASP Top 10</h3>
+          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Every assessment includes testing aligned to the OWASP Top 10 (and API-specific risks where applicable).</p>
           <div class="owasp-grid">
             <div class="owasp-item"><span class="num">A01</span> Broken Access Control (IDOR, privilege escalation)</div>
-            <div class="owasp-item"><span class="num">A02</span> Security Misconfiguration (headers, secrets, CORS)</div>
-            <div class="owasp-item"><span class="num">A03</span> Software Supply Chain (CVEs, outdated components)</div>
-            <div class="owasp-item"><span class="num">A04</span> Cryptographic Failures (weak crypto, exposed keys)</div>
-            <div class="owasp-item"><span class="num">A05</span> Injection (SQL, XSS, Command, SSRF, XXE)</div>
-            <div class="owasp-item"><span class="num">A06</span> Insecure Design (business logic, race conditions)</div>
-            <div class="owasp-item"><span class="num">A07</span> Authentication Failures (JWT, OAuth, session)</div>
-            <div class="owasp-item"><span class="num">A08</span> Data Integrity Failures (deserialization, uploads)</div>
-            <div class="owasp-item"><span class="num">A09</span> Logging & Monitoring Failures</div>
-            <div class="owasp-item"><span class="num">A10</span> Exception Handling (ReDoS, error disclosure)</div>
+            <div class="owasp-item"><span class="num">A02</span> Cryptographic Failures (weak crypto, exposed keys)</div>
+            <div class="owasp-item"><span class="num">A03</span> Injection (SQLi, XSS, command injection)</div>
+            <div class="owasp-item"><span class="num">A04</span> Insecure Design (business logic, race conditions)</div>
+            <div class="owasp-item"><span class="num">A05</span> Security Misconfiguration (headers, CORS, exposed admin)</div>
+            <div class="owasp-item"><span class="num">A06</span> Vulnerable and Outdated Components (CVEs, libraries)</div>
+            <div class="owasp-item"><span class="num">A07</span> Identification & Authentication Failures (session/JWT/OAuth)</div>
+            <div class="owasp-item"><span class="num">A08</span> Software & Data Integrity Failures (CI/CD, deserialization, uploads)</div>
+            <div class="owasp-item"><span class="num">A09</span> Security Logging & Monitoring Failures</div>
+            <div class="owasp-item"><span class="num">A10</span> Server-Side Request Forgery (SSRF)</div>
           </div>
         </div>
 
@@ -535,7 +577,7 @@
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
             <p class="small" style="margin-top:10px"><strong>Human:</strong> Report review</p>
-            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="startCheckout('attack_surface_intel')">Buy Now - $500</button>
+            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="openCheckoutModal('attack_surface_intel')">Buy Now - $500</button>
           </div>
           
           <div class="card price">
@@ -552,7 +594,7 @@
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
             <p class="small" style="margin-top:10px"><strong>Human:</strong> Validation + call</p>
-            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="startCheckout('rapid_assessment')">Buy Now - $2,500</button>
+            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="openCheckoutModal('rapid_assessment')">Buy Now - $2,500</button>
           </div>
 
           <div class="card price">
@@ -653,9 +695,9 @@
         <div class="card box" style="margin-top:24px">
           <h3 style="margin:0 0 8px">Get a quote</h3>
           <p class="small" style="margin:0 0 12px">We respond within 24 hours with a custom quote based on your scope.</p>
-          <a class="btn btnP" href="#" onclick="alert('Wire this button to your intake system (Calendly / email / CRM).'); return false;">Request quote</a>
+          <a class="btn btnP" href="mailto:hello@agenticsecurity.com?subject=Security%20assessment%20quote&body=Hi%20Agentic%20Security%20Partners%2C%0A%0ACompany%3A%0ATargets%3A%0ATimeline%3A%0AAuth%20required%3A%20Yes%2FNo%0A%0AThanks!">Request quote</a>
           <span style="margin:0 12px;color:var(--muted)">or</span>
-          <a class="btn" href="#" onclick="alert('Wire to Calendly or scheduling link'); return false;">Book a call</a>
+          <a class="btn" href="mailto:hello@agenticsecurity.com?subject=Book%20a%20call&body=Hi%20Agentic%20Security%20Partners%2C%0A%0AI%27d%20like%20to%20book%20a%20call.%20Ideal%20times%3A%0A%0AThanks!">Book a call</a>
         </div>
 
         <div class="two" style="margin-top:24px">
@@ -686,8 +728,32 @@
     <footer class="foot">
       <div><b>Agentic Security Partners LLC</b> • AI-powered discovery, human-validated findings.</div>
       <div style="margin-top:6px">© <span id="y">2025</span> • High-impact security assessments for modern SaaS teams.</div>
+      <div style="margin-top:8px">
+        <a href="mailto:hello@agenticsecurity.com" style="color:var(--accent)">hello@agenticsecurity.com</a>
+        <span style="margin:0 10px;color:var(--line)">|</span>
+        <a href="/privacy.html" style="color:var(--muted)">Privacy</a>
+        <span style="margin:0 10px;color:var(--line)">|</span>
+        <a href="/terms.html" style="color:var(--muted)">Terms</a>
+        <span style="margin:0 10px;color:var(--line)">|</span>
+        <a href="/.well-known/security.txt" style="color:var(--muted)">Security</a>
+      </div>
     </footer>
   </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutOverlay" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+    <div class="card modal">
+      <h3 id="checkoutTitle">Continue to secure checkout</h3>
+      <p>Enter your email so we can send your receipt and scope intake link.</p>
+      <input id="checkoutEmail" type="email" autocomplete="email" placeholder="you@company.com" />
+      <div class="row">
+        <button class="btn" type="button" onclick="closeCheckoutModal()">Cancel</button>
+        <button class="btn btnP" id="checkoutContinueBtn" type="button" onclick="confirmCheckout()">Continue</button>
+      </div>
+      <p class="small" style="margin-top:10px">Prefer invoice or custom scope? Email <a href="mailto:hello@agenticsecurity.com" style="color:var(--accent)">hello@agenticsecurity.com</a>.</p>
+    </div>
+  </div>
+
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
     
@@ -700,7 +766,8 @@
     // ============================================
     // Page Navigation
     // ============================================
-    function showPage(pageId) {
+    function showPage(pageId, opts) {
+      opts = opts || {};
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
       });
@@ -719,11 +786,15 @@
 
       // Preserve deep-linking + back/forward behavior without a jarring jump.
       try {
-        history.replaceState(null, '', '#' + pageId);
+        if (opts.replace) history.replaceState(null, '', '#' + pageId);
+        else history.pushState(null, '', '#' + pageId);
       } catch (e) {
         // Fallback for older browsers
         window.location.hash = pageId;
       }
+
+      // Close mobile menu after navigation
+      document.querySelector('header.nav')?.classList.remove('open');
       
       window.scrollTo(0, 0);
     }
@@ -731,24 +802,69 @@
     window.addEventListener('load', function() {
       const hash = window.location.hash.substring(1);
       if (hash) {
-        showPage(hash);
+        showPage(hash, { replace: true });
       }
     });
+
+    window.addEventListener('hashchange', function() {
+      const hash = window.location.hash.substring(1);
+      if (hash) showPage(hash, { replace: true });
+    });
+
+    function toggleMenu() {
+      const header = document.querySelector('header.nav');
+      if (!header) return;
+      header.classList.toggle('open');
+    }
     
     // ============================================
     // Stripe Checkout
     // ============================================
-    async function startCheckout(tier) {
-      // Prompt for email
-      const email = prompt('Enter your email address to continue:');
+    let pendingTier = null;
+
+    function openCheckoutModal(tier) {
+      pendingTier = tier;
+      const overlay = document.getElementById('checkoutOverlay');
+      const emailInput = document.getElementById('checkoutEmail');
+      overlay.classList.add('open');
+      emailInput.value = '';
+      setTimeout(() => emailInput.focus(), 0);
+    }
+
+    function closeCheckoutModal() {
+      const overlay = document.getElementById('checkoutOverlay');
+      overlay.classList.remove('open');
+      pendingTier = null;
+      const continueBtn = document.getElementById('checkoutContinueBtn');
+      continueBtn.disabled = false;
+      continueBtn.textContent = 'Continue';
+    }
+
+    function confirmCheckout() {
+      const email = (document.getElementById('checkoutEmail').value || '').trim();
       if (!email || !email.includes('@')) {
         alert('Please enter a valid email address.');
         return;
       }
-      
-      // Show loading state
-      const buttons = document.querySelectorAll('.btn');
+      if (!pendingTier) return;
+      startCheckout(pendingTier, email);
+    }
+
+    // Close modal on backdrop click / ESC
+    document.getElementById('checkoutOverlay').addEventListener('click', function(e) {
+      if (e.target === e.currentTarget) closeCheckoutModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeCheckoutModal();
+    });
+
+    async function startCheckout(tier, email) {
+      // Show loading state (only disable actual <button> elements)
+      const buttons = document.querySelectorAll('button.btn');
       buttons.forEach(btn => btn.disabled = true);
+      const continueBtn = document.getElementById('checkoutContinueBtn');
+      continueBtn.disabled = true;
+      continueBtn.textContent = 'Starting...';
       
       try {
         const response = await fetch(`${API_BASE_URL}/api/checkout`, {
@@ -776,6 +892,8 @@
         console.error('Checkout error:', error);
         alert('Error: ' + error.message + '\n\nPlease try again or contact us directly.');
         buttons.forEach(btn => btn.disabled = false);
+        continueBtn.disabled = false;
+        continueBtn.textContent = 'Continue';
       }
     }
   </script>
