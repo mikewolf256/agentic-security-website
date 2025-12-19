@@ -84,6 +84,17 @@
       border-color: rgba(124,92,255,.8);
       background: linear-gradient(180deg, rgba(124,92,255,1), rgba(124,92,255,.78));
     }
+    /* Pricing secondary CTAs (e.g., Request Quote): brighter border/text + subtle fill */
+    .price .btn:not(.btnP){
+      color: var(--text);
+      border-color: rgba(169,180,199,.38);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 26px rgba(0,0,0,.22);
+    }
+    .price .btn:not(.btnP):hover{
+      border-color: rgba(169,180,199,.55);
+      background: rgba(255,255,255,.085);
+    }
 
     .heroR{padding:18px;display:flex;align-items:center;justify-content:center}
     .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%}
