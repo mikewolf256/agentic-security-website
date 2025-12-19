@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>React2Shell: What’s Real vs Noise (and How to Validate Fast) | Agentic Security Partners</title>
+  <meta name="description" content="React2Shell is real—but many scanner ‘critical’ findings are false positives. A practical validation checklist for web/app + API teams." />
+  <meta property="og:title" content="React2Shell: What’s Real vs Noise" />
+  <meta property="og:description" content="A practical validation checklist: prototype pollution, SSR reality checks, exploit-path confirmation, and mitigations." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.75;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+    h1{margin:8px 0 8px;letter-spacing:-.4px;line-height:1.2}
+    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    h3{margin:14px 0 6px;letter-spacing:-.1px}
+    p,li{color:var(--muted)}
+    ul,ol{margin:8px 0 0;padding-left:18px}
+    .callout{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08);color:var(--muted)}
+    .checklist{margin-top:10px;padding:12px 14px;border-radius:14px;border:1px solid rgba(124,92,255,.25);background:rgba(0,0,0,.18)}
+    .checklist li{margin:10px 0}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+    code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    pre{white-space:pre-wrap;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+          <div>
+            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div class="pill">Blog</div>
+          </div>
+        </div>
+        <a class="pill" href="/#proof">← Back to Proof</a>
+      </div>
+
+      <h1>React2Shell: what’s real vs noise (and how to validate fast)</h1>
+      <div class="callout">
+        <strong style="color:#fde68a">TL;DR:</strong>
+        <span>React2Shell is real, but most scanner “critical” findings are false positives. Validate exploitability before you mobilize engineering.</span>
+      </div>
+
+      <h2>The React2Shell scare</h2>
+      <p>Since the research dropped, scanners have been flagging “React2Shell” / “client-side prototype pollution → RCE” at high severity. The problem: most alerts prove <em>potential</em>, not exploitability.</p>
+
+      <h2>What React2Shell actually requires</h2>
+      <ol>
+        <li><strong>Client-side prototype pollution:</strong> a gadget that allows <code>Object.prototype</code> modification via user input</li>
+        <li><strong>Server-side rendering (SSR):</strong> Next.js/Remix/etc. running SSR (not just static export)</li>
+        <li><strong>Vulnerable render path:</strong> the SSR process uses the polluted prototype in a dangerous way</li>
+        <li><strong>No mitigation:</strong> no protections that block/neutralize the pollution</li>
+      </ol>
+      <p><strong>All four must be true.</strong> If one fails, React2Shell isn’t exploitable.</p>
+
+      <h2>Why scanners get it wrong</h2>
+      <p>Automated tooling often flags React2Shell based on heuristics like “prototype pollution gadget found” or “Next.js detected.” That can be useful for discovery—but it doesn’t prove a real exploitation path.</p>
+
+      <h3>Real example: the 4 critical that weren’t</h3>
+      <p>In one engagement, a scanner flagged 4 critical auth-bypass candidates (CVSS 9.1). Validation showed the endpoint returned homepage content for all requests—payload and control—so nothing was exploitable. Result: <strong>4 critical → 0 confirmed</strong> and significant engineering time saved.</p>
+
+      <h2>The validation checklist</h2>
+      <p>Before you panic about React2Shell (or any client-side “critical”), run this checklist:</p>
+
+      <h3>1) Is there actually a prototype pollution gadget?</h3>
+      <ul class="checklist">
+        <li>[ ] Can you demonstrate <code>Object.prototype.polluted = true</code> via user input?</li>
+        <li>[ ] Does the pollution persist across requests?</li>
+        <li>[ ] What’s the injection point (URL param, JSON body, headers)?</li>
+      </ul>
+
+      <h3>2) Is SSR actually in use?</h3>
+      <ul class="checklist">
+        <li>[ ] Confirm SSR is enabled (not static export).</li>
+        <li>[ ] Look for SSR markers and server-rendered behavior (not just framework detection).</li>
+        <li>[ ] Confirm the polluted prototype would be used server-side (not only client-side).</li>
+      </ul>
+
+      <h3>3) Can you reach a vulnerable render path?</h3>
+      <ul class="checklist">
+        <li>[ ] Does SSR evaluate the polluted property?</li>
+        <li>[ ] Is there an actual gadget that leads to code execution?</li>
+        <li>[ ] Can you demonstrate server-side impact (not just a changed response)?</li>
+      </ul>
+
+      <h3>4) Are mitigations in place?</h3>
+      <ul class="checklist">
+        <li>[ ] Check for prototype hardening / pollution protections.</li>
+        <li>[ ] Review libraries commonly involved in pollution paths (and their safe versions).</li>
+        <li>[ ] Test if input sanitizes <code>__proto__</code> and <code>constructor</code>.</li>
+      </ul>
+
+      <p><strong>If you can’t check all boxes, it’s not exploitable.</strong> Close it as a false positive with evidence.</p>
+
+      <h2>How we validate</h2>
+      <ol>
+        <li><strong>Control testing:</strong> establish baseline behavior</li>
+        <li><strong>Payload variation:</strong> multiple attack variants to avoid one-off matches</li>
+        <li><strong>Response comparison:</strong> status, size, stable markers, timing</li>
+        <li><strong>Exploitability determination:</strong> confirmed vs false positive, with rationale</li>
+      </ol>
+
+      <pre>Quick heuristic (simplified):
+CONTROL -> 200, 400KB, marker=Home
+PAYLOAD -> 200, 400KB, marker=Home
+EMPTY   -> 200, 400KB, marker=Home
+
+Conclusion: response-shape trap; not exploitable.</pre>
+
+      <h2>Get your “criticals” validated</h2>
+      <p>Worried about React2Shell or drowning in scanner noise?</p>
+      <p><strong>Send your top “critical” findings—get a 72-hour verdict.</strong></p>
+      <p><a href="mailto:hello@agenticsec.team?subject=72-Hour%20Critical%20Triage%20Request">Request a 72-hour critical triage →</a></p>
+
+      <div class="foot">
+        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

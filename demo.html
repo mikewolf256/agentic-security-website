@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Watch the Demo | Agentic Security Partners</title>
+  <meta name="description" content="Request access to a short demo walkthrough of the validation workflow and executive-ready reporting." />
+  <meta property="og:title" content="Watch the Demo | Agentic Security Partners" />
+  <meta property="og:description" content="3–5 minute walkthrough: candidate → validated findings, evidence quality, and executive summary." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.75;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+    h1{margin:8px 0 8px;letter-spacing:-.4px;line-height:1.2}
+    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    p,li{color:var(--muted)}
+    ul{margin:8px 0 0;padding-left:18px}
+    .callout{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08);color:var(--muted)}
+    .formBox{margin-top:14px;padding:16px;border-radius:14px;border:1px solid rgba(124,92,255,.25);background:rgba(0,0,0,.18)}
+    .formHint{font-size:12.5px;color:var(--muted);margin-top:10px}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+    .placeholder{border:2px dashed rgba(169,180,199,.25);border-radius:14px;padding:18px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+          <div>
+            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div class="pill">Demo (gated)</div>
+          </div>
+        </div>
+        <a class="pill" href="/#proof">← Back to Proof</a>
+      </div>
+
+      <h1>Watch the demo</h1>
+      <p>A short 3–5 minute walkthrough of how we turn scanner candidates into validated findings your team can trust.</p>
+
+      <h2>What you’ll see</h2>
+      <ul>
+        <li><strong>Executive summary:</strong> confirmed vs under review, progress/ETA, and what actually matters.</li>
+        <li><strong>Candidate → confirmed workflow:</strong> we validate exploitability before it hits your report.</li>
+        <li><strong>Evidence quality:</strong> request/response excerpts + reproduction steps developers can copy/paste.</li>
+        <li><strong>False positives closed with proof:</strong> why it’s not exploitable (so engineering doesn’t waste cycles).</li>
+      </ul>
+
+      <div class="callout">
+        <strong style="color:#fde68a">No spam:</strong>
+        <span>enter your email and we’ll send the demo link when it’s ready.</span>
+      </div>
+
+      <div class="formBox">
+        <!-- HUBSPOT_FORM_PLACEHOLDER
+          TODO: Replace this placeholder with your HubSpot form embed (email-only).
+          Configure HubSpot post-submit redirect to: /demo-thanks.html
+        -->
+        <div id="hubspot-form" class="placeholder">
+          <div style="font-weight:900;color:var(--text)">HubSpot form embed goes here</div>
+          <div style="margin-top:6px;color:var(--muted);font-size:13px">Email-only gate. Redirect to <code style="color:var(--text)">/demo-thanks.html</code>.</div>
+        </div>
+
+        <div class="formHint">
+          Prefer email? <a href="mailto:hello@agenticsec.team?subject=Demo%20request">hello@agenticsec.team</a>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

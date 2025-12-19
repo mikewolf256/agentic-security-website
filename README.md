@@ -61,3 +61,8 @@ npx serve .
 
 Edit `index.html` directly. Changes will auto-deploy if connected to Netlify via GitHub.
 
+## TODOs (GTM / Proof)
+
+- Add HubSpot email-only embed to `demo.html` (replace `HUBSPOT_FORM_PLACEHOLDER`) and set HubSpot redirect to `/demo-thanks.html`.
+- Add booking calendar URL to the disabled “Book a call” button in `demo-thanks.html`.
+

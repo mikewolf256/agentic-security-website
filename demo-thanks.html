@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Request Received | Agentic Security Partners</title>
+  <meta name="description" content="Thanks — we’ll send the demo link as soon as it’s ready." />
+  <meta property="og:title" content="Demo Request Received | Agentic Security Partners" />
+  <meta property="og:description" content="We’ll send the demo link as soon as it’s ready. In the meantime, you can request a 72-hour critical triage." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.75;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+    h1{margin:8px 0 8px;letter-spacing:-.4px;line-height:1.2}
+    p,li{color:var(--muted)}
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02);font-weight:800;font-size:14px;cursor:pointer;transition:border-color 0.2s}
+    .btnP{border-color:rgba(124,92,255,.35);background:rgba(124,92,255,.18)}
+    .btn:hover{border-color:rgba(169,180,199,.35)}
+    .btnDisabled{opacity:.55;cursor:not-allowed;pointer-events:none}
+    .note{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08);color:var(--muted)}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+          <div>
+            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div class="pill">Demo request</div>
+          </div>
+        </div>
+        <a class="pill" href="/#proof">← Back to Proof</a>
+      </div>
+
+      <h1>Thanks — you’re on the demo list</h1>
+      <p>We’ll email you the demo link as soon as it’s ready.</p>
+
+      <div class="btnRow">
+        <!-- TODO: add booking calendar URL here -->
+        <a class="btn btnP btnDisabled" href="#" aria-disabled="true">Book a call</a>
+        <a class="btn" href="mailto:hello@agenticsec.team?subject=72-Hour%20Critical%20Triage%20Request">Request a 72-hour triage</a>
+      </div>
+
+      <div class="note">
+        <strong style="color:#fde68a">Calendar link coming soon:</strong>
+        <span>we’ll add a scheduling link here once it’s finalized.</span>
+      </div>
+
+      <p style="margin-top:14px">Prefer email? <a href="mailto:hello@agenticsec.team?subject=Demo%20request">hello@agenticsec.team</a></p>
+
+      <div class="foot">
+        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Executive Brief: Handling Client-Side “Critical” Findings | Agentic Security Partners</title>
+  <meta name="description" content="A 3-minute decision framework for CTOs and engineering leaders: validate client-side ‘critical’ findings before you mobilize engineering." />
+  <meta property="og:title" content="Executive Brief: Handling Client-Side “Critical” Findings" />
+  <meta property="og:description" content="Decision framework: reproduce, determine impact, confirm exploit path, and validate before remediation." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/logo.png" />
+  <style>
+    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.75;color:var(--text);
+      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
+                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
+                 var(--bg);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
+    h1{margin:8px 0 8px;letter-spacing:-.4px;line-height:1.2}
+    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    p,li{color:var(--muted)}
+    ul{margin:8px 0 0;padding-left:18px}
+    .meta{margin-top:8px;color:var(--muted);font-size:13px}
+    .callout{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08);color:var(--muted)}
+    .tbl{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+    .tbl th,.tbl td{border-bottom:1px solid var(--line);padding:10px 10px;text-align:left;vertical-align:top}
+    .tbl th{color:var(--text);font-weight:800}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
+          <div>
+            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div class="pill">Executive brief</div>
+          </div>
+        </div>
+        <a class="pill" href="/#proof">← Back to Proof</a>
+      </div>
+
+      <h1>Executive brief: handling client-side “critical” findings</h1>
+      <div class="meta"><strong>Audience:</strong> CTO / VP Engineering / Security Leadership • <strong>Reading time:</strong> ~3 minutes</div>
+
+      <h2>The problem</h2>
+      <p>Your scanner just flagged a pile of “Critical” vulnerabilities. Your team is panicking and your next leadership update is looming.</p>
+      <div class="callout">
+        <strong style="color:#fde68a">Before you mobilize engineering:</strong>
+        <span>scanner severity ≠ exploitability. Many client-side “critical” findings are false positives.</span>
+      </div>
+
+      <h2>The decision framework</h2>
+      <h3 style="margin:14px 0 6px;letter-spacing:-.1px">Step 1: categorize the finding</h3>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Examples</th>
+            <th>Typical FP rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Client-side injection</td>
+            <td>XSS, prototype pollution, DOM-based attacks</td>
+            <td>40–60%</td>
+          </tr>
+          <tr>
+            <td>Auth/session issues</td>
+            <td>JWT problems, session fixation</td>
+            <td>50–70%</td>
+          </tr>
+          <tr>
+            <td>Configuration</td>
+            <td>Missing headers, CORS, CSP</td>
+            <td>30–50%</td>
+          </tr>
+          <tr>
+            <td>Business logic</td>
+            <td>IDOR, access control</td>
+            <td>20–40%</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>Rule of thumb:</strong> the more the scanner relies on response heuristics (vs. proof), the higher the false positive rate.</p>
+
+      <h3 style="margin:14px 0 6px;letter-spacing:-.1px">Step 2: ask three questions</h3>
+      <ul>
+        <li><strong>Can we reproduce it?</strong> A human can demonstrate the attack, not just a scanner report.</li>
+        <li><strong>What’s the actual impact?</strong> “XSS in admin” is not the same as “XSS on a dead 404.”</li>
+        <li><strong>What’s the exploit path?</strong> Auth required? Social engineering? Rare conditions?</li>
+      </ul>
+
+      <h3 style="margin:14px 0 6px;letter-spacing:-.1px">Step 3: validate before remediating</h3>
+      <p><strong>Don’t</strong> allocate sprint capacity based on scanner severity alone. <strong>Do</strong> validate critical findings first and attach evidence to the decision.</p>
+
+      <h2>Real-world example</h2>
+      <p><strong>Scanner output:</strong> 4 Critical NoSQL/LDAP “auth bypass” candidates (CVSS 9.1)</p>
+      <p><strong>After validation:</strong> 0 confirmed. Endpoint returned homepage for any request; scanner confused “200 OK” with “success.”</p>
+      <p><strong>Engineering hours saved:</strong> 40+</p>
+
+      <h2>When to escalate immediately</h2>
+      <ul>
+        <li>RCE/command injection with PoC</li>
+        <li>SQL injection with data extraction proof</li>
+        <li>Auth bypass on real production endpoints</li>
+        <li>Exposed secrets/credentials</li>
+        <li>Active exploitation indicators</li>
+      </ul>
+      <p><strong>Key differentiator:</strong> these have proof, not just alerts.</p>
+
+      <h2>Get clarity in 72 hours</h2>
+      <p>We offer a <strong>72-hour critical triage</strong>: you submit your top “critical” findings, we validate each one, and return clear verdicts (confirmed vs false positive) with evidence attached.</p>
+      <p><a href="mailto:hello@agenticsec.team?subject=72-Hour%20Critical%20Triage">Request critical triage →</a></p>
+
+      <div class="foot">
+        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
+        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
