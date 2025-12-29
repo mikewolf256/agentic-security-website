@@ -225,7 +225,16 @@
     .pricing{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
     @media (max-width:1100px){.pricing{grid-template-columns:repeat(3,1fr)}}
     @media (max-width:900px){.pricing{grid-template-columns:1fr}}
-    .price{padding:22px;padding-top:48px;position:relative}
+    .price{
+      padding:22px;
+      padding-top:48px;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+    }
+    .price ul{flex:1;min-height:0}
+    .price .price-footer{margin-top:auto;padding-top:12px}
+    .price .btn{width:100%}
     .badge{
       position:absolute;
       top:14px;
@@ -809,8 +818,10 @@
               <li><strong>Timeboxed:</strong> up to 2 hours analyst time</li>
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
-            <p class="small" style="margin-top:12px"><strong>Human:</strong> Report review</p>
-            <button class="btn btnP" style="width:100%;margin-top:14px" onclick="openCheckoutModal('attack_surface_intel')">Buy Now - $500</button>
+            <div class="price-footer">
+              <p class="small"><strong>Human:</strong> Report review</p>
+              <button class="btn btnP" onclick="openCheckoutModal('attack_surface_intel')">Buy Now - $500</button>
+            </div>
           </div>
           
           <div class="card price">
@@ -826,8 +837,10 @@
               <li>Same-day findings call</li>
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
-            <p class="small" style="margin-top:12px"><strong>Human:</strong> Validation + call</p>
-            <button class="btn btnP" style="width:100%;margin-top:14px" onclick="openCheckoutModal('rapid_assessment')">Buy Now - $2,500</button>
+            <div class="price-footer">
+              <p class="small"><strong>Human:</strong> Validation + call</p>
+              <button class="btn btnP" onclick="openCheckoutModal('rapid_assessment')">Buy Now - $2,500</button>
+            </div>
           </div>
 
           <div class="card price">
@@ -842,8 +855,10 @@
               <li>1-hour findings call</li>
               <li>Remediation guidance</li>
             </ul>
-            <p class="small" style="margin-top:12px"><strong>Human:</strong> Full validation + call + guidance</p>
-            <button class="btn" style="width:100%;margin-top:14px" onclick="showPage('contact')">Request Quote</button>
+            <div class="price-footer">
+              <p class="small"><strong>Human:</strong> Full validation + call + guidance</p>
+              <button class="btn" onclick="showPage('contact')">Request Quote</button>
+            </div>
           </div>
           
           <div class="card price">
@@ -859,8 +874,10 @@
               <li><strong>Signed attestation letter</strong></li>
               <li>2-hour findings call</li>
             </ul>
-            <p class="small" style="margin-top:12px"><strong>Human:</strong> Dedicated analyst + consultation</p>
-            <button class="btn" style="width:100%;margin-top:14px" onclick="showPage('contact')">Request Quote</button>
+            <div class="price-footer">
+              <p class="small"><strong>Human:</strong> Dedicated analyst + consultation</p>
+              <button class="btn" onclick="showPage('contact')">Request Quote</button>
+            </div>
           </div>
           
           <div class="card price">
@@ -875,8 +892,10 @@
               <li>Ongoing support</li>
               <li><strong>Signed attestation letter</strong></li>
             </ul>
-            <p class="small" style="margin-top:12px"><strong>Human:</strong> Dedicated team + extended support</p>
-            <button class="btn" style="width:100%;margin-top:14px" onclick="showPage('contact')">Request Quote</button>
+            <div class="price-footer">
+              <p class="small"><strong>Human:</strong> Dedicated team + extended support</p>
+              <button class="btn" onclick="showPage('contact')">Request Quote</button>
+            </div>
           </div>
         </div>
         
