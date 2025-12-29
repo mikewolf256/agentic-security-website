@@ -6,27 +6,76 @@
   <title>Terms of Service | Agentic Security Partners</title>
   <meta name="description" content="Terms of service for Agentic Security Partners." />
   <link rel="icon" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6;color:var(--text);
-      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
-                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
-                 var(--bg);
+    :root{
+      --bg:#faf8fc;
+      --bg-subtle:#f3f0f9;
+      --panel:#ffffff;
+      --panel-border:rgba(59,29,90,.08);
+      --text:#24143d;
+      --text-secondary:#3b1d5a;
+      --muted:#6b5b7a;
+      --line:#e8e2f0;
+      --accent:#a855f7;
+      --accent-dark:#8b5cf6;
+      --accent-light:#c084fc;
+      --warn:#f59e0b;
+      --shadow:0 4px 24px rgba(36,20,61,.08), 0 1px 3px rgba(36,20,61,.04);
+      --r:16px;
+      --r-sm:10px;
+      --max:900px;
+      --footer-bg:#24143d;
+      --footer-text:#e8e2f0;
+      --footer-muted:#a89bb8;
     }
-    a{color:var(--accent);text-decoration:none}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Source Sans 3',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-size:17px;
+      line-height:1.7;
+      color:var(--text);
+      background:var(--bg);
+    }
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(168,85,247,.08), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(6,182,212,.06), transparent 50%);
+      pointer-events:none;
+      z-index:-1;
+    }
+    a{color:var(--accent);text-decoration:none;font-weight:500}
     a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
-    .brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
-    h1{margin:0 0 8px;letter-spacing:-.3px}
-    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    h1,h2,h3{font-family:'Bitter',Georgia,serif;font-weight:700;color:var(--text);line-height:1.2}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 24px}
+    .card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--r);box-shadow:var(--shadow);padding:32px}
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .logo{height:44px;width:auto;object-fit:contain;border-radius:10px}
+    .pill{display:inline-block;padding:7px 14px;border-radius:999px;background:linear-gradient(135deg, rgba(168,85,247,.12), rgba(6,182,212,.08));border:1px solid rgba(168,85,247,.2);color:var(--muted);font-size:13px;font-weight:600;margin-top:4px}
+    h1{margin:0 0 10px;font-size:32px;letter-spacing:-.5px}
+    h2{margin:26px 0 12px;font-size:20px;letter-spacing:-.3px;color:var(--text-secondary)}
     p,li{color:var(--muted)}
-    ul{margin:8px 0 0;padding-left:18px}
-    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
-    .pill{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
-    .callout{margin-top:12px;padding:12px 14px;border-radius:12px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08);color:var(--muted);font-size:13px}
+    ul{margin:10px 0 0;padding-left:22px}
+    li{margin:8px 0}
+    .callout{margin-top:16px;padding:16px 18px;border-radius:var(--r-sm);border:1px solid rgba(245,158,11,.25);background:linear-gradient(135deg, rgba(245,158,11,.08), rgba(245,158,11,.03));color:var(--muted);font-size:15px}
+    
+    footer.foot{
+      background:var(--footer-bg);
+      color:var(--footer-text);
+      padding:36px 24px 28px;
+      margin-top:32px;
+    }
+    footer.foot .foot-inner{max-width:var(--max);margin:0 auto;text-align:center}
+    footer.foot a{color:var(--footer-muted);transition:color 0.2s}
+    footer.foot a:hover{color:var(--accent-light)}
+    footer.foot .foot-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+    footer.foot .foot-copy{font-size:13px;color:var(--footer-muted)}
   </style>
 </head>
 <body>
@@ -35,7 +84,7 @@
       <div class="brand">
         <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
         <div>
-          <div style="font-weight:800">Agentic Security Partners</div>
+          <div style="font-family:'Bitter',Georgia,serif;font-weight:800;font-size:18px;letter-spacing:-.2px">Agentic Security Partners</div>
           <div class="pill">Terms of Service</div>
         </div>
       </div>
@@ -44,7 +93,7 @@
       <p>Last updated: <span id="d"></span></p>
 
       <div class="callout">
-        These terms are a lightweight summary for the marketing site. For a paid engagement, you’ll receive a written authorization / statement of work that governs scope, testing windows, and rules of engagement.
+        These terms are a lightweight summary for the marketing site. For a paid engagement, you'll receive a written authorization / statement of work that governs scope, testing windows, and rules of engagement.
       </div>
 
       <h2>Authorized testing only</h2>
@@ -58,20 +107,27 @@
       </ul>
 
       <h2>Deliverables</h2>
-      <p>Deliverables and timelines depend on the selected engagement tier and the agreed scope. Any signed attestation letter (if included) will follow the engagement’s validation and review process.</p>
+      <p>Deliverables and timelines depend on the selected engagement tier and the agreed scope. Any signed attestation letter (if included) will follow the engagement's validation and review process.</p>
 
       <h2>Limitation of liability</h2>
       <p>To the maximum extent permitted by law, Agentic Security Partners LLC is not liable for indirect, incidental, special, consequential, or punitive damages. A paid engagement agreement may include additional terms.</p>
 
       <h2>Contact</h2>
       <p>Questions? Email <a href="mailto:hello@agenticsec.team">hello@agenticsec.team</a>.</p>
-
-      <div class="foot">
-        <div><a href="/">Back to home</a> • <a href="/privacy.html">Privacy</a> • <a href="/.well-known/security.txt">Security</a></div>
-        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
-      </div>
     </div>
   </div>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <div class="foot-links">
+        <a href="/">Back to home</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/.well-known/security.txt">Security</a>
+      </div>
+      <div class="foot-copy">© <span id="y"></span> Agentic Security Partners LLC</div>
+    </div>
+  </footer>
+  
   <script>
     const now = new Date();
     document.getElementById('y').textContent = now.getFullYear();
@@ -79,5 +135,3 @@
   </script>
 </body>
 </html>
-
-

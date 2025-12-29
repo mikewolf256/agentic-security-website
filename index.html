@@ -11,28 +11,94 @@
   <meta property="og:image" content="/logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/logo.png" />
+  <!-- Fly.io-inspired design: Bitter for headings, Source Sans 3 for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:1100px}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.5;color:var(--text);
-      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
-                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
-                 var(--bg);
+    :root{
+      /* Fly.io-inspired light theme */
+      --bg:#faf8fc;
+      --bg-subtle:#f3f0f9;
+      --panel:#ffffff;
+      --panel-border:rgba(59,29,90,.08);
+      --text:#24143d;
+      --text-secondary:#3b1d5a;
+      --muted:#6b5b7a;
+      --line:#e8e2f0;
+      --accent:#a855f7;
+      --accent-dark:#8b5cf6;
+      --accent-light:#c084fc;
+      --ok:#10b981;
+      --ok-light:#34d399;
+      --warn:#f59e0b;
+      --cyan:#06b6d4;
+      --shadow:0 4px 24px rgba(36,20,61,.08), 0 1px 3px rgba(36,20,61,.04);
+      --shadow-lg:0 12px 48px rgba(36,20,61,.12);
+      --r:16px;
+      --r-sm:10px;
+      --max:1140px;
+      /* Footer dark theme */
+      --footer-bg:#24143d;
+      --footer-text:#e8e2f0;
+      --footer-muted:#a89bb8;
+    }
+    *{box-sizing:border-box} 
+    html{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Source Sans 3',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-size:17px;
+      line-height:1.6;
+      color:var(--text);
+      background:var(--bg);
+    }
+    /* Subtle gradient overlay for depth */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(168,85,247,.08), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(6,182,212,.06), transparent 50%);
+      pointer-events:none;
+      z-index:-1;
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0 18px;position:relative}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;cursor:pointer}
-    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
+    a:hover{color:var(--accent)}
+    h1,h2,h3,h4{font-family:'Bitter',Georgia,serif;font-weight:700;line-height:1.2;color:var(--text)}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 24px}
+    .card{
+      background:var(--panel);
+      border:1px solid var(--panel-border);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+    }
+    
+    /* Navigation */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0 24px;position:relative}
+    .brand{display:flex;align-items:center;gap:12px;font-family:'Bitter',Georgia,serif;font-weight:800;font-size:18px;letter-spacing:-.2px;cursor:pointer;color:var(--text)}
+    .brand:hover{color:var(--accent-dark)}
+    .logo{height:44px;width:auto;object-fit:contain;border-radius:10px}
     .brand-text{display:block}
-    .links{display:flex;gap:18px;color:var(--muted);font-size:14px}
-    .links a{cursor:pointer;transition:color 0.2s}
-    .links a:hover,.links a.active{color:var(--text)}
-    .cta{padding:10px 14px;border-radius:12px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.18);font-weight:700;cursor:pointer;transition:background 0.2s}
-    .cta:hover{background:rgba(124,92,255,.25)}
-    .menuBtn{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02);cursor:pointer}
-    .menuBtn:hover{border-color:rgba(169,180,199,.35)}
+    .links{display:flex;gap:24px;color:var(--muted);font-size:15px;font-weight:500}
+    .links a{cursor:pointer;transition:color 0.2s;padding:6px 2px}
+    .links a:hover,.links a.active{color:var(--accent)}
+    .cta{
+      padding:12px 20px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color:#fff;
+      font-weight:700;
+      font-size:15px;
+      cursor:pointer;
+      transition:transform 0.2s, box-shadow 0.2s;
+      box-shadow:0 4px 14px rgba(168,85,247,.35);
+    }
+    .cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(168,85,247,.45);color:#fff}
+    .menuBtn{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--panel);cursor:pointer}
+    .menuBtn:hover{border-color:var(--accent-light)}
     @media (max-width:900px){
       .brand-text{display:none}
       .cta{display:none}
@@ -41,139 +107,230 @@
       .nav.open .links{
         display:flex;
         flex-direction:column;
-        gap:10px;
+        gap:6px;
         position:absolute;
-        top:62px;
+        top:68px;
         right:0;
-        padding:12px;
-        border-radius:16px;
+        padding:16px;
+        border-radius:var(--r);
         border:1px solid var(--line);
-        background:rgba(16,24,39,.92);
-        box-shadow:var(--shadow);
-        min-width:220px;
+        background:var(--panel);
+        box-shadow:var(--shadow-lg);
+        min-width:240px;
+        z-index:50;
       }
-      .nav.open .links a{padding:8px 10px;border-radius:10px}
-      .nav.open .links a:hover{background:rgba(255,255,255,.04)}
+      .nav.open .links a{padding:12px 14px;border-radius:var(--r-sm)}
+      .nav.open .links a:hover{background:var(--bg-subtle)}
     }
 
-    .page{display:none;animation:fadeIn 0.3s ease-in}
+    .page{display:none;animation:fadeIn 0.35s ease-out}
     .page.active{display:block}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;margin-bottom:32px}
     @media (max-width:900px){.hero{grid-template-columns:1fr}}
-    .heroL{padding:30px}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02)}
-    .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.12);animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-    h1{margin:14px 0 10px;font-size:42px;line-height:1.05;letter-spacing:-.6px}
+    .heroL{padding:36px}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:600;
+      padding:8px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:var(--bg-subtle);
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(16,185,129,.15);animation:pulse 2.5s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.1)}}
+    h1{margin:18px 0 14px;font-size:46px;line-height:1.08;letter-spacing:-.8px}
+    h1 em{font-style:italic;color:var(--accent);position:relative}
+    h1 em::after{
+      content:'';
+      position:absolute;
+      bottom:-4px;
+      left:0;
+      width:100%;
+      height:4px;
+      background:linear-gradient(90deg, var(--accent-light), var(--accent));
+      border-radius:2px;
+    }
     @media (max-width:520px){h1{font-size:34px}}
-    .sub{margin:0;color:var(--muted);max-width:62ch}
-    .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02);font-weight:800;font-size:14px;cursor:pointer;transition:border-color 0.2s}
-    .btnP{border-color:rgba(124,92,255,.35);background:rgba(124,92,255,.18)}
-    .btn:hover{border-color:rgba(169,180,199,.35)}
-    /* Pricing CTAs: stronger contrast so they don't look washed out on dark cards */
-    .price .btnP{
-      color: #fff;
-      border-color: rgba(124,92,255,.6);
-      background: linear-gradient(180deg, rgba(124,92,255,.95), rgba(124,92,255,.70));
-      box-shadow: 0 10px 30px rgba(124,92,255,.18);
+    .sub{margin:0;color:var(--muted);max-width:58ch;font-size:18px;line-height:1.7}
+    .btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+    .btn{
+      padding:14px 22px;
+      border-radius:999px;
+      border:2px solid var(--line);
+      background:var(--panel);
+      font-family:'Source Sans 3',sans-serif;
+      font-weight:700;
+      font-size:15px;
+      color:var(--text);
+      cursor:pointer;
+      transition:all 0.2s;
     }
-    .price .btnP:hover{
-      border-color: rgba(124,92,255,.8);
-      background: linear-gradient(180deg, rgba(124,92,255,1), rgba(124,92,255,.78));
+    .btn:hover{border-color:var(--accent-light);color:var(--accent)}
+    .btnP{
+      border:none;
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color:#fff;
+      box-shadow:0 4px 14px rgba(168,85,247,.3);
     }
-    /* Pricing secondary CTAs (e.g., Request Quote): brighter border/text + subtle fill */
-    .price .btn:not(.btnP){
-      color: var(--text);
-      border-color: rgba(169,180,199,.38);
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 10px 26px rgba(0,0,0,.22);
-    }
-    .price .btn:not(.btnP):hover{
-      border-color: rgba(169,180,199,.55);
-      background: rgba(255,255,255,.085);
-    }
+    .btnP:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(168,85,247,.4);color:#fff}
 
-    .heroR{padding:18px;display:flex;align-items:center;justify-content:center}
-    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%}
-    .stat{padding:16px;text-align:center;border-radius:12px;border:1px solid var(--line);background:rgba(10,14,22,.5)}
+    .heroR{padding:20px;display:flex;align-items:center;justify-content:center}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;width:100%}
+    .stat{
+      padding:20px;
+      text-align:center;
+      border-radius:var(--r-sm);
+      background:var(--bg-subtle);
+      border:1px solid var(--line);
+    }
     .statNum{
-      font-size:32px;
+      font-family:'Bitter',Georgia,serif;
+      font-size:34px;
       font-weight:800;
       margin:0 0 4px;
-      color:#10b981;
+      background:linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
-    .statLabel{font-size:12px;color:var(--muted);margin:0}
+    .statLabel{font-size:13px;color:var(--muted);margin:0;font-weight:500}
 
-    .sec{padding:26px 0}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    /* Sections */
+    .sec{padding:32px 0}
+    h2{margin:0 0 16px;font-size:28px;letter-spacing:-.4px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
     @media (max-width:1100px){.grid5{grid-template-columns:repeat(3,1fr)}}
     @media (max-width:900px){.grid3,.grid4{grid-template-columns:1fr}.grid5{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:520px){.grid5{grid-template-columns:1fr}}
-    .feat{padding:16px}
-    .feat h3{margin:6px 0 8px;font-size:16px}
-    .feat p{margin:0;color:var(--muted);font-size:14px}
+    .feat{padding:22px}
+    .feat h3{margin:8px 0 10px;font-size:17px;color:var(--text-secondary)}
+    .feat p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
 
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     @media (max-width:900px){.two{grid-template-columns:1fr}}
-    .box{padding:16px}
-    ul{margin:0;padding-left:18px;color:var(--muted)}
-    li{margin:8px 0}
+    .box{padding:22px}
+    ul{margin:0;padding-left:20px;color:var(--muted)}
+    li{margin:10px 0}
 
-    .pricing{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
     @media (max-width:1100px){.pricing{grid-template-columns:repeat(3,1fr)}}
     @media (max-width:900px){.pricing{grid-template-columns:1fr}}
-    .price{padding:16px;padding-top:42px;position:relative}
-    .badge{position:absolute;top:12px;left:16px;font-size:11px;font-weight:900;padding:5px 10px;border-radius:999px;border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.12);color:#c8f7d7;white-space:nowrap}
-    .badgeNew{border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.12);color:#fde68a}
-    .range{font-size:24px;letter-spacing:-.4px;margin:8px 0 6px}
-    .turnaround{font-size:12px;color:var(--ok);margin-bottom:8px}
-    .small{color:var(--muted);font-size:12px}
+    .price{padding:22px;padding-top:48px;position:relative}
+    .badge{
+      position:absolute;
+      top:14px;
+      left:22px;
+      font-size:11px;
+      font-weight:800;
+      padding:5px 12px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--ok) 0%, var(--ok-light) 100%);
+      color:#fff;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+    .badgeNew{background:linear-gradient(135deg, var(--warn) 0%, #fbbf24 100%)}
+    .range{font-family:'Bitter',Georgia,serif;font-size:26px;letter-spacing:-.4px;margin:10px 0 8px;color:var(--text)}
+    .turnaround{font-size:13px;color:var(--ok);margin-bottom:10px;font-weight:600}
+    .small{color:var(--muted);font-size:13px}
 
-    .compare-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
-    .compare-table th,.compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
-    .compare-table th{color:var(--muted);font-weight:600}
-    .compare-table td:first-child{font-weight:600}
-    .check{color:var(--ok)}
+    .price .btnP{
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      box-shadow: 0 4px 14px rgba(168,85,247,.25);
+    }
+    .price .btnP:hover{
+      transform:translateY(-2px);
+      box-shadow: 0 6px 20px rgba(168,85,247,.35);
+    }
+    .price .btn:not(.btnP){
+      color: var(--text);
+      border-color: var(--line);
+      background: var(--bg-subtle);
+    }
+    .price .btn:not(.btnP):hover{
+      border-color: var(--accent-light);
+      color:var(--accent);
+    }
+
+    /* Comparison table */
+    .compare-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:14px}
+    .compare-table th,.compare-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+    .compare-table th{color:var(--muted);font-weight:600;background:var(--bg-subtle)}
+    .compare-table td:first-child{font-weight:600;color:var(--text-secondary)}
+    .check{color:var(--ok);font-weight:600}
     .x{color:#ef4444}
 
-    .human-ai{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:12px;border-radius:8px;overflow:hidden}
-    .human-ai div{padding:10px;background:rgba(0,0,0,.2);text-align:center;font-size:13px}
-    .human-ai .header{background:rgba(124,92,255,.15);font-weight:700;color:var(--text)}
-    .human-ai .ai{color:var(--accent)}
-    .human-ai .human{color:var(--ok)}
+    /* AI/Human grid */
+    .human-ai{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:14px;border-radius:var(--r-sm);overflow:hidden}
+    .human-ai div{padding:12px;background:var(--bg-subtle);text-align:center;font-size:13px}
+    .human-ai .header{background:linear-gradient(135deg, rgba(168,85,247,.15), rgba(6,182,212,.1));font-weight:700;color:var(--text)}
+    .human-ai .ai{color:var(--accent);font-weight:600}
+    .human-ai .human{color:var(--ok);font-weight:600}
     @media (max-width:600px){.human-ai{grid-template-columns:1fr}.human-ai div{text-align:left}}
 
-    .owasp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+    /* OWASP grid */
+    .owasp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
     @media (max-width:600px){.owasp-grid{grid-template-columns:1fr}}
-    .owasp-item{display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 10px;background:rgba(0,0,0,.2);border-radius:6px}
-    .owasp-item .num{font-weight:800;color:var(--accent);min-width:45px}
+    .owasp-item{display:flex;align-items:center;gap:10px;font-size:14px;padding:10px 12px;background:var(--bg-subtle);border-radius:var(--r-sm);border:1px solid var(--line)}
+    .owasp-item .num{font-family:'Bitter',Georgia,serif;font-weight:800;color:var(--accent);min-width:48px}
 
-    .video-placeholder{background:rgba(0,0,0,.3);border:2px dashed var(--line);border-radius:12px;padding:40px;text-align:center;margin-top:24px}
-    .video-placeholder h3{margin:0 0 8px}
-    .video-placeholder p{margin:0;color:var(--muted);font-size:14px}
+    .video-placeholder{background:var(--bg-subtle);border:2px dashed var(--line);border-radius:var(--r);padding:48px;text-align:center;margin-top:28px}
+    .video-placeholder h3{margin:0 0 10px;color:var(--text-secondary)}
+    .video-placeholder p{margin:0;color:var(--muted);font-size:15px}
 
-    .foot{border-top:1px solid var(--line);padding:22px 0 34px;color:var(--muted);font-size:12.5px}
-    .ico{width:16px;height:16px;display:inline-block;vertical-align:-2px;margin-right:8px;color:var(--text)}
+    /* Footer - Dark purple like fly.io */
+    footer.foot{
+      background:var(--footer-bg);
+      color:var(--footer-text);
+      padding:48px 24px 36px;
+      margin-top:48px;
+    }
+    footer.foot .foot-inner{max-width:var(--max);margin:0 auto}
+    footer.foot b{color:#fff}
+    footer.foot a{color:var(--footer-muted);transition:color 0.2s}
+    footer.foot a:hover{color:var(--accent-light)}
+    footer.foot .foot-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px}
+    footer.foot .foot-copy{margin-top:18px;font-size:13px;color:var(--footer-muted)}
+
+    /* Icons */
+    .ico{width:18px;height:18px;display:inline-block;vertical-align:-3px;margin-right:8px;color:var(--accent)}
     .ico.muted{color:var(--muted)}
 
-    /* Simple modal */
-    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
+    /* Modal */
+    .modalOverlay{position:fixed;inset:0;background:rgba(36,20,61,.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px;z-index:100}
     .modalOverlay.open{display:flex}
-    .modal{width:min(560px, 100%);padding:18px}
-    .modal h3{margin:0 0 6px}
-    .modal p{margin:0 0 12px;color:var(--muted);font-size:14px}
-    .modal input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.3);color:var(--text);font-size:15px}
-    .modal .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .modal{width:min(560px, 100%);padding:24px}
+    .modal h3{margin:0 0 8px;font-size:22px}
+    .modal p{margin:0 0 16px;color:var(--muted);font-size:15px}
+    .modal input{
+      width:100%;
+      padding:14px 18px;
+      border:2px solid var(--line);
+      border-radius:999px;
+      background:var(--bg-subtle);
+      color:var(--text);
+      font-size:16px;
+      font-family:inherit;
+      transition:border-color 0.2s;
+    }
+    .modal input:focus{outline:none;border-color:var(--accent)}
+    .modal .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
     .modal .row .btn{flex:1}
   </style>
 </head>
 <body>
-  <!-- Inline SVG icon sprite (easy to swap for custom icons later) -->
+  <!-- Inline SVG icon sprite -->
   <svg width="0" height="0" style="position:absolute">
     <symbol id="ico-bolt" viewBox="0 0 24 24">
       <path fill="currentColor" d="M13 2L3 14h7l-1 8 12-14h-7l-1-6z"/>
@@ -223,14 +380,14 @@
       <section class="hero">
         <div class="card heroL">
           <div class="eyebrow"><span class="dot"></span> AI-powered discovery • Human-validated findings</div>
-          <h1>Security assessments focused on what actually matters, delivered fast.</h1>
+          <h1>Security assessments focused on what <em>actually matters.</em></h1>
           <p class="sub">We combine automated reconnaissance with expert human validation. Every critical finding is verified by a security professional before it reaches your report. Comprehensive OWASP Top 10 testing in days, not weeks.</p>
           <div class="btns">
             <a class="btn btnP" href="#" onclick="showPage('contact'); return false">Get a quote</a>
             <a class="btn" href="#" onclick="showPage('how'); return false">See how it works</a>
             <a class="btn" href="#" onclick="showPage('pricing'); return false">Pricing</a>
           </div>
-          <p class="small" style="margin-top:14px">✓ Every high-severity finding manually verified &nbsp;•&nbsp; ✓ Clear confidence labels &nbsp;•&nbsp; ✓ Reproduction steps included &nbsp;•&nbsp; ✓ Attestation letter included in Standard+ (add-on for Intel/Rapid)</p>
+          <p class="small" style="margin-top:18px">✓ Every high-severity finding manually verified &nbsp;•&nbsp; ✓ Clear confidence labels &nbsp;•&nbsp; ✓ Reproduction steps included &nbsp;•&nbsp; ✓ Attestation letter included in Standard+ (add-on for Intel/Rapid)</p>
         </div>
         <div class="card heroR">
           <div class="stats">
@@ -255,7 +412,7 @@
       </section>
 
       <section class="sec">
-        <h2 style="margin:0 0 12px;letter-spacing:-.3px">Why choose us</h2>
+        <h2>Why choose us</h2>
         <div class="grid4">
           <div class="card feat">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Speed Without Sacrifice</h3>
@@ -278,8 +435,8 @@
 
       <!-- AI vs Human Transparency -->
       <section class="sec">
-        <h2 style="margin:0 0 12px;letter-spacing:-.3px">AI + Human: Where each excels</h2>
-        <p class="sub" style="margin-bottom:16px">We're transparent about what's automated and what's human-driven.</p>
+        <h2>AI + Human: Where each excels</h2>
+        <p class="sub" style="margin-bottom:18px">We're transparent about what's automated and what's human-driven.</p>
         <div class="card box">
           <div class="human-ai">
             <div class="header">Phase</div>
@@ -327,7 +484,7 @@
 
       <!-- vs Traditional Pentest -->
       <section class="sec">
-        <h2 style="margin:0 0 12px;letter-spacing:-.3px">How we compare</h2>
+        <h2>How we compare</h2>
         <div class="card box">
           <table class="compare-table">
             <tr>
@@ -398,10 +555,10 @@
     <!-- How It Works Page -->
     <div id="page-how" class="page">
       <section class="sec">
-        <h1 style="margin:0 0 12px;letter-spacing:-.3px">How it works</h1>
-        <p class="sub" style="margin-bottom:24px">AI-powered discovery with human-validated findings. We identify vulnerabilities. We don't exploit your production systems.</p>
+        <h1>How it works</h1>
+        <p class="sub" style="margin-bottom:28px">AI-powered discovery with human-validated findings. We identify vulnerabilities. We don't exploit your production systems.</p>
         
-        <div class="grid4" style="margin-bottom:24px">
+        <div class="grid4" style="margin-bottom:28px">
           <div class="card feat">
             <h3>1) Automated Discovery</h3>
             <p>AI-powered reconnaissance maps your attack surface: endpoints, APIs, JavaScript files, configurations. We discover what's exposed before testing.</p>
@@ -421,11 +578,11 @@
         </div>
 
         <!-- What We Test vs Don't -->
-        <div class="card box" style="margin-bottom:24px">
-          <h3 style="margin:0 0 10px">What we do (and don't do)</h3>
+        <div class="card box" style="margin-bottom:28px">
+          <h3 style="margin:0 0 12px">What we do (and don't do)</h3>
           <div class="two">
             <div>
-              <p style="color:var(--ok);font-weight:700;margin:0 0 8px">✓ We identify & validate:</p>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 10px">✓ We identify & validate:</p>
               <ul>
                 <li>Proof of Concept demonstrating exploitability</li>
                 <li>Evidence: request/response, screenshots, reproduction steps</li>
@@ -434,7 +591,7 @@
               </ul>
             </div>
             <div>
-              <p style="color:#ef4444;font-weight:700;margin:0 0 8px">We never:</p>
+              <p style="color:#ef4444;font-weight:700;margin:0 0 10px">We never:</p>
               <ul>
                 <li>Exfiltrate or access real customer data</li>
                 <li>Perform denial-of-service attacks</li>
@@ -447,9 +604,9 @@
         </div>
 
         <!-- OWASP Top 10 -->
-        <div class="card box" style="margin-bottom:24px">
-          <h3 style="margin:0 0 10px">Comprehensive testing aligned to OWASP Top 10</h3>
-          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Every assessment includes testing aligned to the OWASP Top 10 (and API-specific risks where applicable).</p>
+        <div class="card box" style="margin-bottom:28px">
+          <h3 style="margin:0 0 12px">Comprehensive testing aligned to OWASP Top 10</h3>
+          <p style="color:var(--muted);margin:0 0 14px;font-size:15px">Every assessment includes testing aligned to the OWASP Top 10 (and API-specific risks where applicable).</p>
           <div class="owasp-grid">
             <div class="owasp-item"><span class="num">A01</span> Broken Access Control (IDOR, privilege escalation)</div>
             <div class="owasp-item"><span class="num">A02</span> Cryptographic Failures (weak crypto, exposed keys)</div>
@@ -466,11 +623,11 @@
 
         <!-- Credential Handling -->
         <div class="card box">
-          <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-lock" xlink:href="#ico-lock"></use></svg>Enterprise-Grade Data Security</h3>
-          <p style="color:var(--muted);margin:0 0 12px;font-size:14px">Your credentials and findings are protected with the same rigor we'd expect for our own systems:</p>
+          <h3 style="margin:0 0 12px"><svg class="ico" aria-hidden="true"><use href="#ico-lock" xlink:href="#ico-lock"></use></svg>Enterprise-Grade Data Security</h3>
+          <p style="color:var(--muted);margin:0 0 14px;font-size:15px">Your credentials and findings are protected with the same rigor we'd expect for our own systems:</p>
           <div class="two">
             <div>
-              <p style="color:var(--ok);font-weight:700;margin:0 0 8px">Credential Protection</p>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 10px">Credential Protection</p>
               <ul>
                 <li><strong>AES-256 encrypted vault:</strong> Credentials encrypted at rest with per-client isolation</li>
                 <li><strong>Secure transfer:</strong> 1Password, Vault, or encrypted channel</li>
@@ -480,7 +637,7 @@
               </ul>
             </div>
             <div>
-              <p style="color:var(--ok);font-weight:700;margin:0 0 8px">Data Lifecycle Management</p>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 10px">Data Lifecycle Management</p>
               <ul>
                 <li><strong>Per-client isolation:</strong> Your data never mixes with other clients</li>
                 <li><strong>Complete audit trail:</strong> Tamper-evident logging for compliance</li>
@@ -503,12 +660,12 @@
     <!-- Deliverables Page -->
     <div id="page-deliverables" class="page">
       <section class="sec">
-        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Deliverables</h1>
-        <p class="sub" style="margin-bottom:24px">Executive-ready summaries and developer-ready evidence. Every finding includes reproduction steps.</p>
+        <h1>Deliverables</h1>
+        <p class="sub" style="margin-bottom:28px">Executive-ready summaries and developer-ready evidence. Every finding includes reproduction steps.</p>
         
-        <div class="grid3" style="margin-bottom:24px">
+        <div class="grid3" style="margin-bottom:28px">
           <div class="card box">
-            <h3 style="margin:0 0 10px">Executive Summary (PDF)</h3>
+            <h3 style="margin:0 0 12px">Executive Summary (PDF)</h3>
             <ul>
               <li>High-level risk overview and business impact</li>
               <li>Critical findings summary with prioritization</li>
@@ -518,7 +675,7 @@
             </ul>
           </div>
           <div class="card box">
-            <h3 style="margin:0 0 10px">Technical Report (PDF)</h3>
+            <h3 style="margin:0 0 12px">Technical Report (PDF)</h3>
             <ul>
               <li>Detailed vulnerability descriptions</li>
               <li>Proof of Concept for each finding</li>
@@ -528,7 +685,7 @@
             </ul>
           </div>
           <div class="card box">
-            <h3 style="margin:0 0 10px">Attestation Letter (PDF)</h3>
+            <h3 style="margin:0 0 12px">Attestation Letter (PDF)</h3>
             <ul>
               <li>Named security engineer sign-off</li>
               <li>Human validation certification</li>
@@ -536,12 +693,12 @@
               <li>Evidence availability confirmation</li>
               <li>Audit-ready documentation</li>
             </ul>
-            <p class="small" style="margin:10px 0 0">Included in <strong>Standard+</strong>. Available as an add-on for Intel/Rapid.</p>
+            <p class="small" style="margin:12px 0 0">Included in <strong>Standard+</strong>. Available as an add-on for Intel/Rapid.</p>
           </div>
         </div>
 
         <div class="card box">
-          <h3 style="margin:0 0 10px">Developer-Ready Evidence</h3>
+          <h3 style="margin:0 0 12px">Developer-Ready Evidence</h3>
           <ul>
             <li><strong>Reproduction steps:</strong> Curl commands and raw HTTP requests. Test fixes immediately</li>
             <li><strong>Raw findings (JSON):</strong> Machine-readable for Jira, GitHub Issues, or your security tools</li>
@@ -550,9 +707,9 @@
           </ul>
         </div>
 
-        <div class="two" style="margin-top:24px">
+        <div class="two" style="margin-top:28px">
           <div class="card box">
-            <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>Secure Report Delivery</h3>
+            <h3 style="margin:0 0 12px"><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>Secure Report Delivery</h3>
             <ul>
               <li><strong>Integrity verified:</strong> SHA256 manifest for all deliverables</li>
               <li><strong>Password protected:</strong> Optional AES encryption on delivery package</li>
@@ -561,7 +718,7 @@
             </ul>
           </div>
           <div class="card box">
-            <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-file-text" xlink:href="#ico-file-text"></use></svg>Attestation & Compliance</h3>
+            <h3 style="margin:0 0 12px"><svg class="ico" aria-hidden="true"><use href="#ico-file-text" xlink:href="#ico-file-text"></use></svg>Attestation & Compliance</h3>
             <ul>
               <li><strong>Signed attestation letter:</strong> Included in Standard+ (add-on for Intel/Rapid)</li>
               <li><strong>Compliance mapping:</strong> SOC 2, ISO 27001, PCI-DSS alignment</li>
@@ -571,8 +728,8 @@
           </div>
         </div>
 
-        <div class="card box" style="margin-top:24px">
-          <h3 style="margin:0 0 10px">Findings Review Call (Included)</h3>
+        <div class="card box" style="margin-top:28px">
+          <h3 style="margin:0 0 12px">Findings Review Call (Included)</h3>
           <p style="margin:0;color:var(--muted)">Every assessment includes a walkthrough call with a security expert. We discuss critical findings, answer technical questions, and help prioritize your remediation roadmap. <strong>100% human, no AI.</strong></p>
         </div>
       </section>
@@ -581,14 +738,14 @@
     <!-- Proof / Resources Page -->
     <div id="page-proof" class="page">
       <section class="sec">
-        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Proof & Resources</h1>
-        <p class="sub" style="margin-bottom:20px">Short, concrete examples of how validation turns scanner noise into actionable signal — plus resources you can share internally.</p>
+        <h1>Proof & Resources</h1>
+        <p class="sub" style="margin-bottom:24px">Short, concrete examples of how validation turns scanner noise into actionable signal — plus resources you can share internally.</p>
 
-        <h2 style="margin:0 0 10px;letter-spacing:-.2px">Proof</h2>
-        <div class="grid4" style="margin-bottom:22px">
+        <h2>Proof</h2>
+        <div class="grid4" style="margin-bottom:26px">
           <a class="card feat" href="/case-studies/validation-in-action.html">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-user-check" xlink:href="#ico-user-check"></use></svg>Case study: “Validation in action”</h3>
-            <p>A real-world example: 4 scanner “critical” auth bypass findings → 0 confirmed after validation, with evidence.</p>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-user-check" xlink:href="#ico-user-check"></use></svg>Case study: "Validation in action"</h3>
+            <p>A real-world example: 4 scanner "critical" auth bypass findings → 0 confirmed after validation, with evidence.</p>
           </a>
           <a class="card feat" href="/samples/validation-report-example.html">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-file-text" xlink:href="#ico-file-text"></use></svg>Sample validation report</h3>
@@ -596,37 +753,37 @@
           </a>
           <a class="card feat" href="/marketing/validation/from-4-critical-to-0-confirmed.svg">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>Infographic</h3>
-            <p>“From 4 Critical to 0 Confirmed” — the high-level pipeline and why it matters.</p>
+            <p>"From 4 Critical to 0 Confirmed" — the high-level pipeline and why it matters.</p>
           </a>
           <a class="card feat" href="/blog/why-your-scanners-critical-findings-are-probably-wrong.html">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Blog: scanner criticals are probably wrong</h3>
-            <p>Why many “critical” scanner findings are false positives, and how to validate fast without breaking prod.</p>
+            <p>Why many "critical" scanner findings are false positives, and how to validate fast without breaking prod.</p>
           </a>
         </div>
 
-        <h2 style="margin:0 0 10px;letter-spacing:-.2px">Resources</h2>
-        <div class="grid4" style="margin-bottom:24px">
+        <h2>Resources</h2>
+        <div class="grid4" style="margin-bottom:28px">
           <a class="card feat" href="/blog/react2shell-validation.html">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>React2Shell: what’s real vs noise</h3>
-            <p>A practical validation checklist for client-side “critical” findings (SSR, prototype pollution, exploit path, mitigations).</p>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>React2Shell: what's real vs noise</h3>
+            <p>A practical validation checklist for client-side "critical" findings (SSR, prototype pollution, exploit path, mitigations).</p>
           </a>
           <a class="card feat" href="/briefs/client-side-critical-findings.html">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-file-text" xlink:href="#ico-file-text"></use></svg>Executive brief: client-side “critical”</h3>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-file-text" xlink:href="#ico-file-text"></use></svg>Executive brief: client-side "critical"</h3>
             <p>Decision framework for CTOs: validate before you mobilize engineering, with escalation criteria and ROI math.</p>
           </a>
           <a class="card feat" href="/demo.html?utm_source=proof&utm_medium=site&utm_campaign=demo_gate">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-play" xlink:href="#ico-play"></use></svg>Watch the demo (email)</h3>
-            <p>3–5 minute walkthrough of candidate → confirmed workflow. We’ll email you the demo link when it’s ready.</p>
+            <p>3–5 minute walkthrough of candidate → confirmed workflow. We'll email you the demo link when it's ready.</p>
           </a>
           <a class="card feat" href="mailto:hello@agenticsec.team?subject=72-Hour%20Critical%20Triage%20Request">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-target" xlink:href="#ico-target"></use></svg>Request a 72-hour triage</h3>
-            <p>Send your top “critical” findings. We’ll validate exploitability and return clear verdicts with evidence.</p>
+            <p>Send your top "critical" findings. We'll validate exploitability and return clear verdicts with evidence.</p>
           </a>
         </div>
 
         <div class="card box">
-          <h3 style="margin:0 0 8px">Where this fits in the engagement</h3>
-          <p style="margin:0;color:var(--muted);font-size:14px">These assets support the “Human Validation” step. We use the same approach for every critical/high-severity candidate before it enters your report.</p>
+          <h3 style="margin:0 0 10px">Where this fits in the engagement</h3>
+          <p style="margin:0;color:var(--muted);font-size:15px">These assets support the "Human Validation" step. We use the same approach for every critical/high-severity candidate before it enters your report.</p>
         </div>
       </section>
     </div>
@@ -634,8 +791,8 @@
     <!-- Pricing Page -->
     <div id="page-pricing" class="page">
       <section class="sec">
-        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Pricing</h1>
-        <p class="sub" style="margin-bottom:24px">Transparent, scope-based pricing. Start small, scale up. First-time client discounts available.</p>
+        <h1>Pricing</h1>
+        <p class="sub" style="margin-bottom:28px">Transparent, scope-based pricing. Start small, scale up. First-time client discounts available.</p>
         
         <div class="pricing">
           <div class="card price">
@@ -652,8 +809,8 @@
               <li><strong>Timeboxed:</strong> up to 2 hours analyst time</li>
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
-            <p class="small" style="margin-top:10px"><strong>Human:</strong> Report review</p>
-            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="openCheckoutModal('attack_surface_intel')">Buy Now - $500</button>
+            <p class="small" style="margin-top:12px"><strong>Human:</strong> Report review</p>
+            <button class="btn btnP" style="width:100%;margin-top:14px" onclick="openCheckoutModal('attack_surface_intel')">Buy Now - $500</button>
           </div>
           
           <div class="card price">
@@ -669,8 +826,8 @@
               <li>Same-day findings call</li>
               <li><strong>Attestation letter:</strong> add-on</li>
             </ul>
-            <p class="small" style="margin-top:10px"><strong>Human:</strong> Validation + call</p>
-            <button class="btn btnP" style="width:100%;margin-top:12px" onclick="openCheckoutModal('rapid_assessment')">Buy Now - $2,500</button>
+            <p class="small" style="margin-top:12px"><strong>Human:</strong> Validation + call</p>
+            <button class="btn btnP" style="width:100%;margin-top:14px" onclick="openCheckoutModal('rapid_assessment')">Buy Now - $2,500</button>
           </div>
 
           <div class="card price">
@@ -685,8 +842,8 @@
               <li>1-hour findings call</li>
               <li>Remediation guidance</li>
             </ul>
-            <p class="small" style="margin-top:10px"><strong>Human:</strong> Full validation + call + guidance</p>
-            <button class="btn" style="width:100%;margin-top:12px" onclick="showPage('contact')">Request Quote</button>
+            <p class="small" style="margin-top:12px"><strong>Human:</strong> Full validation + call + guidance</p>
+            <button class="btn" style="width:100%;margin-top:14px" onclick="showPage('contact')">Request Quote</button>
           </div>
           
           <div class="card price">
@@ -702,8 +859,8 @@
               <li><strong>Signed attestation letter</strong></li>
               <li>2-hour findings call</li>
             </ul>
-            <p class="small" style="margin-top:10px"><strong>Human:</strong> Dedicated analyst + consultation</p>
-            <button class="btn" style="width:100%;margin-top:12px" onclick="showPage('contact')">Request Quote</button>
+            <p class="small" style="margin-top:12px"><strong>Human:</strong> Dedicated analyst + consultation</p>
+            <button class="btn" style="width:100%;margin-top:14px" onclick="showPage('contact')">Request Quote</button>
           </div>
           
           <div class="card price">
@@ -718,13 +875,13 @@
               <li>Ongoing support</li>
               <li><strong>Signed attestation letter</strong></li>
             </ul>
-            <p class="small" style="margin-top:10px"><strong>Human:</strong> Dedicated team + extended support</p>
-            <button class="btn" style="width:100%;margin-top:12px" onclick="showPage('contact')">Request Quote</button>
+            <p class="small" style="margin-top:12px"><strong>Human:</strong> Dedicated team + extended support</p>
+            <button class="btn" style="width:100%;margin-top:14px" onclick="showPage('contact')">Request Quote</button>
           </div>
         </div>
         
-        <div class="card box" style="margin-top:24px">
-          <h3 style="margin:0 0 10px">Add-On Services (Human-Delivered)</h3>
+        <div class="card box" style="margin-top:28px">
+          <h3 style="margin:0 0 12px">Add-On Services (Human-Delivered)</h3>
           <div class="two">
             <ul>
               <li><strong>Remediation support:</strong> Pair with your devs to fix issues ($200/hr)</li>
@@ -742,23 +899,23 @@
           </div>
         </div>
 
-        <div class="card box" style="margin-top:24px;border-color:rgba(124,92,255,.3)">
-          <h3 style="margin:0 0 8px"><svg class="ico" aria-hidden="true"><use href="#ico-gift" xlink:href="#ico-gift"></use></svg>First-Time Client Discount</h3>
+        <div class="card box" style="margin-top:28px;border-color:rgba(168,85,247,.25);background:linear-gradient(135deg, rgba(168,85,247,.04), rgba(6,182,212,.02))">
+          <h3 style="margin:0 0 10px"><svg class="ico" aria-hidden="true"><use href="#ico-gift" xlink:href="#ico-gift"></use></svg>First-Time Client Discount</h3>
           <p style="margin:0;color:var(--muted)">New clients get <strong>20% off</strong> their first assessment. We want to prove our value before you commit to larger engagements.</p>
         </div>
         
-        <p class="small" style="margin-top:14px">Pricing varies by scope size, authentication complexity, and compliance requirements. <a href="#" onclick="showPage('contact'); return false" style="color:var(--accent)">Contact us</a> for a custom quote.</p>
+        <p class="small" style="margin-top:18px">Pricing varies by scope size, authentication complexity, and compliance requirements. <a href="#" onclick="showPage('contact'); return false" style="color:var(--accent);font-weight:600">Contact us</a> for a custom quote.</p>
       </section>
     </div>
 
     <!-- Contact/Get Started Page -->
     <div id="page-contact" class="page">
       <section class="sec">
-        <h1 style="margin:0 0 12px;letter-spacing:-.3px">Get started</h1>
-        <p class="sub" style="margin-bottom:24px">Ready to see what we can find? Tell us about your scope and we'll provide a quote within 24 hours.</p>
+        <h1>Get started</h1>
+        <p class="sub" style="margin-bottom:28px">Ready to see what we can find? Tell us about your scope and we'll provide a quote within 24 hours.</p>
         
         <div class="card box">
-          <h3 style="margin:0 0 10px">What we need to get started</h3>
+          <h3 style="margin:0 0 12px">What we need to get started</h3>
           <ul>
             <li><strong>Target URLs:</strong> Primary application and API endpoints (1 URL for Rapid, up to 10 for Platform)</li>
             <li><strong>Timeline:</strong> When do you need results? (Same-day to 1 week options)</li>
@@ -768,17 +925,17 @@
           </ul>
         </div>
 
-        <div class="card box" style="margin-top:24px">
-          <h3 style="margin:0 0 8px">Get a quote</h3>
-          <p class="small" style="margin:0 0 12px">We respond within 24 hours with a custom quote based on your scope.</p>
+        <div class="card box" style="margin-top:28px">
+          <h3 style="margin:0 0 10px">Get a quote</h3>
+          <p class="small" style="margin:0 0 16px">We respond within 24 hours with a custom quote based on your scope.</p>
           <a class="btn btnP" href="mailto:hello@agenticsec.team?subject=Security%20assessment%20quote&body=Hi%20Agentic%20Security%20Partners%2C%0A%0ACompany%3A%0ATargets%3A%0ATimeline%3A%0AAuth%20required%3A%20Yes%2FNo%0A%0AThanks!">Request quote</a>
-          <span style="margin:0 12px;color:var(--muted)">or</span>
+          <span style="margin:0 14px;color:var(--muted)">or</span>
           <a class="btn" href="mailto:hello@agenticsec.team?subject=Book%20a%20call&body=Hi%20Agentic%20Security%20Partners%2C%0A%0AI%27d%20like%20to%20book%20a%20call.%20Ideal%20times%3A%0A%0AThanks!">Book a call</a>
         </div>
 
-        <div class="two" style="margin-top:24px">
+        <div class="two" style="margin-top:28px">
           <div class="card box">
-            <h3 style="margin:0 0 10px">Quick start options</h3>
+            <h3 style="margin:0 0 12px">Quick start options</h3>
             <ul>
               <li><strong>$500 Attack Surface Intel:</strong> Same-day external reconnaissance</li>
               <li><strong>$2,500 72‑Hour Critical Triage:</strong> 72-hour OWASP Top 10 check (critical findings only)</li>
@@ -786,7 +943,7 @@
             </ul>
           </div>
           <div class="card box">
-            <h3 style="margin:0 0 10px">What happens next</h3>
+            <h3 style="margin:0 0 12px">What happens next</h3>
             <ul>
               <li>1. You share scope details</li>
               <li>2. We provide quote within 24 hours</li>
@@ -800,21 +957,21 @@
         </div>
       </section>
     </div>
-
-    <footer class="foot">
-      <div><b>Agentic Security Partners LLC</b> • AI-powered discovery, human-validated findings.</div>
-      <div style="margin-top:6px">© <span id="y">2025</span> • High-impact security assessments for modern SaaS teams.</div>
-      <div style="margin-top:8px">
-        <a href="mailto:hello@agenticsec.team" style="color:var(--accent)">hello@agenticsec.team</a>
-        <span style="margin:0 10px;color:var(--line)">|</span>
-        <a href="/privacy.html" style="color:var(--muted)">Privacy</a>
-        <span style="margin:0 10px;color:var(--line)">|</span>
-        <a href="/terms.html" style="color:var(--muted)">Terms</a>
-        <span style="margin:0 10px;color:var(--line)">|</span>
-        <a href="/.well-known/security.txt" style="color:var(--muted)">Security</a>
-      </div>
-    </footer>
   </div>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <div><b>Agentic Security Partners LLC</b> — AI-powered discovery, human-validated findings.</div>
+      <div class="foot-links">
+        <a href="mailto:hello@agenticsec.team">hello@agenticsec.team</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/.well-known/security.txt">Security</a>
+      </div>
+      <div class="foot-copy">© <span id="y">2025</span> Agentic Security Partners LLC. High-impact security assessments for modern SaaS teams.</div>
+    </div>
+  </footer>
 
   <!-- Checkout Modal -->
   <div id="checkoutOverlay" class="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
@@ -826,7 +983,7 @@
         <button class="btn" type="button" onclick="closeCheckoutModal()">Cancel</button>
         <button class="btn btnP" id="checkoutContinueBtn" type="button" onclick="confirmCheckout()">Continue</button>
       </div>
-      <p class="small" style="margin-top:10px">Prefer invoice or custom scope? Email <a href="mailto:hello@agenticsec.team" style="color:var(--accent)">hello@agenticsec.team</a>.</p>
+      <p class="small" style="margin-top:14px">Prefer invoice or custom scope? Email <a href="mailto:hello@agenticsec.team" style="color:var(--accent);font-weight:600">hello@agenticsec.team</a>.</p>
     </div>
   </div>
 
@@ -975,4 +1132,3 @@
   </script>
 </body>
 </html>
-

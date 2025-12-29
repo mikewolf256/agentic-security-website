@@ -3,32 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Why Your Scanner’s “Critical” Findings Are Probably Wrong | Agentic Security Partners</title>
+  <title>Why Your Scanner's "Critical" Findings Are Probably Wrong | Agentic Security Partners</title>
   <meta name="description" content="Why many scanner critical findings are false positives, and a practical validation loop to get to truth fast." />
   <link rel="icon" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:900px}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.75;color:var(--text);
-      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
-                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
-                 var(--bg);
+    :root{
+      --bg:#faf8fc;
+      --bg-subtle:#f3f0f9;
+      --panel:#ffffff;
+      --panel-border:rgba(59,29,90,.08);
+      --text:#24143d;
+      --text-secondary:#3b1d5a;
+      --muted:#6b5b7a;
+      --line:#e8e2f0;
+      --accent:#a855f7;
+      --accent-dark:#8b5cf6;
+      --accent-light:#c084fc;
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --shadow:0 4px 24px rgba(36,20,61,.08), 0 1px 3px rgba(36,20,61,.04);
+      --r:16px;
+      --r-sm:10px;
+      --max:900px;
+      --footer-bg:#24143d;
+      --footer-text:#e8e2f0;
+      --footer-muted:#a89bb8;
     }
-    a{color:var(--accent);text-decoration:none}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Source Sans 3',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--text);
+      background:var(--bg);
+    }
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(168,85,247,.08), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(6,182,212,.06), transparent 50%);
+      pointer-events:none;
+      z-index:-1;
+    }
+    a{color:var(--accent);text-decoration:none;font-weight:500}
     a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
-    h1{margin:8px 0 8px;letter-spacing:-.4px;line-height:1.2}
-    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    h1,h2,h3{font-family:'Bitter',Georgia,serif;font-weight:700;color:var(--text);line-height:1.2}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 24px}
+    .card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--r);box-shadow:var(--shadow);padding:32px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{height:44px;width:auto;object-fit:contain;border-radius:10px}
+    .pill{display:inline-block;padding:7px 14px;border-radius:999px;background:linear-gradient(135deg, rgba(168,85,247,.12), rgba(6,182,212,.08));border:1px solid rgba(168,85,247,.2);color:var(--muted);font-size:13px;font-weight:600}
+    h1{margin:10px 0 12px;font-size:32px;letter-spacing:-.5px}
+    h2{margin:26px 0 12px;font-size:22px;letter-spacing:-.3px;color:var(--text-secondary)}
     p,li{color:var(--muted)}
-    ul{margin:8px 0 0;padding-left:18px}
-    .callout{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.08);color:var(--muted)}
-    pre{white-space:pre-wrap;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
-    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+    ul{margin:10px 0 0;padding-left:22px}
+    li{margin:8px 0}
+    .callout{margin-top:16px;padding:16px 18px;border-radius:var(--r-sm);border:1px solid rgba(245,158,11,.25);background:linear-gradient(135deg, rgba(245,158,11,.08), rgba(245,158,11,.03));color:var(--muted)}
+    .callout strong{color:#d97706}
+    pre{white-space:pre-wrap;color:var(--text);background:var(--bg-subtle);border:1px solid var(--line);border-radius:var(--r-sm);padding:18px;overflow:auto;font-size:14px}
+    
+    footer.foot{
+      background:var(--footer-bg);
+      color:var(--footer-text);
+      padding:36px 24px 28px;
+      margin-top:32px;
+    }
+    footer.foot .foot-inner{max-width:var(--max);margin:0 auto;text-align:center}
+    footer.foot a{color:var(--footer-muted);transition:color 0.2s}
+    footer.foot a:hover{color:var(--accent-light)}
+    footer.foot .foot-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+    footer.foot .foot-copy{font-size:13px;color:var(--footer-muted)}
   </style>
 </head>
 <body>
@@ -38,31 +89,31 @@
         <div class="brand">
           <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
           <div>
-            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div style="font-family:'Bitter',Georgia,serif;font-weight:800;font-size:18px;letter-spacing:-.2px">Agentic Security Partners</div>
             <div class="pill">Blog</div>
           </div>
         </div>
         <a class="pill" href="/#proof">← Back to Proof</a>
       </div>
 
-      <h1>Why your scanner’s “Critical” findings are probably wrong</h1>
+      <h1>Why your scanner's "Critical" findings are probably wrong</h1>
       <p>Most scanners are forced to infer vulnerabilities from response patterns: status codes, content markers, timing differences, or error strings. Those heuristics are useful for discovery — but they can also create high-confidence-looking false positives.</p>
 
       <div class="callout">
-        <strong style="color:#fde68a">Rule of thumb:</strong>
+        <strong>Rule of thumb:</strong>
         <span>scanner output is a candidate; exploitability is a conclusion you earn with validation.</span>
       </div>
 
-      <h2>Common reasons “critical” is wrong</h2>
+      <h2>Common reasons "critical" is wrong</h2>
       <ul>
-        <li><strong>Response-shape traps:</strong> endpoints that always return “home” content for any request.</li>
-        <li><strong>Error handling quirks:</strong> “200 OK” with a generic error page can look like auth bypass.</li>
+        <li><strong>Response-shape traps:</strong> endpoints that always return "home" content for any request.</li>
+        <li><strong>Error handling quirks:</strong> "200 OK" with a generic error page can look like auth bypass.</li>
         <li><strong>WAF/CDN normalization:</strong> injected payloads are stripped or normalized, producing misleading similarities.</li>
-        <li><strong>Out-of-scope routes:</strong> 404/redirect behavior gets misclassified as “bypass.”</li>
+        <li><strong>Out-of-scope routes:</strong> 404/redirect behavior gets misclassified as "bypass."</li>
       </ul>
 
       <h2>A lightweight validation loop (safe for production)</h2>
-      <p>You don’t need full exploitation to validate. A quick loop catches most false positives:</p>
+      <p>You don't need full exploitation to validate. A quick loop catches most false positives:</p>
       <ul>
         <li><strong>Baseline control:</strong> normal request and a neutral/empty request.</li>
         <li><strong>Payload variants:</strong> multiple payloads to avoid one-off matches.</li>
@@ -75,9 +126,9 @@ CONTROL -> 200, 400KB, title=Home
 PAYLOAD -> 200, 400KB, title=Home
 EMPTY   -> 200, 400KB, title=Home
 
-Conclusion: endpoint returns “Home” regardless of input; candidate is not exploitable.</pre>
+Conclusion: endpoint returns "Home" regardless of input; candidate is not exploitable.</pre>
 
-      <h2>What “validated” looks like</h2>
+      <h2>What "validated" looks like</h2>
       <p>Validated reports include:</p>
       <ul>
         <li>Clear status: confirmed / unconfirmed / false positive</li>
@@ -86,17 +137,24 @@ Conclusion: endpoint returns “Home” regardless of input; candidate is not ex
       </ul>
 
       <p>Want to see a concrete example? Start with the <a href="/case-studies/validation-in-action.html">Validation in Action case study</a> and the <a href="/samples/validation-report-example.html">sample validation report</a>.</p>
-
-      <div class="foot">
-        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
-        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
-      </div>
     </div>
   </div>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <div class="foot-links">
+        <a href="/">Home</a>
+        <a href="/#proof">Proof</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/.well-known/security.txt">Security</a>
+      </div>
+      <div class="foot-copy">© <span id="y"></span> Agentic Security Partners LLC</div>
+    </div>
+  </footer>
+  
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
-
-

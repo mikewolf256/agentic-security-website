@@ -6,36 +6,87 @@
   <title>Sample: Validation Report | Agentic Security Partners</title>
   <meta name="description" content="A sample validation report showing evidence-first structure and confidence labeling." />
   <link rel="icon" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b0f17;--panel:#101827;--text:#e9eef7;--muted:#a9b4c7;--line:#1f2a3d;--accent:#7c5cff;--ok:#22c55e;--warn:#f59e0b;--shadow:0 18px 60px rgba(0,0,0,.35);--r:18px;--max:980px}
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.65;color:var(--text);
-      background:radial-gradient(1000px 500px at 10% 5%, rgba(139,92,246,.5), transparent 50%),
-                 radial-gradient(900px 450px at 90% 15%, rgba(16,185,129,.3), transparent 50%),
-                 var(--bg);
+    :root{
+      --bg:#faf8fc;
+      --bg-subtle:#f3f0f9;
+      --panel:#ffffff;
+      --panel-border:rgba(59,29,90,.08);
+      --text:#24143d;
+      --text-secondary:#3b1d5a;
+      --muted:#6b5b7a;
+      --line:#e8e2f0;
+      --accent:#a855f7;
+      --accent-dark:#8b5cf6;
+      --accent-light:#c084fc;
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --shadow:0 4px 24px rgba(36,20,61,.08), 0 1px 3px rgba(36,20,61,.04);
+      --r:16px;
+      --r-sm:10px;
+      --max:980px;
+      --footer-bg:#24143d;
+      --footer-text:#e8e2f0;
+      --footer-muted:#a89bb8;
     }
-    a{color:var(--accent);text-decoration:none}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Source Sans 3',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-size:17px;
+      line-height:1.65;
+      color:var(--text);
+      background:var(--bg);
+    }
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(168,85,247,.08), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(6,182,212,.06), transparent 50%);
+      pointer-events:none;
+      z-index:-1;
+    }
+    a{color:var(--accent);text-decoration:none;font-weight:500}
     a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-    .card{background:rgba(16,24,39,.75);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);padding:26px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo{height:40px;width:auto;object-fit:contain;border-radius:8px}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(124,92,255,.35);background:rgba(124,92,255,.12);color:var(--muted);font-size:12px}
-    h1{margin:8px 0 8px;letter-spacing:-.3px;line-height:1.2}
-    h2{margin:18px 0 8px;letter-spacing:-.2px}
+    h1,h2,h3{font-family:'Bitter',Georgia,serif;font-weight:700;color:var(--text);line-height:1.2}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 24px}
+    .card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--r);box-shadow:var(--shadow);padding:32px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{height:44px;width:auto;object-fit:contain;border-radius:10px}
+    .pill{display:inline-block;padding:7px 14px;border-radius:999px;background:linear-gradient(135deg, rgba(168,85,247,.12), rgba(6,182,212,.08));border:1px solid rgba(168,85,247,.2);color:var(--muted);font-size:13px;font-weight:600}
+    h1{margin:10px 0 12px;font-size:30px;letter-spacing:-.5px}
+    h2{margin:26px 0 12px;font-size:22px;letter-spacing:-.3px;color:var(--text-secondary)}
     p,li{color:var(--muted)}
-    ul{margin:8px 0 0;padding-left:18px}
-    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    ul,ol{margin:10px 0 0;padding-left:22px}
+    li{margin:8px 0}
+    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
     @media (max-width:900px){.meta{grid-template-columns:1fr 1fr}}
     @media (max-width:520px){.meta{grid-template-columns:1fr}}
-    .chip{border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.22);padding:12px}
-    .chip .k{font-size:12px;color:var(--muted);margin:0}
-    .chip .v{font-size:14px;color:var(--text);font-weight:700;margin:2px 0 0}
-    pre{white-space:pre-wrap;color:var(--text);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
-    .good{color:var(--ok);font-weight:800}
-    .bad{color:#ef4444;font-weight:800}
-    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+    .chip{border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg-subtle);padding:14px}
+    .chip .k{font-size:12px;color:var(--muted);margin:0;text-transform:uppercase;letter-spacing:.5px}
+    .chip .v{font-size:15px;color:var(--text);font-weight:700;margin:4px 0 0}
+    .good{color:var(--ok)}
+    .bad{color:var(--danger)}
+    pre{white-space:pre-wrap;color:var(--text);background:var(--bg-subtle);border:1px solid var(--line);border-radius:var(--r-sm);padding:18px;overflow:auto;font-size:14px}
+    
+    footer.foot{
+      background:var(--footer-bg);
+      color:var(--footer-text);
+      padding:36px 24px 28px;
+      margin-top:32px;
+    }
+    footer.foot .foot-inner{max-width:var(--max);margin:0 auto;text-align:center}
+    footer.foot a{color:var(--footer-muted);transition:color 0.2s}
+    footer.foot a:hover{color:var(--accent-light)}
+    footer.foot .foot-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+    footer.foot .foot-copy{font-size:13px;color:var(--footer-muted)}
   </style>
 </head>
 <body>
@@ -45,7 +96,7 @@
         <div class="brand">
           <a href="/"><img src="/logo.png" alt="Agentic Security Partners" class="logo" /></a>
           <div>
-            <div style="font-weight:900;letter-spacing:-.2px">Agentic Security Partners</div>
+            <div style="font-family:'Bitter',Georgia,serif;font-weight:800;font-size:18px;letter-spacing:-.2px">Agentic Security Partners</div>
             <div class="pill">Sample report</div>
           </div>
         </div>
@@ -53,7 +104,7 @@
       </div>
 
       <h1>Sample validation report (structure)</h1>
-      <p>This is a simplified example of what “validated” looks like. The goal is clarity: reproduce quickly, understand impact, and know the confidence level.</p>
+      <p>This is a simplified example of what "validated" looks like. The goal is clarity: reproduce quickly, understand impact, and know the confidence level.</p>
 
       <div class="meta">
         <div class="chip"><p class="k">Title</p><p class="v">Potential auth bypass (candidate)</p></div>
@@ -63,10 +114,10 @@
       </div>
 
       <h2>Summary</h2>
-      <p>Scanner flagged an authentication bypass based on a 200 response and “homepage-looking” content. Validation shows the endpoint returns the same homepage response for payload and control requests; no authentication logic is exercised.</p>
+      <p>Scanner flagged an authentication bypass based on a 200 response and "homepage-looking" content. Validation shows the endpoint returns the same homepage response for payload and control requests; no authentication logic is exercised.</p>
 
       <h2>Reproduction (example)</h2>
-      <ol style="color:var(--muted);padding-left:18px;margin:8px 0 0">
+      <ol>
         <li>Send a baseline request (control).</li>
         <li>Send the candidate payload request.</li>
         <li>Compare response markers (status, size, keywords).</li>
@@ -93,23 +144,30 @@ Content-Length: 412833
 
 Conclusion: response-shape is identical; candidate is not exploitable.</pre>
 
-      <h2>What “validated” means on our reports</h2>
+      <h2>What "validated" means on our reports</h2>
       <ul>
         <li><strong>Confirmed findings</strong> include reproduction steps + evidence + remediation guidance.</li>
-        <li><strong>Unconfirmed candidates</strong> are clearly labeled with confidence and what’s missing to confirm.</li>
+        <li><strong>Unconfirmed candidates</strong> are clearly labeled with confidence and what's missing to confirm.</li>
         <li><strong>False positives</strong> are closed with a short explanation and proof.</li>
       </ul>
-
-      <div class="foot">
-        <div><a href="/">Home</a> • <a href="/#proof">Proof</a> • <a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/.well-known/security.txt">Security</a></div>
-        <div style="margin-top:6px">© <span id="y"></span> Agentic Security Partners LLC</div>
-      </div>
     </div>
   </div>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <div class="foot-links">
+        <a href="/">Home</a>
+        <a href="/#proof">Proof</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/.well-known/security.txt">Security</a>
+      </div>
+      <div class="foot-copy">© <span id="y"></span> Agentic Security Partners LLC</div>
+    </div>
+  </footer>
+  
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
-
-
