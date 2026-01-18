@@ -184,7 +184,7 @@
     .heroR{padding:20px;display:flex;align-items:center;justify-content:center}
     .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;width:100%}
     .stat{
-      padding:20px;
+      padding:18px;
       text-align:center;
       border-radius:var(--r-sm);
       background:var(--bg-subtle);
@@ -192,15 +192,93 @@
     }
     .statNum{
       font-family:'Bitter',Georgia,serif;
-      font-size:34px;
+      font-size:clamp(22px, 2.2vw, 30px);
       font-weight:800;
-      margin:0 0 4px;
+      line-height:1.15;
+      margin:0 0 6px;
       background:linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
     }
-    .statLabel{font-size:13px;color:var(--muted);margin:0;font-weight:500}
+    .statLabel{
+      font-size:12.5px;
+      color:var(--muted);
+      margin:0 auto;
+      font-weight:500;
+      line-height:1.45;
+      max-width:26ch;
+    }
+
+    /* ICP / Who This Is For */
+    .icp-banner{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+      gap:12px 28px;
+      padding:20px 28px;
+      margin-bottom:32px;
+      background:linear-gradient(135deg, rgba(168,85,247,.06) 0%, rgba(6,182,212,.04) 100%);
+      border:1px solid rgba(168,85,247,.15);
+      border-radius:var(--r);
+      text-align:center;
+    }
+    .icp-banner .icp-label{
+      font-weight:700;
+      color:var(--accent-dark);
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+    .icp-banner .icp-items{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 20px;
+      justify-content:center;
+    }
+    .icp-banner .icp-item{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--text-secondary);
+      font-size:15px;
+      font-weight:500;
+    }
+    .icp-banner .icp-item svg{
+      width:18px;
+      height:18px;
+      color:var(--ok);
+    }
+
+    /* Sound Familiar / Trigger Events */
+    .triggers{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-bottom:32px;
+    }
+    @media (max-width:900px){.triggers{grid-template-columns:1fr}}
+    .trigger{
+      padding:20px 22px;
+      border-radius:var(--r-sm);
+      background:var(--panel);
+      border:1px solid var(--line);
+      text-align:center;
+    }
+    .trigger-q{
+      font-family:'Bitter',Georgia,serif;
+      font-size:17px;
+      font-weight:600;
+      color:var(--text);
+      margin:0 0 8px;
+      line-height:1.35;
+    }
+    .trigger-a{
+      font-size:14px;
+      color:var(--muted);
+      margin:0;
+    }
 
     /* Sections */
     .sec{padding:32px 0}
@@ -381,22 +459,21 @@
       <button class="menuBtn" type="button" aria-label="Open menu" onclick="toggleMenu()">
         <svg class="ico muted" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M4 7h16v2H4V7zm0 8h16v2H4v-2zm0-4h16v2H4v-2z"/></svg>
       </button>
-      <a class="cta" href="#contact" onclick="showPage('contact'); return false">Get a quote</a>
+      <a class="cta" href="#" onclick="openCheckoutModal('attack_surface_intel'); return false">$500 Intel Report</a>
     </header>
 
     <!-- Home Page -->
     <div id="page-home" class="page active">
       <section class="hero">
         <div class="card heroL">
-          <div class="eyebrow"><span class="dot"></span> AI-powered discovery • Human-validated findings</div>
-          <h1>Security assessments focused on what <em>actually matters.</em></h1>
-          <p class="sub">We combine automated reconnaissance with expert human validation. Every critical finding is verified by a security professional before it reaches your report. Comprehensive OWASP Top 10 testing in days, not weeks.</p>
+          <div class="eyebrow"><span class="dot"></span> For B2B SaaS teams • Human-validated findings</div>
+          <h1>Security you can <em>send to customers.</em></h1>
+          <p class="sub">Human-validated findings you can trust. Fast enough to unblock enterprise deals, SOC 2 audits, and security questionnaires. No scanner noise — just clear, actionable results in days.</p>
           <div class="btns">
-            <a class="btn btnP" href="#" onclick="showPage('contact'); return false">Get a quote</a>
-            <a class="btn" href="#" onclick="showPage('how'); return false">See how it works</a>
-            <a class="btn" href="#" onclick="showPage('pricing'); return false">Pricing</a>
+            <a class="btn btnP" href="#" onclick="openCheckoutModal('attack_surface_intel')">Start with $500 Intel →</a>
+            <a class="btn" href="#" onclick="showPage('pricing'); return false">See all plans</a>
           </div>
-          <p class="small" style="margin-top:18px">✓ Every high-severity finding manually verified &nbsp;•&nbsp; ✓ Clear confidence labels &nbsp;•&nbsp; ✓ Reproduction steps included &nbsp;•&nbsp; ✓ Attestation letter included in Standard+ (add-on for Intel/Rapid)</p>
+          <p class="small" style="margin-top:18px">✓ Every critical finding manually verified &nbsp;•&nbsp; ✓ Audit-ready documentation &nbsp;•&nbsp; ✓ Reproduction steps included &nbsp;•&nbsp; ✓ Results in 24-72 hours</p>
         </div>
         <div class="card heroR">
           <div class="stats">
@@ -419,6 +496,32 @@
           </div>
         </div>
       </section>
+
+      <!-- Who This Is For -->
+      <div class="icp-banner">
+        <span class="icp-label">Built for:</span>
+        <div class="icp-items">
+          <span class="icp-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> B2B SaaS teams (Seed → Series B)</span>
+          <span class="icp-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> No dedicated security hire yet</span>
+          <span class="icp-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Preparing for SOC 2 or enterprise deals</span>
+        </div>
+      </div>
+
+      <!-- Sound Familiar? Trigger Events -->
+      <div class="triggers">
+        <div class="trigger">
+          <p class="trigger-q">"Customer asking for your latest pentest?"</p>
+          <p class="trigger-a">Get audit-ready documentation in 24-72 hours.</p>
+        </div>
+        <div class="trigger">
+          <p class="trigger-q">"SOC 2 auditor wants security evidence?"</p>
+          <p class="trigger-a">Signed attestation letters included in Standard+.</p>
+        </div>
+        <div class="trigger">
+          <p class="trigger-q">"Drowning in scanner noise?"</p>
+          <p class="trigger-a">Human-validated findings. No false positives.</p>
+        </div>
+      </div>
 
       <section class="sec">
         <h2>Why choose us</h2>
