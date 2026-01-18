@@ -414,6 +414,48 @@
     .modal input:focus{outline:none;border-color:var(--accent)}
     .modal .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
     .modal .row .btn{flex:1}
+
+    /* Intake form */
+    .form-card{padding:24px}
+    .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    @media (max-width:900px){.form-grid{grid-template-columns:1fr}}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{font-size:13px;font-weight:700;color:var(--text-secondary)}
+    .field input,.field select,.field textarea{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:var(--bg-subtle);
+      font-family:inherit;
+      font-size:15px;
+      color:var(--text);
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .field textarea{min-height:110px;resize:vertical}
+    .field input:focus,.field select:focus,.field textarea:focus{
+      outline:none;
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(168,85,247,.12);
+      background:#fff;
+    }
+    .hint{font-size:12.5px;color:var(--muted);margin-top:2px}
+    .check-row{display:flex;flex-wrap:wrap;gap:12px}
+    .check-row label{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--text);font-size:14px}
+    .check-row input{width:auto}
+    .form-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+    .form-actions .btn{flex:1;min-width:180px}
+    .json-preview{
+      margin-top:18px;
+      background:#1f1530;
+      color:#e8e2f0;
+      border-radius:var(--r-sm);
+      padding:16px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:12.5px;
+      white-space:pre-wrap;
+      border:1px solid rgba(168,85,247,.25);
+    }
   </style>
 </head>
 <body>
@@ -466,9 +508,9 @@
     <div id="page-home" class="page active">
       <section class="hero">
         <div class="card heroL">
-          <div class="eyebrow"><span class="dot"></span> For B2B SaaS teams • Human-validated findings</div>
-          <h1>Security you can <em>send to customers.</em></h1>
-          <p class="sub">Human-validated findings you can trust. Fast enough to unblock enterprise deals, SOC 2 audits, and security questionnaires. No scanner noise — just clear, actionable results in days.</p>
+          <div class="eyebrow"><span class="dot"></span> AI-powered discovery • Human-validated findings</div>
+          <h1>Security assessments focused on what <em>actually matters.</em></h1>
+          <p class="sub">We combine automated reconnaissance with expert human validation. Every critical finding is verified by a security professional before it reaches your report. Comprehensive OWASP Top 10 testing in days, not weeks.</p>
           <div class="btns">
             <a class="btn btnP" href="#" onclick="openCheckoutModal('attack_surface_intel')">Start with $500 Intel →</a>
             <a class="btn" href="#" onclick="showPage('pricing'); return false">See all plans</a>
@@ -1047,12 +1089,115 @@
           </ul>
         </div>
 
-        <div class="card box" style="margin-top:28px">
-          <h3 style="margin:0 0 10px">Get a quote</h3>
-          <p class="small" style="margin:0 0 16px">We respond within 24 hours with a custom quote based on your scope.</p>
-          <a class="btn btnP" href="mailto:hello@agenticsec.team?subject=Security%20assessment%20quote&body=Hi%20Agentic%20Security%20Partners%2C%0A%0ACompany%3A%0ATargets%3A%0ATimeline%3A%0AAuth%20required%3A%20Yes%2FNo%0A%0AThanks!">Request quote</a>
-          <span style="margin:0 14px;color:var(--muted)">or</span>
-          <a class="btn" href="mailto:hello@agenticsec.team?subject=Book%20a%20call&body=Hi%20Agentic%20Security%20Partners%2C%0A%0AI%27d%20like%20to%20book%20a%20call.%20Ideal%20times%3A%0A%0AThanks!">Book a call</a>
+        <div class="card box form-card" style="margin-top:28px">
+          <h3 style="margin:0 0 10px">Scope intake form</h3>
+          <p class="small" style="margin:0 0 16px">Generate a structured scope bundle you can paste directly into our testing MCP flow. We respond within 24 hours with a plan and quote.</p>
+          <form id="intakeForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="intakeCompany">Company name</label>
+                <input id="intakeCompany" name="company" type="text" placeholder="Acme, Inc." required />
+              </div>
+              <div class="field">
+                <label for="intakeContact">Primary contact</label>
+                <input id="intakeContact" name="contact" type="text" placeholder="Jane Doe" required />
+              </div>
+              <div class="field">
+                <label for="intakeEmail">Contact email</label>
+                <input id="intakeEmail" name="email" type="email" placeholder="jane@acme.com" required />
+              </div>
+              <div class="field">
+                <label for="intakeRole">Role / title</label>
+                <input id="intakeRole" name="role" type="text" placeholder="CTO, Head of Security" />
+              </div>
+              <div class="field">
+                <label for="intakeEnv">Environment</label>
+                <select id="intakeEnv" name="environment">
+                  <option value="production">Production</option>
+                  <option value="staging">Staging</option>
+                  <option value="both">Both</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="intakeTimeline">Timeline / deadline</label>
+                <input id="intakeTimeline" name="timeline" type="text" placeholder="Need results by Mar 15" />
+              </div>
+              <div class="field">
+                <label for="intakeAuthRequired">Authentication required?</label>
+                <select id="intakeAuthRequired" name="auth_required">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="unknown">Not sure yet</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="intakeRateLimits">Rate limits</label>
+                <input id="intakeRateLimits" name="rate_limits" type="text" placeholder="e.g., 5 req/sec per IP" />
+              </div>
+              <div class="field">
+                <label for="intakeAllowlist">IP allowlist required?</label>
+                <select id="intakeAllowlist" name="ip_allowlist_required">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                  <option value="unknown">Not sure yet</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="intakeSensitivity">Data sensitivity</label>
+                <select id="intakeSensitivity" name="data_sensitivity">
+                  <option value="low">Low (no PII)</option>
+                  <option value="medium">Medium (some PII)</option>
+                  <option value="high">High (regulated data)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field" style="margin-top:16px">
+              <label for="intakeTargets">Target URLs</label>
+              <textarea id="intakeTargets" name="targets" placeholder="https://app.acme.com&#10;https://api.acme.com"></textarea>
+              <div class="hint">One URL per line. Include primary app and any authenticated endpoints.</div>
+            </div>
+
+            <div class="field">
+              <label for="intakeApiBases">API base URLs</label>
+              <textarea id="intakeApiBases" name="api_bases" placeholder="https://api.acme.com/v1&#10;https://api.acme.com/v2"></textarea>
+              <div class="hint">List REST/GraphQL base URLs, one per line.</div>
+            </div>
+
+            <div class="field">
+              <label>Authentication methods</label>
+              <div class="check-row">
+                <label><input type="checkbox" name="auth_methods" value="session_cookie" /> Session cookie</label>
+                <label><input type="checkbox" name="auth_methods" value="oauth" /> OAuth/OIDC</label>
+                <label><input type="checkbox" name="auth_methods" value="sso" /> SSO/SAML</label>
+                <label><input type="checkbox" name="auth_methods" value="jwt" /> JWT</label>
+                <label><input type="checkbox" name="auth_methods" value="api_key" /> API key</label>
+                <label><input type="checkbox" name="auth_methods" value="other" /> Other</label>
+              </div>
+              <div class="field" style="margin-top:8px">
+                <input id="intakeAuthNotes" name="auth_notes" type="text" placeholder="Auth notes (roles, test users, MFA, etc.)" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="intakeOutOfScope">Out of scope</label>
+              <textarea id="intakeOutOfScope" name="out_of_scope" placeholder="E.g., marketing site, third-party tools, production databases"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="intakeNotes">Additional notes</label>
+              <textarea id="intakeNotes" name="notes" placeholder="Anything else we should know?"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btnP" type="submit">Generate scope JSON</button>
+              <button class="btn" id="intakeCopyBtn" type="button" disabled>Copy JSON</button>
+              <button class="btn" type="reset">Reset</button>
+            </div>
+          </form>
+          <pre id="intakeJson" class="json-preview" style="display:none"></pre>
+          <p class="small" style="margin-top:14px">We never run tests without written authorization. NDA available on request.</p>
         </div>
 
         <div class="two" style="margin-top:28px">
@@ -1250,6 +1395,113 @@
         continueBtn.disabled = false;
         continueBtn.textContent = 'Continue';
       }
+    }
+
+    // ============================================
+    // Scope Intake Form
+    // ============================================
+    const intakeForm = document.getElementById('intakeForm');
+    const intakeJson = document.getElementById('intakeJson');
+    const intakeCopyBtn = document.getElementById('intakeCopyBtn');
+
+    function splitLines(value) {
+      return (value || '')
+        .split(/[\n,]/)
+        .map(part => part.trim())
+        .filter(Boolean);
+    }
+
+    function buildIntakePayload() {
+      const authMethods = Array.from(document.querySelectorAll('input[name="auth_methods"]:checked'))
+        .map(input => input.value);
+
+      return {
+        company: document.getElementById('intakeCompany')?.value.trim() || '',
+        contact: {
+          name: document.getElementById('intakeContact')?.value.trim() || '',
+          email: document.getElementById('intakeEmail')?.value.trim() || '',
+          role: document.getElementById('intakeRole')?.value.trim() || ''
+        },
+        scope: {
+          targets: splitLines(document.getElementById('intakeTargets')?.value),
+          api_bases: splitLines(document.getElementById('intakeApiBases')?.value),
+          environment: document.getElementById('intakeEnv')?.value || 'production',
+          auth_required: document.getElementById('intakeAuthRequired')?.value || 'unknown',
+          auth_methods: authMethods,
+          auth_notes: document.getElementById('intakeAuthNotes')?.value.trim() || ''
+        },
+        constraints: {
+          rate_limits: document.getElementById('intakeRateLimits')?.value.trim() || '',
+          ip_allowlist_required: document.getElementById('intakeAllowlist')?.value || 'unknown',
+          data_sensitivity: document.getElementById('intakeSensitivity')?.value || 'low',
+          out_of_scope: document.getElementById('intakeOutOfScope')?.value.trim() || ''
+        },
+        timeline: document.getElementById('intakeTimeline')?.value.trim() || '',
+        notes: document.getElementById('intakeNotes')?.value.trim() || '',
+        submitted_at: new Date().toISOString()
+      };
+    }
+
+    function renderIntakeJson(payload) {
+      if (!intakeJson) return;
+      const json = JSON.stringify(payload, null, 2);
+      intakeJson.textContent = json;
+      intakeJson.style.display = 'block';
+      intakeCopyBtn.disabled = false;
+      try {
+        localStorage.setItem('intake_payload', json);
+      } catch (e) {
+        // Ignore storage errors
+      }
+    }
+
+    function clearIntakeJson() {
+      if (!intakeJson) return;
+      intakeJson.textContent = '';
+      intakeJson.style.display = 'none';
+      if (intakeCopyBtn) intakeCopyBtn.disabled = true;
+      try {
+        localStorage.removeItem('intake_payload');
+      } catch (e) {
+        // Ignore storage errors
+      }
+    }
+
+    if (intakeForm) {
+      intakeForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const payload = buildIntakePayload();
+        renderIntakeJson(payload);
+      });
+
+      intakeForm.addEventListener('reset', function() {
+        setTimeout(clearIntakeJson, 0);
+      });
+    }
+
+    if (intakeCopyBtn) {
+      intakeCopyBtn.addEventListener('click', async function() {
+        if (!intakeJson || !intakeJson.textContent) return;
+        try {
+          await navigator.clipboard.writeText(intakeJson.textContent);
+          intakeCopyBtn.textContent = 'Copied!';
+          setTimeout(() => (intakeCopyBtn.textContent = 'Copy JSON'), 1500);
+        } catch (e) {
+          intakeCopyBtn.textContent = 'Copy failed';
+          setTimeout(() => (intakeCopyBtn.textContent = 'Copy JSON'), 1500);
+        }
+      });
+    }
+
+    try {
+      const cached = localStorage.getItem('intake_payload');
+      if (cached && intakeJson) {
+        intakeJson.textContent = cached;
+        intakeJson.style.display = 'block';
+        if (intakeCopyBtn) intakeCopyBtn.disabled = false;
+      }
+    } catch (e) {
+      // Ignore storage errors
     }
   </script>
 </body>
