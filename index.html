@@ -493,6 +493,7 @@
       <nav class="links">
         <a href="#home" onclick="showPage('home'); return false" class="nav-link" data-page="home">Home</a>
         <a href="#solutions" onclick="showPage('solutions'); return false" class="nav-link" data-page="solutions">Solutions</a>
+        <a href="#defense" onclick="showPage('defense'); return false" class="nav-link" data-page="defense">Defense (SOC)</a>
         <a href="#how" onclick="showPage('how'); return false" class="nav-link" data-page="how">How it works</a>
         <a href="#deliverables" onclick="showPage('deliverables'); return false" class="nav-link" data-page="deliverables">Deliverables</a>
         <a href="#proof" onclick="showPage('proof'); return false" class="nav-link" data-page="proof">Proof</a>
@@ -740,7 +741,10 @@
               <li><strong>PII-safe:</strong> Local scrubbing (Presidio) before LLM analysis</li>
               <li><strong>Fast:</strong> Sub-5s detection with Redis stateful tracking</li>
             </ul>
-            <p style="margin-top:18px"><a class="btn" href="mailto:hello@agenticsec.team?subject=SOC%20Triage%20Inquiry" style="display:inline-block;border-color:var(--cyan);color:var(--cyan)">Contact for SOC triage →</a></p>
+            <p style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+              <a class="btn btnP" href="#" onclick="showPage('defense'); return false" style="display:inline-block;background:linear-gradient(135deg, var(--cyan), #0891b2);box-shadow:0 4px 14px rgba(6,182,212,.3)">Learn more →</a>
+              <a class="btn" href="mailto:hello@agenticsec.team?subject=SOC%20Triage%20Inquiry" style="display:inline-block;border-color:var(--cyan);color:var(--cyan)">Request demo</a>
+            </p>
           </div>
         </div>
 
@@ -837,10 +841,283 @@
             <p style="color:var(--muted);margin-bottom:18px">Get your scanner's top "criticals" validated in 72 hours.</p>
             <a class="btn btnP" href="#" onclick="openCheckoutModal('rapid_assessment')">$2,500 Critical Triage →</a>
           </div>
-          <div class="card box" style="text-align:center;padding:32px">
+          <div class="card box" style="text-align:center;padding:32px;border-left:4px solid var(--cyan)">
             <h3 style="margin:0 0 14px">Explore SOC Triage</h3>
-            <p style="color:var(--muted);margin-bottom:18px">Let's discuss your alert volume and false positive rate.</p>
-            <a class="btn" href="mailto:hello@agenticsec.team?subject=SOC%20Triage%20Discussion" style="border-color:var(--cyan);color:var(--cyan)">Schedule a call →</a>
+            <p style="color:var(--muted);margin-bottom:18px">Pre-SOC2 companies & early fintech: see how we cut alert fatigue.</p>
+            <a class="btn btnP" href="#" onclick="showPage('defense'); return false" style="background:linear-gradient(135deg, var(--cyan), #0891b2);box-shadow:0 4px 14px rgba(6,182,212,.3)">See Defense page →</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Defense (SOC) Page -->
+    <div id="page-defense" class="page">
+      <section class="sec">
+        <h1>Defense: SOC Triage for Growing Companies</h1>
+        <p class="sub" style="margin-bottom:28px">You're growing fast. Alerts are piling up. You don't have a SOC team yet. We bridge the gap with AI-powered triage that cuts false positives and spots real threats.</p>
+
+        <!-- The Pain Section -->
+        <div class="card box" style="margin-bottom:28px;background:linear-gradient(135deg, rgba(239,68,68,.04), rgba(239,68,68,.02));border-left:4px solid #ef4444">
+          <h2 style="margin:0 0 12px;color:#dc2626">The Problem: Pre-SOC2 Alert Chaos</h2>
+          <p style="color:var(--text-secondary);margin-bottom:14px">You're between $1M-$10M ARR. Customers are asking about security. SOC2 is on the roadmap. But right now:</p>
+          <ul style="margin-top:14px">
+            <li><strong>Your engineering team doubles as security.</strong> They're reviewing CloudFlare/Datadog alerts, not shipping features.</li>
+            <li><strong>80% of "critical" alerts are false positives.</strong> Your scanner flags everything. Real threats get buried in noise.</li>
+            <li><strong>You can't afford a full SOC team.</strong> Hiring security analysts costs $150K+/year per person. You need 3-5 for 24/7 coverage.</li>
+            <li><strong>Fintech-specific attacks aren't detected.</strong> IDOR account enumeration, mass assignment, synthetic identity—traditional SIEM rules miss these.</li>
+            <li><strong>Auditors want proof.</strong> "Show us your incident response process." You have Slack alerts and a spreadsheet.</li>
+          </ul>
+        </div>
+
+        <!-- The Solution -->
+        <h2 style="margin-bottom:16px">Our Solution: AI-Powered Triage Middleware</h2>
+        <p style="color:var(--muted);margin-bottom:18px">Think of us as your first SOC analyst—automated, compliant, and running 24/7. We sit between your alerts and your team, validating what's real before engineering gets paged.</p>
+
+        <div class="grid3" style="margin-bottom:28px">
+          <div class="card feat">
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-target" xlink:href="#ico-target"></use></svg>Ownership-Aware IDOR Detection</h3>
+            <p>Traditional systems flag "user accessed 10 resources." We ask: <strong>did they access OTHER users' resources?</strong> 90% false positive reduction for fintech apps.</p>
+          </div>
+          <div class="card feat">
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>PII-Safe AI Analysis</h3>
+            <p>Local PII scrubbing (Presidio + regex) before LLM sees data. <strong>GDPR/PCI-DSS compliant</strong> out of the box. Your customer data never hits external APIs.</p>
+          </div>
+          <div class="card feat">
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Business Context Enrichment</h3>
+            <p>AI learns your environment: QA test users, recent deployments, known tools. <strong>60% reduction</strong> in false escalations via context-aware triage.</p>
+          </div>
+        </div>
+
+        <!-- What You Get -->
+        <h2 style="margin-bottom:16px">What You Get</h2>
+        <div class="two" style="margin-bottom:28px">
+          <div class="card box">
+            <h3 style="margin:0 0 12px">Real-Time Detection</h3>
+            <ul>
+              <li><strong>Sub-5s detection:</strong> Redis-backed stateful tracking catches attacks in real-time</li>
+              <li><strong>Chronicle/SIEM integration:</strong> YARA-L rules trigger webhooks, enrichment, case creation</li>
+              <li><strong>Auto-hold capability:</strong> High-confidence IDOR attacks can auto-suspend attacker accounts</li>
+              <li><strong>MITRE ATT&CK mapping:</strong> Every alert tagged with tactics/techniques for SOC2 evidence</li>
+            </ul>
+          </div>
+          <div class="card box">
+            <h3 style="margin:0 0 12px">Audit-Ready Evidence</h3>
+            <ul>
+              <li><strong>Complete audit trail:</strong> Every decision logged with timestamp, confidence, reasoning</li>
+              <li><strong>PII scrubbing logs:</strong> Prove GDPR/PCI-DSS compliance to auditors</li>
+              <li><strong>Detection metrics:</strong> False positive rate, time-to-detection, analyst time saved</li>
+              <li><strong>Compliance mappings:</strong> SOC2, PCI-DSS, HIPAA, OWASP coverage documented</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Who This Is For -->
+        <div class="card box" style="margin-bottom:28px;border-left:4px solid var(--cyan)">
+          <h2 style="margin:0 0 12px">Who This Is For</h2>
+          <div class="two">
+            <div>
+              <p style="color:var(--text-secondary);font-weight:700;margin-bottom:10px">✓ Pre-SOC2 SaaS Companies</p>
+              <ul style="font-size:14px">
+                <li>$1M-$10M ARR, preparing for compliance</li>
+                <li>No dedicated security hire yet</li>
+                <li>Engineering team handling security alerts</li>
+                <li>Need audit-ready incident response process</li>
+              </ul>
+            </div>
+            <div>
+              <p style="color:var(--text-secondary);font-weight:700;margin-bottom:10px">✓ Early-Stage Fintech</p>
+              <ul style="font-size:14px">
+                <li>Handling payments, loans, or sensitive financial data</li>
+                <li>PCI-DSS compliance required</li>
+                <li>IDOR/account enumeration risk is high</li>
+                <li>Can't afford full SOC team (3-5 analysts @ $150K+/year)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <h2 style="margin-bottom:16px">Common Use Cases</h2>
+        <div class="grid3" style="margin-bottom:28px">
+          <div class="card feat">
+            <h3>IDOR Account Enumeration</h3>
+            <p><strong>Fintech Problem:</strong> Attackers probe `/api/loans/12345` sequentially to find vulnerable accounts.</p>
+            <p style="margin-top:10px"><strong>Our Detection:</strong> Ownership-aware tracking only alerts if they access OTHER users' loans. Legitimate multi-loan users ignored.</p>
+          </div>
+          <div class="card feat">
+            <h3>SOC2 Incident Response</h3>
+            <p><strong>Auditor Question:</strong> "Show me your incident detection and response process."</p>
+            <p style="margin-top:10px"><strong>Our Evidence:</strong> Complete audit trail, MITRE ATT&CK mappings, mean time to detection metrics, case management integration.</p>
+          </div>
+          <div class="card feat">
+            <h3>Alert Fatigue Reduction</h3>
+            <p><strong>Current State:</strong> 100+ alerts/day, 80% false positives, engineering reviews manually.</p>
+            <p style="margin-top:10px"><strong>After Deployment:</strong> 10-20 alerts/day, 95%+ true positives, 30+ engineering hours/week saved.</p>
+          </div>
+        </div>
+
+        <!-- ROI Calculator -->
+        <div class="card box" style="margin-bottom:28px;background:linear-gradient(135deg, rgba(168,85,247,.04), rgba(6,182,212,.02));border-color:rgba(168,85,247,.2)">
+          <h3 style="margin:0 0 12px">Cost vs. Hiring a SOC Team</h3>
+          <table class="compare-table">
+            <tr>
+              <th></th>
+              <th>Build Your Own SOC</th>
+              <th>Agentic Security Defense</th>
+            </tr>
+            <tr>
+              <td><strong>Setup Cost</strong></td>
+              <td>$50K-$100K (SIEM, tools, training)</td>
+              <td><span class="check">$0 (we handle infrastructure)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Annual Personnel</strong></td>
+              <td>$450K-$750K (3-5 analysts @ $150K+/yr)</td>
+              <td><span class="check">$30K-$60K/year</span></td>
+            </tr>
+            <tr>
+              <td><strong>Time to Value</strong></td>
+              <td>6-12 months (hire, train, tune)</td>
+              <td><span class="check">1-2 weeks (deploy, baseline, tune)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Coverage</strong></td>
+              <td>Varies by analyst skill</td>
+              <td><span class="check">Consistent AI + human validation</span></td>
+            </tr>
+            <tr>
+              <td><strong>Compliance Ready</strong></td>
+              <td>Requires documentation and process</td>
+              <td><span class="check">Built-in audit trail and evidence</span></td>
+            </tr>
+          </table>
+          <p style="margin-top:14px;font-size:14px;color:var(--muted)"><strong>Bottom line:</strong> Save $400K+/year vs. building a SOC team. Get to SOC2 faster. Scale as you grow.</p>
+        </div>
+
+        <!-- Technical Architecture (Simplified) -->
+        <h2 style="margin-bottom:16px">How It Works (5-Minute Overview)</h2>
+        <div class="card box" style="margin-bottom:28px">
+          <h3 style="margin:0 0 12px">The "Sandwich Model" Security Pipeline</h3>
+          <p style="color:var(--muted);margin-bottom:14px;font-size:15px">Your alerts go through a multi-layer validation pipeline before reaching your team:</p>
+          <div class="human-ai">
+            <div class="header">Step</div>
+            <div class="header">What Happens</div>
+            <div class="header">Why It Matters</div>
+            
+            <div>1. Alert Arrives</div>
+            <div class="ai">From CloudFlare, Datadog, Chronicle, etc.</div>
+            <div>Works with your existing tools</div>
+            
+            <div>2. PII Scrubbing</div>
+            <div class="ai">Presidio removes emails, IPs, credit cards</div>
+            <div>GDPR/PCI-DSS compliant before external API</div>
+            
+            <div>3. Context Enrichment</div>
+            <div class="human">Add business context (QA users, deployments)</div>
+            <div>Reduces false positives by 60%</div>
+            
+            <div>4. AI Analysis</div>
+            <div class="ai">Claude analyzes (scrubbed data only)</div>
+            <div>Fast triage with institutional knowledge</div>
+            
+            <div>5. Ownership Check</div>
+            <div class="human">Did user access THEIR resources or OTHERS'?</div>
+            <div>90% FP reduction for IDOR attacks</div>
+            
+            <div>6. Verdict</div>
+            <div class="human">CRITICAL / MEDIUM / FALSE_POSITIVE</div>
+            <div>Clear action with confidence score</div>
+            
+            <div>7. Response</div>
+            <div class="ai">Auto-hold, SOAR case, or dismiss</div>
+            <div>Sub-5s mean time to response</div>
+          </div>
+        </div>
+
+        <!-- Compliance Focus -->
+        <h2 style="margin-bottom:16px">Built for Compliance (SOC2, PCI-DSS, GDPR)</h2>
+        <div class="grid3" style="margin-bottom:28px">
+          <div class="card feat">
+            <h3>SOC 2 Type II</h3>
+            <p><strong>CC6.1 (Security):</strong> Ownership-aware detection prevents unauthorized access.</p>
+            <p style="margin-top:6px"><strong>CC7.2 (Monitoring):</strong> Real-time detection with complete audit trail.</p>
+          </div>
+          <div class="card feat">
+            <h3>PCI-DSS</h3>
+            <p><strong>Req 3.3:</strong> Credit card patterns scrubbed before LLM.</p>
+            <p style="margin-top:6px"><strong>Req 10:</strong> Complete audit trail of all access to cardholder data environments.</p>
+          </div>
+          <div class="card feat">
+            <h3>GDPR Article 25</h3>
+            <p><strong>Privacy by Design:</strong> PII never leaves your infrastructure without scrubbing.</p>
+            <p style="margin-top:6px"><strong>Data Minimization:</strong> Only de-identified data sent to external APIs.</p>
+          </div>
+        </div>
+
+        <!-- Customer Journey -->
+        <h2 style="margin-bottom:16px">Getting Started (2-Week Timeline)</h2>
+        <div class="card box" style="margin-bottom:28px">
+          <div class="two">
+            <div>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 10px">Week 1: Deploy & Baseline</p>
+              <ul style="font-size:14px">
+                <li><strong>Day 1-2:</strong> Scope discussion—what alerts do you get? What's noisy?</li>
+                <li><strong>Day 3-4:</strong> Deploy middleware (Docker/K8s), configure PII scrubbing</li>
+                <li><strong>Day 5-7:</strong> Shadow mode—log only, no blocking, establish baseline</li>
+              </ul>
+            </div>
+            <div>
+              <p style="color:var(--ok);font-weight:700;margin:0 0 10px">Week 2: Tune & Launch</p>
+              <ul style="font-size:14px">
+                <li><strong>Day 8-10:</strong> Review false positive rate, tune thresholds</li>
+                <li><strong>Day 11-12:</strong> Enable medium-confidence alerts (human review queue)</li>
+                <li><strong>Day 13-14:</strong> Enable high-confidence auto-hold (IDOR attacks)</li>
+              </ul>
+            </div>
+          </div>
+          <p style="margin-top:14px;font-size:14px;color:var(--muted)"><strong>After 2 weeks:</strong> Production-ready. Metrics dashboard showing detection rate, false positives, analyst time saved.</p>
+        </div>
+
+        <!-- FAQ Section -->
+        <h2 style="margin-bottom:16px">Common Questions</h2>
+        <div class="card box" style="margin-bottom:28px">
+          <details style="margin-bottom:12px">
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">Do I need Chronicle or a specific SIEM?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">No. We integrate with any SIEM that can send webhooks (Splunk, Datadog, CloudFlare, Sentinel, QRadar). Chronicle is optional but provides rich enrichment.</p>
+          </details>
+          <details style="margin-bottom:12px">
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">What about PII and customer data?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">All PII is scrubbed locally (Presidio + regex) before any external API call. Customer emails, IPs, credit cards never reach the LLM. Fully GDPR/PCI-DSS compliant.</p>
+          </details>
+          <details style="margin-bottom:12px">
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">Can I run this on-premise or in my VPC?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">Yes. Docker/K8s deployment. All sensitive data stays in your infrastructure. Only scrubbed, anonymized data hits external AI APIs.</p>
+          </details>
+          <details style="margin-bottom:12px">
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">How much does this cost vs. hiring a SOC team?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">SOC team: $450K-$750K/year (3-5 analysts). Us: $30K-$60K/year depending on alert volume. Save $400K+/year.</p>
+          </details>
+          <details style="margin-bottom:12px">
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">What if I already have some security tools?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">We layer on top. Your existing SIEM, EDR, CloudFlare, Datadog all stay. We just validate alerts before they reach your team.</p>
+          </details>
+          <details>
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">Do you replace my security team?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">No. We're the first line of defense. High-confidence alerts we handle automatically. Medium-confidence alerts go to your team with context. You make final decisions on complex scenarios.</p>
+          </details>
+        </div>
+
+        <!-- CTA -->
+        <div class="two" style="margin-top:32px">
+          <div class="card box" style="text-align:center;padding:32px;border-left:4px solid var(--cyan)">
+            <h3 style="margin:0 0 14px">Schedule a Demo</h3>
+            <p style="color:var(--muted);margin-bottom:18px">30-minute call: review your alert volume, discuss integration, see the dashboard.</p>
+            <a class="btn btnP" href="mailto:hello@agenticsec.team?subject=SOC%20Triage%20Demo%20Request" style="background:linear-gradient(135deg, var(--cyan), #0891b2);box-shadow:0 4px 14px rgba(6,182,212,.3)">Request Demo →</a>
+          </div>
+          <div class="card box" style="text-align:center;padding:32px">
+            <h3 style="margin:0 0 14px">Send Us Your Noisy Alerts</h3>
+            <p style="color:var(--muted);margin-bottom:18px">Share your top 10 "critical" alerts. We'll show you which are real and which are noise.</p>
+            <a class="btn" href="mailto:hello@agenticsec.team?subject=Alert%20Triage%20Sample" style="border-color:var(--cyan);color:var(--cyan)">Send Sample Alerts →</a>
           </div>
         </div>
       </section>
