@@ -648,8 +648,8 @@
       <section class="hero">
         <div class="card heroL">
           <div class="eyebrow"><span class="dot"></span> Signal from noise • Offense to defense</div>
-          <h1>Validate scanner findings and SOC alerts—<em>with evidence.</em></h1>
-          <p class="sub">We deliver validated security outcomes, not tool output. Whether you need pentest findings confirmed or SOC alerts triaged, we combine AI-powered analysis with human verification—delivering only evidence-backed results you can act on.</p>
+          <h1>Validate scanner findings and SOC alerts. <em>With evidence.</em></h1>
+          <p class="sub">We deliver validated security outcomes, not tool output. Whether you need pentest findings confirmed or SOC alerts triaged, we combine AI-powered analysis with human verification to deliver only evidence-backed results you can act on.</p>
           <div class="btns">
             <a class="btn btnP" href="#" onclick="showPage('solutions'); return false">See how we help →</a>
             <a class="btn" href="#" onclick="showPage('pricing'); return false">View pricing</a>
@@ -849,7 +849,7 @@
     <div id="page-solutions" class="page">
       <section class="sec">
         <h1>Solutions: Offense + Defense</h1>
-        <p class="sub" style="margin-bottom:28px">Same core capability—AI-powered validation—applied to both sides of security. We turn noise into signal, whether you're pentesting or triaging alerts.</p>
+        <p class="sub" style="margin-bottom:28px">Same core capability (AI-powered validation) applied to both sides of security. We turn noise into signal, whether you're pentesting or triaging alerts.</p>
 
         <!-- Two-column overview -->
         <div class="two" style="margin-bottom:32px">
@@ -873,7 +873,7 @@
             <p style="color:var(--muted);font-size:15px;margin-bottom:14px"><strong>The Problem:</strong> Your SOC reviews 100+ alerts daily. 80% are false positives. Analysts burn out. Real threats get missed in the noise.</p>
             <p style="color:var(--muted);font-size:15px;margin-bottom:14px"><strong>Our Solution:</strong> AI-powered triage middleware with PII scrubbing, business context enrichment, and ownership-aware detection.</p>
             <ul style="margin-top:14px">
-              <li><strong>IDOR detection:</strong> Ownership-aware—only alerts on OTHER users' resources</li>
+              <li><strong>IDOR detection:</strong> Ownership-aware; only alerts on OTHER users' resources</li>
               <li><strong>Chronicle integration:</strong> YARA-L rules + enrichment + case creation</li>
               <li><strong>PII-safe:</strong> Local scrubbing (Presidio) before LLM analysis</li>
               <li><strong>Fast:</strong> Sub-5s detection with Redis stateful tracking</li>
@@ -888,7 +888,7 @@
         <!-- Unified Value Prop -->
         <div class="card box" style="margin-bottom:28px;background:linear-gradient(135deg, rgba(168,85,247,.04), rgba(6,182,212,.02));border-color:rgba(168,85,247,.2)">
           <h3 style="margin:0 0 12px">Same Problem, Different Context</h3>
-          <p style="margin:0;color:var(--muted);font-size:15px">Both sides suffer from <strong>alert fatigue</strong>. Scanners cry wolf. SIEMs generate noise. Engineering and SOC teams waste time investigating false positives. We solve this with <strong>AI-powered validation + human expertise</strong>—delivering only confirmed, actionable findings.</p>
+          <p style="margin:0;color:var(--muted);font-size:15px">Both sides suffer from <strong>alert fatigue</strong>. Scanners cry wolf. SIEMs generate noise. Engineering and SOC teams waste time investigating false positives. We solve this with <strong>AI-powered validation + human expertise</strong>, delivering only confirmed, actionable findings.</p>
         </div>
 
         <h2 style="margin-bottom:16px">How They Complement Each Other</h2>
@@ -991,7 +991,7 @@
     <div id="page-defense" class="page">
       <section class="sec">
         <h1>Defense: Application-Aware Alert Triage</h1>
-        <p class="sub" style="margin-bottom:28px">You're growing fast. Alerts are piling up. You don't have a SOC team yet. We provide **managed triage** with lightweight middleware that understands your application context—cutting false positives and spotting real threats.</p>
+        <p class="sub" style="margin-bottom:28px">You're growing fast. Alerts are piling up. You don't have a SOC team yet. We provide **managed triage** with lightweight middleware that understands your application context, cutting false positives and spotting real threats.</p>
 
         <!-- The Pain Section -->
         <div class="card box" style="margin-bottom:28px;background:linear-gradient(135deg, rgba(239,68,68,.04), rgba(239,68,68,.02));border-left:4px solid #ef4444">
@@ -1001,14 +1001,14 @@
             <li><strong>Your engineering team doubles as security.</strong> They're reviewing CloudFlare/Datadog alerts, not shipping features.</li>
             <li><strong>Most "critical" alerts are false positives.</strong> Your scanner flags everything. Real threats get buried in noise.</li>
             <li><strong>You can't afford a full SOC team.</strong> Hiring security analysts costs $150K+/year per person. You need 3-5 for 24/7 coverage.</li>
-            <li><strong>Application-specific attacks aren't detected.</strong> IDOR account enumeration, ownership violations—traditional SIEM rules miss application context.</li>
+            <li><strong>Application-specific attacks aren't detected.</strong> IDOR account enumeration, ownership violations. Traditional SIEM rules miss application context.</li>
             <li><strong>Auditors want proof.</strong> "Show us your incident response process." You have Slack alerts and a spreadsheet.</li>
           </ul>
         </div>
 
         <!-- The Solution -->
         <h2 style="margin-bottom:16px">Our Solution: Managed Triage + Lightweight Middleware</h2>
-        <p style="color:var(--muted);margin-bottom:18px">We deploy a small service in your VPC that receives alerts from your SIEM/monitoring tools. Our team validates what's real before engineering gets paged. Think of it as your first SOC analyst—automated, compliant, and running 24/7.</p>
+        <p style="color:var(--muted);margin-bottom:18px">We deploy a small service in your VPC that receives alerts from your SIEM/monitoring tools. Our team validates what's real before engineering gets paged. Think of it as your first SOC analyst: automated, compliant, and running 24/7.</p>
 
         <div class="grid3" style="margin-bottom:28px">
           <div class="card feat">
@@ -1198,9 +1198,9 @@
             <div>
               <p style="color:var(--ok);font-weight:700;margin:0 0 10px">Week 1: Deploy & Baseline</p>
               <ul style="font-size:14px">
-                <li><strong>Day 1-2:</strong> Scope discussion—what alerts do you get? What's noisy?</li>
+                <li><strong>Day 1-2:</strong> Scope discussion (what alerts do you get? What's noisy?)</li>
                 <li><strong>Day 3-4:</strong> Deploy middleware (Docker/K8s), configure PII scrubbing</li>
-                <li><strong>Day 5-7:</strong> Shadow mode—log only, no blocking, establish baseline</li>
+                <li><strong>Day 5-7:</strong> Shadow mode (log only, no blocking, establish baseline)</li>
               </ul>
             </div>
             <div>
@@ -1468,7 +1468,7 @@
     <div id="page-proof" class="page">
       <section class="sec">
         <h1>Proof & Resources</h1>
-        <p class="sub" style="margin-bottom:24px">Short, concrete examples of how validation turns scanner noise into actionable signal — plus resources you can share internally.</p>
+        <p class="sub" style="margin-bottom:24px">Short, concrete examples of how validation turns scanner noise into actionable signal, plus resources you can share internally.</p>
 
         <h2>Offense: Pentest Validation</h2>
         <div class="grid4" style="margin-bottom:26px">
@@ -1482,7 +1482,7 @@
           </a>
           <a class="card feat" href="/marketing/validation/from-4-critical-to-0-confirmed.svg">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>Infographic</h3>
-            <p>"From 4 Critical to 0 Confirmed" — the high-level pipeline and why it matters.</p>
+            <p>"From 4 Critical to 0 Confirmed": the high-level pipeline and why it matters.</p>
           </a>
           <a class="card feat" href="/blog/why-your-scanners-critical-findings-are-probably-wrong.html">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Blog: scanner criticals are probably wrong</h3>

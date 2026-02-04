@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>React2Shell: What's Real vs Noise (and How to Validate Fast) | Agentic Security Partners</title>
-  <meta name="description" content="React2Shell is real—but many scanner 'critical' findings are false positives. A practical validation checklist for web/app + API teams." />
+  <meta name="description" content="React2Shell is real, but many scanner 'critical' findings are false positives. A practical validation checklist for web/app + API teams." />
   <meta property="og:title" content="React2Shell: What's Real vs Noise" />
   <meta property="og:description" content="A practical validation checklist: prototype pollution, SSR reality checks, exploit-path confirmation, and mitigations." />
   <meta property="og:type" content="article" />
@@ -125,10 +125,10 @@
       <p><strong>All four must be true.</strong> If one fails, React2Shell isn't exploitable.</p>
 
       <h2>Why scanners get it wrong</h2>
-      <p>Automated tooling often flags React2Shell based on heuristics like "prototype pollution gadget found" or "Next.js detected." That can be useful for discovery—but it doesn't prove a real exploitation path.</p>
+      <p>Automated tooling often flags React2Shell based on heuristics like "prototype pollution gadget found" or "Next.js detected." That can be useful for discovery, but it doesn't prove a real exploitation path.</p>
 
       <h3>Real example: the 4 critical that weren't</h3>
-      <p>In one engagement, a scanner flagged 4 critical auth-bypass candidates (CVSS 9.1). Validation showed the endpoint returned homepage content for all requests—payload and control—so nothing was exploitable. Result: <strong>4 critical → 0 confirmed</strong> and significant engineering time saved.</p>
+      <p>In one engagement, a scanner flagged 4 critical auth-bypass candidates (CVSS 9.1). Validation showed the endpoint returned homepage content for all requests (payload and control), so nothing was exploitable. Result: <strong>4 critical → 0 confirmed</strong> and significant engineering time saved.</p>
 
       <h2>The validation checklist</h2>
       <p>Before you panic about React2Shell (or any client-side "critical"), run this checklist:</p>
@@ -180,7 +180,7 @@ Conclusion: response-shape trap; not exploitable.</pre>
 
       <h2>Get your "criticals" validated</h2>
       <p>Worried about React2Shell or drowning in scanner noise?</p>
-      <p><strong>Send your top "critical" findings—get a 72-hour verdict.</strong></p>
+      <p><strong>Send your top "critical" findings. Get a 72-hour verdict.</strong></p>
       <p><a href="mailto:hello@agenticsec.team?subject=72-Hour%20Critical%20Triage%20Request">Request a 72-hour critical triage →</a></p>
     </div>
   </div>
