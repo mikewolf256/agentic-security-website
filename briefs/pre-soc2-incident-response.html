@@ -110,7 +110,7 @@
         <li>"How do you monitor for unauthorized access?"</li>
         <li>"What's your mean time to detection for critical threats?"</li>
       </ul>
-      <p>Right now, your process is: CloudFlare sends alerts to Slack, engineering triages when they have time, you maintain a spreadsheet of "incidents."</p>
+      <p>Right now, your process is: your WAF/monitoring tools send alerts to Slack, engineering triages when they have time, you maintain a spreadsheet of "incidents."</p>
       <p><strong>This won't pass audit.</strong> And you can't afford to hire a full SOC team.</p>
 
       <h2>The Math on Building a SOC Team</h2>
@@ -128,7 +128,7 @@
         <tr>
           <td>SIEM Platform</td>
           <td>$30K-$100K/year</td>
-          <td>Splunk, Sentinel, Chronicle licensing</td>
+          <td>SIEM licensing + retention costs</td>
         </tr>
         <tr>
           <td>Training & Tools</td>
@@ -152,7 +152,7 @@
       <h3>What You Deploy</h3>
       <ul>
         <li><strong>Lightweight middleware:</strong> Small service in your VPC/gateway (Docker/K8s)</li>
-        <li><strong>Webhook integration:</strong> Receives alerts from CloudFlare, Datadog, Chronicle, Splunk</li>
+        <li><strong>Webhook integration:</strong> Receives alerts from your SIEM/WAF/EDR/observability tools</li>
         <li><strong>Optional app events:</strong> Ownership context from your application (who owns what resources)</li>
       </ul>
 
@@ -216,7 +216,7 @@
       <p><strong>Ownership-Aware Detection:</strong> Only alerts if user accesses OTHER users' resources → 90% reduction in false positives.</p>
 
       <h3>2. Alert Fatigue for Engineering Teams</h3>
-      <p><strong>Before:</strong> 100+ alerts/day from CloudFlare/Datadog. 80% false positives. Engineering spends 2-3 hours/day triaging.</p>
+      <p><strong>Before:</strong> 100+ alerts/day from WAF/observability tooling. 80% false positives. Engineering spends 2-3 hours/day triaging.</p>
       <p><strong>After:</strong> 10-20 validated alerts/day. 95%+ are real threats. Engineering saves 20+ hours/week.</p>
 
       <h3>3. Auditor Evidence Package</h3>
@@ -246,7 +246,7 @@
       <p>No. We provide the first layer of triage. High-confidence threats are handled automatically. Medium-confidence alerts are validated by our team before escalation. You make final decisions on complex scenarios.</p>
 
       <h3>Q: What about customer data and PII?</h3>
-      <p>All PII is scrubbed locally (Microsoft Presidio + regex) before any external API call. Customer emails, IPs, credit cards never leave your infrastructure. GDPR/PCI-DSS compliant by design.</p>
+      <p>All PII is scrubbed locally (redaction + regex/NER) before any external API call. Customer emails, IPs, credit cards never leave your infrastructure. GDPR/PCI-DSS compliant by design.</p>
 
       <h3>Q: Can we run this on-premise?</h3>
       <p>Yes. Docker/Kubernetes deployment in your VPC. All sensitive data stays in your infrastructure. Only scrubbed, anonymized telemetry hits external AI APIs for analysis.</p>

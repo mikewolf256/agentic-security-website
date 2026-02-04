@@ -149,13 +149,13 @@
         <li><strong>Industry:</strong> Fintech (consumer lending)</li>
         <li><strong>Stage:</strong> Series A, $5M ARR, 30 employees</li>
         <li><strong>Challenge:</strong> Preparing for SOC2, no security hire yet</li>
-        <li><strong>Tech Stack:</strong> React/Node.js, CloudFlare, Datadog RUM</li>
+        <li><strong>Tech Stack:</strong> React/Node.js, WAF + observability tooling</li>
       </ul>
 
       <h2>The Problem</h2>
       <p>Their engineering team was drowning in security alerts:</p>
       <ul>
-        <li><strong>100+ alerts/day</strong> from CloudFlare WAF and Datadog</li>
+        <li><strong>100+ alerts/day</strong> from WAF and observability alerts</li>
         <li><strong>80% were false positives</strong> (legitimate users triggering rate limits)</li>
         <li><strong>Engineering spent 2-3 hours/day</strong> manually triaging Slack alerts</li>
         <li><strong>SOC2 auditor wanted proof</strong> of incident detection and response</li>
@@ -171,7 +171,7 @@
       <h3>Week 1: Deploy & Baseline</h3>
       <ul>
         <li>Deployed lightweight middleware as K8s sidecar in their VPC</li>
-        <li>Connected webhooks from CloudFlare and Datadog</li>
+        <li>Connected webhooks from existing alert sources (WAF + monitoring)</li>
         <li>Added optional ownership context from application (who owns which loans)</li>
         <li>Ran in shadow mode to establish baseline metrics</li>
       </ul>
@@ -313,7 +313,7 @@
       </table>
       <p style="font-size:14px;color:var(--muted);margin-top:12px"><strong>Success Rate:</strong> 4/4 scenarios (100%) with correct verdicts<br>
       <strong>Average Confidence:</strong> 94%<br>
-      <strong>Source:</strong> Demo testing with mock Chronicle data</p>
+      <strong>Source:</strong> Demo testing with mock SIEM data</p>
 
       <h2>Cost Savings</h2>
       <table>
@@ -358,7 +358,7 @@
       <h2>What This Means for You</h2>
       <p>If you're a growing fintech or SaaS company facing:</p>
       <ul>
-        <li>Alert fatigue from CloudFlare/Datadog/SIEM tools</li>
+        <li>Alert fatigue from WAF/observability/SIEM tools</li>
         <li>Engineering team handling security manually</li>
         <li>SOC2 audit requiring incident response evidence</li>
         <li>Can't afford $450K+ to build a SOC team</li>

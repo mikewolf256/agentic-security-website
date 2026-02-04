@@ -640,7 +640,7 @@
       <button class="menuBtn" type="button" aria-label="Open menu" onclick="toggleMenu()">
         <svg class="ico muted" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M4 7h16v2H4V7zm0 8h16v2H4v-2zm0-4h16v2H4v-2z"/></svg>
       </button>
-      <a class="cta" href="#" onclick="openCheckoutModal('attack_surface_intel'); return false">$500 Intel Report</a>
+      <a class="cta" href="#contact" onclick="showPage('contact'); return false">Request a demo</a>
     </header>
 
     <!-- Home Page -->
@@ -874,9 +874,9 @@
             <p style="color:var(--muted);font-size:15px;margin-bottom:14px"><strong>Our Solution:</strong> AI-powered triage middleware with PII scrubbing, business context enrichment, and ownership-aware detection.</p>
             <ul style="margin-top:14px">
               <li><strong>IDOR detection:</strong> Ownership-aware; only alerts on OTHER users' resources</li>
-              <li><strong>Chronicle integration:</strong> YARA-L rules + enrichment + case creation</li>
-              <li><strong>PII-safe:</strong> Local scrubbing (Presidio) before LLM analysis</li>
-              <li><strong>Fast:</strong> Sub-5s detection with Redis stateful tracking</li>
+              <li><strong>SIEM + webhook integration:</strong> Detection rules + enrichment + case creation</li>
+              <li><strong>PII-safe:</strong> Local scrubbing + redaction before any LLM analysis</li>
+              <li><strong>Fast:</strong> Seconds-level triage with stateful tracking</li>
             </ul>
             <p style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
               <a class="btn btnP" href="#" onclick="showPage('defense'); return false" style="display:inline-block;background:linear-gradient(135deg, var(--cyan), #0891b2);box-shadow:0 4px 14px rgba(6,182,212,.3)">Learn more →</a>
@@ -899,7 +899,7 @@
           </div>
           <div class="card feat">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>Production Runtime</h3>
-            <p><strong>Defensive triage</strong> monitors production for real attacks. Real-time IDOR detection, EDR alert validation, Chronicle enrichment.</p>
+            <p><strong>Defensive triage</strong> monitors production for real attacks. Real-time IDOR detection, EDR alert validation, and case-ready enrichment.</p>
           </div>
           <div class="card feat">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Continuous Loop</h3>
@@ -929,7 +929,7 @@
             <tr>
               <td><strong>Enterprise Security Teams</strong></td>
               <td><span class="check">✓</span> Validate external pentest findings</td>
-              <td><span class="check">✓</span> Alert triage automation, Chronicle enrichment</td>
+              <td><span class="check">✓</span> Alert triage automation and enrichment</td>
             </tr>
             <tr>
               <td><strong>SOC Analysts</strong></td>
@@ -949,7 +949,7 @@
             <div class="header">Why It Matters</div>
             
             <div>🔴 Inbound Gate</div>
-            <div class="ai">PII Scrubbing (Presidio + Regex)</div>
+            <div class="ai">PII Scrubbing (local redaction + regex/NER)</div>
             <div>GDPR/PCI-DSS compliance before external API</div>
             
             <div>🟡 Execution Gate</div>
@@ -991,14 +991,14 @@
     <div id="page-defense" class="page">
       <section class="sec">
         <h1>Defense: Application-Aware Alert Triage</h1>
-        <p class="sub" style="margin-bottom:28px">You're growing fast. Alerts are piling up. You don't have a SOC team yet. We provide **managed triage** with lightweight middleware that understands your application context, cutting false positives and spotting real threats.</p>
+        <p class="sub" style="margin-bottom:28px">You're growing fast. Alerts are piling up. You don't have a SOC team yet. We provide <strong>managed triage</strong> with lightweight middleware that understands your application context, cutting false positives and spotting real threats.</p>
 
         <!-- The Pain Section -->
         <div class="card box" style="margin-bottom:28px;background:linear-gradient(135deg, rgba(239,68,68,.04), rgba(239,68,68,.02));border-left:4px solid #ef4444">
           <h2 style="margin:0 0 12px;color:#dc2626">The Problem: Pre-SOC2 Alert Chaos</h2>
           <p style="color:var(--text-secondary);margin-bottom:14px">You're between $1M-$10M ARR. Customers are asking about security. SOC2 is on the roadmap. But right now:</p>
           <ul style="margin-top:14px">
-            <li><strong>Your engineering team doubles as security.</strong> They're reviewing CloudFlare/Datadog alerts, not shipping features.</li>
+            <li><strong>Your engineering team doubles as security.</strong> They're reviewing WAF/observability alerts, not shipping features.</li>
             <li><strong>Most "critical" alerts are false positives.</strong> Your scanner flags everything. Real threats get buried in noise.</li>
             <li><strong>You can't afford a full SOC team.</strong> Hiring security analysts costs $150K+/year per person. You need 3-5 for 24/7 coverage.</li>
             <li><strong>Application-specific attacks aren't detected.</strong> IDOR account enumeration, ownership violations. Traditional SIEM rules miss application context.</li>
@@ -1017,7 +1017,7 @@
           </div>
           <div class="card feat">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>PII-Safe AI Analysis</h3>
-            <p>Local PII scrubbing (Presidio + regex) before any LLM analysis. <strong>GDPR/PCI-DSS compliant</strong> by design. Your customer data never hits external APIs.</p>
+            <p>Local PII scrubbing (redaction + regex/NER) before any LLM analysis. <strong>GDPR/PCI-DSS compliant</strong> by design. Your customer data never hits external APIs.</p>
           </div>
           <div class="card feat">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Business Context Enrichment</h3>
@@ -1032,7 +1032,7 @@
             <h3 style="margin:0 0 12px">Rapid Detection & Response</h3>
             <ul>
               <li><strong>Fast triage:</strong> Stateful tracking catches attacks quickly (typically within seconds)</li>
-              <li><strong>SIEM integration:</strong> Works with Chronicle, Splunk, Datadog, CloudFlare via webhooks</li>
+              <li><strong>Integrates with existing tools:</strong> SIEM/WAF/EDR/observability via webhooks</li>
               <li><strong>Auto-response capability:</strong> High-confidence threats can trigger automated holds</li>
               <li><strong>MITRE ATT&CK mapping:</strong> Every alert tagged with tactics/techniques for SOC2 evidence</li>
             </ul>
@@ -1142,11 +1142,11 @@
             <div class="header">Why It Matters</div>
             
             <div>1. Alert Arrives</div>
-            <div class="ai">From CloudFlare, Datadog, Chronicle, etc.</div>
+            <div class="ai">From your WAF, observability, SIEM, etc.</div>
             <div>Works with your existing tools</div>
             
             <div>2. PII Scrubbing</div>
-            <div class="ai">Presidio removes emails, IPs, credit cards</div>
+            <div class="ai">Local scrubbing removes emails, IPs, credit cards</div>
             <div>GDPR/PCI-DSS compliant before external API</div>
             
             <div>3. Context Enrichment</div>
@@ -1167,7 +1167,7 @@
             
             <div>7. Response</div>
             <div class="ai">Auto-hold, SOAR case, or dismiss</div>
-            <div>Sub-5s mean time to response</div>
+            <div>Seconds-level time to response</div>
           </div>
         </div>
 
@@ -1220,15 +1220,15 @@
         <div class="card box" style="margin-bottom:28px">
           <details style="margin-bottom:12px">
             <summary style="font-weight:700;cursor:pointer;padding:10px 0">Where does this run and what's required?</summary>
-            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px"><strong>Deployment:</strong> Small service in your VPC, gateway, or as a sidecar. <strong>Requirements:</strong> Webhook from Chronicle/Datadog/CloudFlare + optional application events for ownership context. We never require production database access.</p>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px"><strong>Deployment:</strong> Small service in your VPC, gateway, or as a sidecar. <strong>Requirements:</strong> One or more alert webhooks (SIEM/WAF/EDR/observability) + optional application events for ownership context. We never require production database access.</p>
           </details>
           <details style="margin-bottom:12px">
-            <summary style="font-weight:700;cursor:pointer;padding:10px 0">Do I need Chronicle or a specific SIEM?</summary>
-            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">No. We integrate with any SIEM that can send webhooks (Splunk, Datadog, CloudFlare, Sentinel, QRadar). Chronicle is optional but provides rich enrichment.</p>
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">Do I need a specific SIEM?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">No. We integrate with any system that can send webhooks (SIEM, WAF, EDR, observability). If you have a SIEM already, we layer on top—no rip-and-replace.</p>
           </details>
           <details style="margin-bottom:12px">
             <summary style="font-weight:700;cursor:pointer;padding:10px 0">What about PII and customer data?</summary>
-            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">All PII is scrubbed locally (Presidio + regex) before any external API call. Customer emails, IPs, credit cards never reach the LLM. Fully GDPR/PCI-DSS compliant.</p>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">All PII is scrubbed locally (redaction + regex/NER) before any external API call. Customer emails, IPs, credit cards never reach the LLM. Fully GDPR/PCI-DSS compliant.</p>
           </details>
           <details style="margin-bottom:12px">
             <summary style="font-weight:700;cursor:pointer;padding:10px 0">Can I run this on-premise or in my VPC?</summary>
@@ -1240,7 +1240,7 @@
           </details>
           <details style="margin-bottom:12px">
             <summary style="font-weight:700;cursor:pointer;padding:10px 0">What if I already have some security tools?</summary>
-            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">We layer on top. Your existing SIEM, EDR, CloudFlare, Datadog all stay. We just validate alerts before they reach your team.</p>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">We layer on top. Your existing SIEM, EDR, WAF, and observability tooling all stay. We validate alerts before they reach your team.</p>
           </details>
           <details>
             <summary style="font-weight:700;cursor:pointer;padding:10px 0">Do you replace my security team?</summary>
