@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pre-SOC2 Incident Response Without Hiring 5 Analysts | Agentic Security</title>
+  <meta name="description" content="How growing companies build audit-ready incident response without the $450K+ cost of a SOC team." />
+  <link rel="icon" href="/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#faf8fc;
+      --bg-subtle:#f3f0f9;
+      --panel:#ffffff;
+      --panel-border:rgba(59,29,90,.08);
+      --text:#24143d;
+      --text-secondary:#3b1d5a;
+      --muted:#6b5b7a;
+      --line:#e8e2f0;
+      --accent:#a855f7;
+      --ok:#10b981;
+      --cyan:#06b6d4;
+      --shadow:0 4px 24px rgba(36,20,61,.08);
+      --r:16px;
+      --r-sm:10px;
+      --max:760px;
+      --footer-bg:#24143d;
+      --footer-text:#e8e2f0;
+      --footer-muted:#a89bb8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Source Sans 3',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-size:17px;
+      line-height:1.75;
+      color:var(--text);
+      background:var(--bg);
+    }
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(168,85,247,.08), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(6,182,212,.06), transparent 50%);
+      pointer-events:none;
+      z-index:-1;
+    }
+    h1,h2,h3{font-family:'Bitter',Georgia,serif;font-weight:700;color:var(--text);line-height:1.2}
+    a{color:var(--accent);text-decoration:none;font-weight:500}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 24px}
+    .card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--r);box-shadow:var(--shadow);padding:32px}
+    .back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:18px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg-subtle)}
+    .back:hover{color:var(--accent);border-color:var(--accent-light);text-decoration:none}
+    h1{margin:0 0 8px;font-size:34px;letter-spacing:-.5px}
+    .meta{color:var(--muted);font-size:15px;margin-bottom:24px}
+    .hr{border:0;height:1px;background:var(--line);margin:28px 0}
+    h2{margin:32px 0 16px;font-size:24px}
+    h3{margin:24px 0 12px;font-size:19px;color:var(--text-secondary)}
+    p{color:var(--muted);line-height:1.8}
+    ul{margin:12px 0;padding-left:24px}
+    li{margin:10px 0;color:var(--muted)}
+    strong{color:var(--text-secondary);font-weight:600}
+    .callout{
+      padding:20px 24px;
+      background:linear-gradient(135deg, rgba(168,85,247,.06), rgba(6,182,212,.04));
+      border-left:4px solid var(--accent);
+      border-radius:var(--r-sm);
+      margin:24px 0;
+    }
+    .callout p{margin:0}
+    table{width:100%;border-collapse:collapse;font-size:15px;margin:20px 0}
+    th,td{padding:12px;text-align:left;border-bottom:1px solid var(--line)}
+    th{background:var(--bg-subtle);color:var(--text-secondary);font-weight:700}
+    .check{color:var(--ok);font-weight:600}
+    footer.foot{
+      background:var(--footer-bg);
+      color:var(--footer-text);
+      padding:36px 24px 28px;
+      margin-top:48px;
+      text-align:center;
+    }
+    footer.foot a{color:var(--footer-muted);transition:color 0.2s}
+    footer.foot a:hover{color:var(--accent-light)}
+    footer.foot .foot-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+    footer.foot .foot-copy{font-size:13px;color:var(--footer-muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/#proof">← Back to Proof</a>
+    
+    <div class="card">
+      <h1>Pre-SOC2 Incident Response Without Hiring 5 Analysts</h1>
+      <div class="meta">
+        <strong>Audience:</strong> CTO, VP Engineering, Security Leadership (Pre-SOC2 Companies)<br>
+        <strong>Reading Time:</strong> 4 minutes
+      </div>
+
+      <div class="hr"></div>
+
+      <h2>The Situation</h2>
+      <p>You're at $2M-$10M ARR. Enterprise customers are asking about your security posture. SOC2 is on the roadmap for next year. Your auditor wants to see:</p>
+      <ul>
+        <li>"Show us your incident detection and response process"</li>
+        <li>"How do you monitor for unauthorized access?"</li>
+        <li>"What's your mean time to detection for critical threats?"</li>
+      </ul>
+      <p>Right now, your process is: CloudFlare sends alerts to Slack, engineering triages when they have time, you maintain a spreadsheet of "incidents."</p>
+      <p><strong>This won't pass audit.</strong> And you can't afford to hire a full SOC team.</p>
+
+      <h2>The Math on Building a SOC Team</h2>
+      <table>
+        <tr>
+          <th>Resource</th>
+          <th>Cost</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>3-5 SOC Analysts</td>
+          <td>$450K-$750K/year</td>
+          <td>$150K+ per analyst for 24/7 coverage</td>
+        </tr>
+        <tr>
+          <td>SIEM Platform</td>
+          <td>$30K-$100K/year</td>
+          <td>Splunk, Sentinel, Chronicle licensing</td>
+        </tr>
+        <tr>
+          <td>Training & Tools</td>
+          <td>$20K-$50K/year</td>
+          <td>SANS courses, tooling, playbooks</td>
+        </tr>
+        <tr>
+          <td><strong>Total Year 1</strong></td>
+          <td><strong>$500K-$900K</strong></td>
+          <td>Plus 6-12 months to hire and train</td>
+        </tr>
+      </table>
+
+      <div class="callout">
+        <p><strong>Reality check:</strong> Most companies at $2M-$10M ARR can't justify this spend. But customers and auditors still want answers.</p>
+      </div>
+
+      <h2>The Alternative: Managed Triage + Lightweight Middleware</h2>
+      <p>Instead of building a SOC team from scratch, deploy a small service that validates alerts before they reach your engineering team:</p>
+
+      <h3>What You Deploy</h3>
+      <ul>
+        <li><strong>Lightweight middleware:</strong> Small service in your VPC/gateway (Docker/K8s)</li>
+        <li><strong>Webhook integration:</strong> Receives alerts from CloudFlare, Datadog, Chronicle, Splunk</li>
+        <li><strong>Optional app events:</strong> Ownership context from your application (who owns what resources)</li>
+      </ul>
+
+      <h3>What We Provide</h3>
+      <ul>
+        <li><strong>AI-powered triage:</strong> Every alert analyzed with business context</li>
+        <li><strong>PII scrubbing:</strong> GDPR/PCI-DSS compliant processing</li>
+        <li><strong>Human validation:</strong> Medium-confidence alerts reviewed by our team</li>
+        <li><strong>Audit trail:</strong> Complete logs for every triage decision</li>
+      </ul>
+
+      <h3>What You Get for SOC2</h3>
+      <p>When your auditor asks "Show us your incident response process," you show them:</p>
+      <ul>
+        <li><span class="check">✓</span> <strong>Automated detection:</strong> Real-time monitoring with mean time to detection < 60 seconds</li>
+        <li><span class="check">✓</span> <strong>Complete audit trail:</strong> Every alert logged with timestamp, verdict, confidence, reasoning</li>
+        <li><span class="check">✓</span> <strong>MITRE ATT&CK alignment:</strong> Every incident tagged with tactics/techniques</li>
+        <li><span class="check">✓</span> <strong>Documented response:</strong> Auto-hold for high-confidence threats, escalation for medium-confidence</li>
+        <li><span class="check">✓</span> <strong>Metrics dashboard:</strong> Detection rate, false positive rate, analyst time saved</li>
+      </ul>
+
+      <h2>Cost Comparison</h2>
+      <table>
+        <tr>
+          <th></th>
+          <th>Build SOC Team</th>
+          <th>Agentic Security</th>
+        </tr>
+        <tr>
+          <td><strong>Year 1 Cost</strong></td>
+          <td>$500K-$900K</td>
+          <td><span class="check">$30K-$60K</span></td>
+        </tr>
+        <tr>
+          <td><strong>Time to Value</strong></td>
+          <td>6-12 months</td>
+          <td><span class="check">2 weeks</span></td>
+        </tr>
+        <tr>
+          <td><strong>Coverage</strong></td>
+          <td>Varies by analyst skill</td>
+          <td><span class="check">Consistent AI + human</span></td>
+        </tr>
+        <tr>
+          <td><strong>Audit Ready</strong></td>
+          <td>Requires process documentation</td>
+          <td><span class="check">Built-in audit trail</span></td>
+        </tr>
+        <tr>
+          <td><strong>Compliance</strong></td>
+          <td>Manual PII handling</td>
+          <td><span class="check">Automated PII scrubbing</span></td>
+        </tr>
+      </table>
+
+      <h2>Common Use Cases</h2>
+
+      <h3>1. IDOR Account Enumeration (Fintech)</h3>
+      <p><strong>The Attack:</strong> User probes `/api/loans/12345`, `12346`, `12347` to find unauthorized accounts.</p>
+      <p><strong>Traditional Detection:</strong> Flags anyone accessing 3+ sequential IDs → False positives on legitimate multi-loan users.</p>
+      <p><strong>Ownership-Aware Detection:</strong> Only alerts if user accesses OTHER users' resources → 90% reduction in false positives.</p>
+
+      <h3>2. Alert Fatigue for Engineering Teams</h3>
+      <p><strong>Before:</strong> 100+ alerts/day from CloudFlare/Datadog. 80% false positives. Engineering spends 2-3 hours/day triaging.</p>
+      <p><strong>After:</strong> 10-20 validated alerts/day. 95%+ are real threats. Engineering saves 20+ hours/week.</p>
+
+      <h3>3. Auditor Evidence Package</h3>
+      <p><strong>SOC2 Requirement (CC7.2):</strong> "The entity monitors system components...and evaluates security events to determine whether they could impact the achievement of the entity's objectives."</p>
+      <p><strong>What You Show:</strong> Complete audit trail, detection metrics, incident response timeline, MITRE ATT&CK mappings, automated response playbooks.</p>
+
+      <h2>Getting Started (2-Week Timeline)</h2>
+      <p><strong>Week 1: Deploy & Baseline</strong></p>
+      <ul>
+        <li>Day 1-2: Scope call—what alerts do you get? What's noisy?</li>
+        <li>Day 3-4: Deploy middleware in your VPC, configure webhooks</li>
+        <li>Day 5-7: Shadow mode (log only, establish baseline metrics)</li>
+      </ul>
+
+      <p><strong>Week 2: Tune & Launch</strong></p>
+      <ul>
+        <li>Day 8-10: Review false positive rate, tune thresholds</li>
+        <li>Day 11-12: Enable medium-confidence alerts (human review queue)</li>
+        <li>Day 13-14: Enable high-confidence auto-response</li>
+      </ul>
+
+      <p><strong>After 2 Weeks:</strong> Production-ready. Metrics dashboard showing detection rate, false positive rate, time to detection.</p>
+
+      <h2>FAQ for Leadership</h2>
+
+      <h3>Q: Do we need to hire security analysts?</h3>
+      <p>No. We provide the first layer of triage. High-confidence threats are handled automatically. Medium-confidence alerts are validated by our team before escalation. You make final decisions on complex scenarios.</p>
+
+      <h3>Q: What about customer data and PII?</h3>
+      <p>All PII is scrubbed locally (Microsoft Presidio + regex) before any external API call. Customer emails, IPs, credit cards never leave your infrastructure. GDPR/PCI-DSS compliant by design.</p>
+
+      <h3>Q: Can we run this on-premise?</h3>
+      <p>Yes. Docker/Kubernetes deployment in your VPC. All sensitive data stays in your infrastructure. Only scrubbed, anonymized telemetry hits external AI APIs for analysis.</p>
+
+      <h3>Q: What if we grow and need a full SOC later?</h3>
+      <p>Perfect. The middleware stays in place and your SOC analysts get higher-quality, pre-validated alerts. We become your Tier 1 automation, they become Tier 2/3 investigation.</p>
+
+      <h2>The Bottom Line</h2>
+      <p>Building a SOC team costs $500K-$900K in Year 1 and takes 6-12 months. You need it for SOC2, but you're not ready for that investment yet.</p>
+      <p><strong>Our approach:</strong> $30K-$60K/year, 2-week deployment, audit-ready from day one. Get to SOC2 faster. Scale as you grow.</p>
+
+      <div class="hr"></div>
+
+      <div style="text-align:center;padding:24px 0">
+        <h3 style="margin:0 0 12px">Ready to Build Your Incident Response Process?</h3>
+        <p style="margin:0 0 20px">Schedule a 30-minute call. We'll review your alert sources and walk through the deployment process.</p>
+        <a href="mailto:hello@agenticsec.team?subject=SOC%20Triage%20Consultation" style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg, var(--accent), var(--accent-dark));color:#fff;border-radius:999px;font-weight:700;box-shadow:0 4px 14px rgba(168,85,247,.3);text-decoration:none">Schedule Consultation →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <div class="foot-links">
+        <a href="/">Home</a>
+        <a href="/#defense">Defense (SOC)</a>
+        <a href="/#proof">Proof</a>
+        <a href="/privacy.html">Privacy</a>
+      </div>
+      <div class="foot-copy">© <span id="y"></span> Agentic Security Partners LLC</div>
+    </div>
+  </footer>
+  
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
