@@ -648,13 +648,13 @@
       <section class="hero">
         <div class="card heroL">
           <div class="eyebrow"><span class="dot"></span> Signal from noise • Offense to defense</div>
-          <h1>Validation that cuts through <em>false positives.</em></h1>
-          <p class="sub">We validate security findings so your teams don't waste time. From scanner output to SOC alerts, we combine AI-powered analysis with human verification—delivering evidence-backed results you can trust.</p>
+          <h1>Validate scanner findings and SOC alerts—<em>with evidence.</em></h1>
+          <p class="sub">We deliver validated security outcomes, not tool output. Whether you need pentest findings confirmed or SOC alerts triaged, we combine AI-powered analysis with human verification—delivering only evidence-backed results you can act on.</p>
           <div class="btns">
             <a class="btn btnP" href="#" onclick="showPage('solutions'); return false">See how we help →</a>
             <a class="btn" href="#" onclick="showPage('pricing'); return false">View pricing</a>
           </div>
-          <p class="small" style="margin-top:18px">✓ Pentest validation (web/API) &nbsp;•&nbsp; ✓ SOC alert triage &nbsp;•&nbsp; ✓ Human-verified findings &nbsp;•&nbsp; ✓ Fast turnaround</p>
+          <p class="small" style="margin-top:18px">✓ Pentest validation service (web/API) &nbsp;•&nbsp; ✓ SOC triage service + lightweight deploy &nbsp;•&nbsp; ✓ Evidence-backed verdicts &nbsp;•&nbsp; ✓ Fast turnaround</p>
         </div>
         <div class="card heroR">
           <div class="stats">
@@ -689,14 +689,14 @@
       </div>
 
       <!-- Sound Familiar? Trigger Events -->
-      <div class="triggers">
+        <div class="triggers">
         <div class="trigger">
           <p class="trigger-q">"Drowning in scanner criticals?"</p>
           <p class="trigger-a">We validate before engineering wastes time.</p>
         </div>
         <div class="trigger">
           <p class="trigger-q">"SOC analyst reviewing 100+ alerts daily?"</p>
-          <p class="trigger-a">AI-powered triage cuts false positives by 90%.</p>
+          <p class="trigger-a">AI-powered triage dramatically reduces false positives.</p>
         </div>
         <div class="trigger">
           <p class="trigger-q">"Need audit-ready evidence fast?"</p>
@@ -961,7 +961,7 @@
             <div>Institutional knowledge reduces false positives</div>
             
             <div>⚪ LLM Analysis</div>
-            <div class="ai">Claude Sonnet 4.5 (Scrubbed Data Only)</div>
+            <div class="ai">Best-in-class LLM (Scrubbed Data Only)</div>
             <div>AI reasoning without PII exposure</div>
             
             <div>🟢 Outbound Gate</div>
@@ -990,8 +990,8 @@
     <!-- Defense (SOC) Page -->
     <div id="page-defense" class="page">
       <section class="sec">
-        <h1>Defense: SOC Triage for Growing Companies</h1>
-        <p class="sub" style="margin-bottom:28px">You're growing fast. Alerts are piling up. You don't have a SOC team yet. We bridge the gap with AI-powered triage that cuts false positives and spots real threats.</p>
+        <h1>Defense: Application-Aware Alert Triage</h1>
+        <p class="sub" style="margin-bottom:28px">You're growing fast. Alerts are piling up. You don't have a SOC team yet. We provide **managed triage** with lightweight middleware that understands your application context—cutting false positives and spotting real threats.</p>
 
         <!-- The Pain Section -->
         <div class="card box" style="margin-bottom:28px;background:linear-gradient(135deg, rgba(239,68,68,.04), rgba(239,68,68,.02));border-left:4px solid #ef4444">
@@ -999,29 +999,29 @@
           <p style="color:var(--text-secondary);margin-bottom:14px">You're between $1M-$10M ARR. Customers are asking about security. SOC2 is on the roadmap. But right now:</p>
           <ul style="margin-top:14px">
             <li><strong>Your engineering team doubles as security.</strong> They're reviewing CloudFlare/Datadog alerts, not shipping features.</li>
-            <li><strong>80% of "critical" alerts are false positives.</strong> Your scanner flags everything. Real threats get buried in noise.</li>
+            <li><strong>Most "critical" alerts are false positives.</strong> Your scanner flags everything. Real threats get buried in noise.</li>
             <li><strong>You can't afford a full SOC team.</strong> Hiring security analysts costs $150K+/year per person. You need 3-5 for 24/7 coverage.</li>
-            <li><strong>Fintech-specific attacks aren't detected.</strong> IDOR account enumeration, mass assignment, synthetic identity—traditional SIEM rules miss these.</li>
+            <li><strong>Application-specific attacks aren't detected.</strong> IDOR account enumeration, ownership violations—traditional SIEM rules miss application context.</li>
             <li><strong>Auditors want proof.</strong> "Show us your incident response process." You have Slack alerts and a spreadsheet.</li>
           </ul>
         </div>
 
         <!-- The Solution -->
-        <h2 style="margin-bottom:16px">Our Solution: AI-Powered Triage Middleware</h2>
-        <p style="color:var(--muted);margin-bottom:18px">Think of us as your first SOC analyst—automated, compliant, and running 24/7. We sit between your alerts and your team, validating what's real before engineering gets paged.</p>
+        <h2 style="margin-bottom:16px">Our Solution: Managed Triage + Lightweight Middleware</h2>
+        <p style="color:var(--muted);margin-bottom:18px">We deploy a small service in your VPC that receives alerts from your SIEM/monitoring tools. Our team validates what's real before engineering gets paged. Think of it as your first SOC analyst—automated, compliant, and running 24/7.</p>
 
         <div class="grid3" style="margin-bottom:28px">
           <div class="card feat">
-            <h3><svg class="ico" aria-hidden="true"><use href="#ico-target" xlink:href="#ico-target"></use></svg>Ownership-Aware IDOR Detection</h3>
-            <p>Traditional systems flag "user accessed 10 resources." We ask: <strong>did they access OTHER users' resources?</strong> 90% false positive reduction for fintech apps.</p>
+            <h3><svg class="ico" aria-hidden="true"><use href="#ico-target" xlink:href="#ico-target"></use></svg>Ownership-Aware Detection</h3>
+            <p>Traditional systems flag "user accessed 10 resources." We ask: <strong>did they access OTHER users' resources?</strong> This application context dramatically reduces false positives.</p>
           </div>
           <div class="card feat">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-shield" xlink:href="#ico-shield"></use></svg>PII-Safe AI Analysis</h3>
-            <p>Local PII scrubbing (Presidio + regex) before LLM sees data. <strong>GDPR/PCI-DSS compliant</strong> out of the box. Your customer data never hits external APIs.</p>
+            <p>Local PII scrubbing (Presidio + regex) before any LLM analysis. <strong>GDPR/PCI-DSS compliant</strong> by design. Your customer data never hits external APIs.</p>
           </div>
           <div class="card feat">
             <h3><svg class="ico" aria-hidden="true"><use href="#ico-bolt" xlink:href="#ico-bolt"></use></svg>Business Context Enrichment</h3>
-            <p>AI learns your environment: QA test users, recent deployments, known tools. <strong>60% reduction</strong> in false escalations via context-aware triage.</p>
+            <p>System learns your environment: QA test users, recent deployments, known tools. Significantly reduces false escalations through context-aware triage.</p>
           </div>
         </div>
 
@@ -1029,11 +1029,11 @@
         <h2 style="margin-bottom:16px">What You Get</h2>
         <div class="two" style="margin-bottom:28px">
           <div class="card box">
-            <h3 style="margin:0 0 12px">Real-Time Detection</h3>
+            <h3 style="margin:0 0 12px">Rapid Detection & Response</h3>
             <ul>
-              <li><strong>Sub-5s detection:</strong> Redis-backed stateful tracking catches attacks in real-time</li>
-              <li><strong>Chronicle/SIEM integration:</strong> YARA-L rules trigger webhooks, enrichment, case creation</li>
-              <li><strong>Auto-hold capability:</strong> High-confidence IDOR attacks can auto-suspend attacker accounts</li>
+              <li><strong>Fast triage:</strong> Stateful tracking catches attacks quickly (typically within seconds)</li>
+              <li><strong>SIEM integration:</strong> Works with Chronicle, Splunk, Datadog, CloudFlare via webhooks</li>
+              <li><strong>Auto-response capability:</strong> High-confidence threats can trigger automated holds</li>
               <li><strong>MITRE ATT&CK mapping:</strong> Every alert tagged with tactics/techniques for SOC2 evidence</li>
             </ul>
           </div>
@@ -1078,8 +1078,8 @@
         <div class="grid3" style="margin-bottom:28px">
           <div class="card feat">
             <h3>IDOR Account Enumeration</h3>
-            <p><strong>Fintech Problem:</strong> Attackers probe `/api/loans/12345` sequentially to find vulnerable accounts.</p>
-            <p style="margin-top:10px"><strong>Our Detection:</strong> Ownership-aware tracking only alerts if they access OTHER users' loans. Legitimate multi-loan users ignored.</p>
+            <p><strong>The Problem:</strong> Attackers probe `/api/loans/12345` sequentially. User accesses 3 non-owned resources sequentially → escalate. User makes 1 typo on their own resource → log-only.</p>
+            <p style="margin-top:10px"><strong>Our Detection:</strong> Ownership-aware tracking only alerts on OTHER users' resources. Legitimate multi-loan users don't trigger false alarms.</p>
           </div>
           <div class="card feat">
             <h3>SOC2 Incident Response</h3>
@@ -1128,7 +1128,7 @@
               <td><span class="check">Built-in audit trail and evidence</span></td>
             </tr>
           </table>
-          <p style="margin-top:14px;font-size:14px;color:var(--muted)"><strong>Bottom line:</strong> Save $400K+/year vs. building a SOC team. Get to SOC2 faster. Scale as you grow.</p>
+          <p style="margin-top:14px;font-size:14px;color:var(--muted)"><strong>Bottom line:</strong> Significant cost savings vs. building a SOC team. Get to SOC2 faster. Scale as you grow.</p>
         </div>
 
         <!-- Technical Architecture (Simplified) -->
@@ -1154,7 +1154,7 @@
             <div>Reduces false positives by 60%</div>
             
             <div>4. AI Analysis</div>
-            <div class="ai">Claude analyzes (scrubbed data only)</div>
+            <div class="ai">Best-in-class LLM analyzes (scrubbed data only)</div>
             <div>Fast triage with institutional knowledge</div>
             
             <div>5. Ownership Check</div>
@@ -1218,6 +1218,10 @@
         <!-- FAQ Section -->
         <h2 style="margin-bottom:16px">Common Questions</h2>
         <div class="card box" style="margin-bottom:28px">
+          <details style="margin-bottom:12px">
+            <summary style="font-weight:700;cursor:pointer;padding:10px 0">Where does this run and what's required?</summary>
+            <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px"><strong>Deployment:</strong> Small service in your VPC, gateway, or as a sidecar. <strong>Requirements:</strong> Webhook from Chronicle/Datadog/CloudFlare + optional application events for ownership context. We never require production database access.</p>
+          </details>
           <details style="margin-bottom:12px">
             <summary style="font-weight:700;cursor:pointer;padding:10px 0">Do I need Chronicle or a specific SIEM?</summary>
             <p style="margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px">No. We integrate with any SIEM that can send webhooks (Splunk, Datadog, CloudFlare, Sentinel, QRadar). Chronicle is optional but provides rich enrichment.</p>
