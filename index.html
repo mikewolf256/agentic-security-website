@@ -88,14 +88,26 @@
     
     /* Dropdown Navigation */
     .nav-item{position:relative;display:inline-block}
-    .nav-item > a{display:flex;align-items:center;gap:4px;color:var(--muted)}
+    .nav-item > a{display:flex;align-items:center;gap:4px;color:var(--muted);padding:8px 4px}
     .nav-item:hover > a{color:var(--accent)}
     .nav-item .dropdown-arrow{font-size:10px;transition:transform 0.2s}
     .nav-item:hover .dropdown-arrow{transform:rotate(180deg)}
+    
+    /* Invisible bridge to prevent dropdown from closing */
+    .nav-item::after{
+      content:'';
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      height:12px;
+      background:transparent;
+    }
+    
     .nav-dropdown{
       display:none;
       position:absolute;
-      top:calc(100% + 12px);
+      top:calc(100% + 4px);
       left:-8px;
       min-width:220px;
       background:var(--panel);
@@ -105,8 +117,9 @@
       padding:8px 0;
       z-index:100;
       opacity:0;
-      transform:translateY(-8px);
-      transition:opacity 0.2s, transform 0.2s;
+      transform:translateY(-4px);
+      transition:opacity 0.15s, transform 0.15s;
+      pointer-events:none;
     }
     .nav-dropdown::before{
       content:'';
@@ -134,7 +147,8 @@
       display:block;
       opacity:1;
       transform:translateY(0);
-      animation:fadeIn 0.2s ease-out;
+      pointer-events:auto;
+      animation:fadeIn 0.15s ease-out;
     }
     @keyframes fadeInDropdown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
     .nav-dropdown a{
