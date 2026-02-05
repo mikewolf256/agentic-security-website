@@ -878,6 +878,11 @@
               <li><strong>PII-safe:</strong> Local scrubbing + redaction before any LLM analysis</li>
               <li><strong>Fast:</strong> Seconds-level triage with stateful tracking</li>
             </ul>
+            <div style="margin-top:14px;padding:14px 16px;border-radius:12px;border:1px solid rgba(6,182,212,.22);background:linear-gradient(135deg, rgba(6,182,212,.06), rgba(168,85,247,.03))">
+              <p style="margin:0 0 8px;color:var(--text-secondary);font-weight:800">Works with your existing tools (no rip-and-replace)</p>
+              <p style="margin:0 0 10px;color:var(--muted);font-size:14px">We ingest alerts via webhooks, enrich with identity/asset/app context, and output consistent verdicts + next actions. Your telemetry and storage stay where they are.</p>
+              <p style="margin:0;color:var(--muted);font-size:14px"><strong style="color:var(--text-secondary)">What it isn’t:</strong> not a replacement for your SIEM/EDR/WAF/cloud tooling • not a new data lake.</p>
+            </div>
             <p style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
               <a class="btn btnP" href="#" onclick="showPage('defense'); return false" style="display:inline-block;background:linear-gradient(135deg, var(--cyan), #0891b2);box-shadow:0 4px 14px rgba(6,182,212,.3)">Learn more →</a>
               <a class="btn" href="mailto:hello@agenticsec.team?subject=SOC%20Triage%20Inquiry" style="display:inline-block;border-color:var(--cyan);color:var(--cyan)">Request demo</a>
